@@ -147,33 +147,43 @@
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 900px) {
             header {
-                flex-direction: column;
-                align-items: flex-start;
+                padding: 20px;
+                align-items: center;
             }
 
             .bio {
-                text-align: left;
-                max-width: 100%;
+                font-size: 12px;
             }
 
-            main {
-                flex-direction: column;
-                padding: 40px 24px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            header {
-                padding: 20px;
+            .logo {
+                font-size: 12px;
             }
 
             .nav-links {
                 gap: 16px;
             }
 
+            .nav-links svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .theme-toggle svg {
+                width: 16px;
+                height: 16px;
+            }
+
+            .theme-toggle .slash {
+                font-size: 16px;
+            }
+
+            main {
+                padding: 40px 20px;
+            }
+
             .section-title h2 {
-                font-size: 48px;
-                letter-spacing: -1px;
+                font-size: 64px;
+                letter-spacing: -1.5px;
             }
 
             .sections {
@@ -182,6 +192,35 @@
 
             footer {
                 padding: 20px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 20px;
+                gap: 12px;
+            }
+
+            .bio {
+                font-size: 11px;
+            }
+
+            .logo {
+                font-size: 11px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .section-title h2 {
+                font-size: 48px;
+                letter-spacing: -1px;
+            }
+
+            .sections {
+                gap: 50px;
             }
         }
     </style>
