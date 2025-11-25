@@ -53,6 +53,9 @@
             gap: 4px;
             color: inherit;
             transition: opacity 0.2s ease;
+            line-height: 1;
+            position: relative;
+            top: 1px;
         }
 
         .theme-toggle:hover {
@@ -79,16 +82,23 @@
         .nav-links {
             display: flex;
             gap: 24px;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text-color);
             text-decoration: none;
             transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a:hover {
             opacity: 0.5;
+        }
+
+        .nav-links svg {
+            display: block;
         }
 
         .bio {
