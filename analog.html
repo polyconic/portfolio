@@ -133,18 +133,21 @@
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 16px;
+            grid-auto-rows: 10px;
         }
 
         .gallery-item {
             cursor: pointer;
             overflow: hidden;
             border-radius: 2px;
+            position: relative;
         }
 
         .gallery-item img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
@@ -232,7 +235,7 @@
 
             .gallery-grid {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 15px;
+                gap: 12px;
             }
 
             .lightbox-prev,
@@ -278,7 +281,7 @@
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
             </a>
-            <a href="/cdn-cgi/l/email-protection#9ff8edfaf8f0edb1feedebdfeff2b1f2fa" aria-label="Email">
+            <a href="mailto:gregor.art@pm.me" aria-label="Email">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -293,65 +296,65 @@
             <h1>Analog</h1>
         </div>
         
-        <div class="gallery-grid">
-            <div class="gallery-item" data-index="0">
+        <div class="gallery-grid" id="gallery">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-5.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="1">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-16.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="2">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-19.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="3">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-33.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="4">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-45.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="5">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-51.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="6">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000013310005.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="7">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000013310006.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="8">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000013320001.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="9">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000013330002.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="10">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000054070009.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="11">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000054080009.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="12">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000074870004.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="13">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000074870010.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="14">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/EGANGREGOR-000074880002.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="15">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/gregor.personals-10.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="16">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/gregor.personals-12.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="17">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/gregor.personals-22.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="18">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/gregor.personals-37.webp" alt="Analog photo" loading="lazy">
             </div>
-            <div class="gallery-item" data-index="19">
+            <div class="gallery-item">
                 <img src="photos webp/photo webp/analog/gregor.personals-38.webp" alt="Analog photo" loading="lazy">
             </div>
         </div>
@@ -368,13 +371,14 @@
         &copy; 2025 GREGOR EGAN
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Theme toggle
+    <script>
+        // Apply saved theme immediately on load
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
 
+        // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const theme = document.documentElement.getAttribute('data-theme');
@@ -386,6 +390,29 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
+
+        // Masonry layout - set grid row spans based on image height
+        function setGridSpans() {
+            const items = document.querySelectorAll('.gallery-item');
+            items.forEach(item => {
+                const img = item.querySelector('img');
+                if (img.complete) {
+                    const height = img.offsetHeight;
+                    const rowSpan = Math.ceil(height / 10);
+                    item.style.gridRowEnd = `span ${rowSpan}`;
+                } else {
+                    img.addEventListener('load', () => {
+                        const height = img.offsetHeight;
+                        const rowSpan = Math.ceil(height / 10);
+                        item.style.gridRowEnd = `span ${rowSpan}`;
+                    });
+                }
+            });
+        }
+
+        // Call on load and resize
+        window.addEventListener('load', setGridSpans);
+        window.addEventListener('resize', setGridSpans);
 
         // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
@@ -404,18 +431,24 @@
             const imgSrc = galleryItems[currentIndex].querySelector('img').src;
             lightboxImg.src = imgSrc;
             lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        document.querySelector('.lightbox-close').addEventListener('click', () => {
+        function closeLightbox() {
             lightbox.classList.remove('active');
-        });
+            document.body.style.overflow = '';
+        }
 
-        document.querySelector('.lightbox-prev').addEventListener('click', () => {
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+
+        document.querySelector('.lightbox-prev').addEventListener('click', (e) => {
+            e.stopPropagation();
             currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
             showLightbox();
         });
 
-        document.querySelector('.lightbox-next').addEventListener('click', () => {
+        document.querySelector('.lightbox-next').addEventListener('click', (e) => {
+            e.stopPropagation();
             currentIndex = (currentIndex + 1) % galleryItems.length;
             showLightbox();
         });
@@ -423,7 +456,7 @@
         // Close lightbox on background click
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox) {
-                lightbox.classList.remove('active');
+                closeLightbox();
             }
         });
 
@@ -432,9 +465,15 @@
             if (!lightbox.classList.contains('active')) return;
             
             if (e.key === 'Escape') {
-                lightbox.classList.remove('active');
+                closeLightbox();
             } else if (e.key === 'ArrowLeft') {
                 currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
                 showLightbox();
             } else if (e.key === 'ArrowRight') {
-              
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                showLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
