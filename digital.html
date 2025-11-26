@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital - Gregor Egan</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -131,12 +132,12 @@
         }
 
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 16px;
+            max-width: 100%;
         }
 
         .gallery-item {
+            width: calc(33.333% - 11px);
+            margin-bottom: 16px;
             cursor: pointer;
             overflow: hidden;
             border-radius: 2px;
@@ -230,9 +231,8 @@
                 padding: 40px 20px;
             }
 
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 12px;
+            .gallery-item {
+                width: calc(50% - 8px);
             }
 
             .lightbox-prev,
@@ -243,9 +243,8 @@
         }
 
         @media (max-width: 600px) {
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
+            .gallery-item {
+                width: 100%;
             }
         }
     </style>
@@ -278,7 +277,7 @@
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
             </a>
-            <a href="/cdn-cgi/l/email-protection#34534651535b461a5546407444591a5951" aria-label="Email">
+            <a href="mailto:gregor.art@pm.me" aria-label="Email">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -395,79 +394,100 @@
         &copy; 2025 GREGOR EGAN
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Apply saved theme immediately on load
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-
-        // Theme toggle
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            const theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Apply saved theme
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
             }
-        });
 
-        // Lightbox functionality
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = lightbox.querySelector('img');
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        let currentIndex = 0;
-
-        galleryItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                currentIndex = index;
-                showLightbox();
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function() {
+                const theme = document.documentElement.getAttribute('data-theme');
+                if (theme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                }
             });
-        });
 
-        function showLightbox() {
-            const imgSrc = galleryItems[currentIndex].querySelector('img').src;
-            lightboxImg.src = imgSrc;
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+            // Initialize Masonry
+            const gallery = document.getElementById('gallery');
+            const msnry = new Masonry(gallery, {
+                itemSelector: '.gallery-item',
+                columnWidth: '.gallery-item',
+                gutter: 16,
+                percentPosition: true
+            });
 
-        function closeLightbox() {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
+            // Relayout after images load
+            window.addEventListener('load', function() {
+                msnry.layout();
+            });
 
-        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+            // Lightbox
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('img');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            let currentIndex = 0;
 
-        document.querySelector('.lightbox-prev').addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-            showLightbox();
-        });
+            galleryItems.forEach(function(item, index) {
+                item.addEventListener('click', function() {
+                    currentIndex = index;
+                    showLightbox();
+                });
+            });
 
-        document.querySelector('.lightbox-next').addEventListener('click', (e) => {
-            e.stopPropagation();
-            currentIndex = (currentIndex + 1) % galleryItems.length;
-            showLightbox();
-        });
-
-        // Close lightbox on background click
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
+            function showLightbox() {
+                const imgSrc = galleryItems[currentIndex].querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
             }
-        });
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (!lightbox.classList.contains('active')) return;
-            
-            if (e.key === 'Escape') {
-                closeLightbox();
-            } else if (e.key === 'ArrowLeft') {
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+
+            document.querySelector('.lightbox-prev').addEventListener('click', function(e) {
+                e.stopPropagation();
                 currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
                 showLightbox();
-            } else if (e.key === 'ArrowRight') {
+            });
+
+            document.querySelector('.lightbox-next').addEventListener('click', function(e) {
+                e.stopPropagation();
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                showLightbox();
+            });
+
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener('keydown', function(e) {
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                    showLightbox();
+                } else if (e.key === 'ArrowRight') {
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    showLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
