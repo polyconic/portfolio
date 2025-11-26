@@ -134,20 +134,17 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 16px;
-            grid-auto-rows: 10px;
         }
 
         .gallery-item {
             cursor: pointer;
             overflow: hidden;
             border-radius: 2px;
-            position: relative;
         }
 
         .gallery-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
             display: block;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
@@ -281,7 +278,7 @@
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
             </a>
-            <a href="mailto:gregor.art@pm.me" aria-label="Email">
+            <a href="/cdn-cgi/l/email-protection#076075626068752966757347776a296a62" aria-label="Email">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -371,7 +368,7 @@
         &copy; 2025 GREGOR EGAN
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Apply saved theme immediately on load
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
@@ -390,29 +387,6 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
-
-        // Masonry layout - set grid row spans based on image height
-        function setGridSpans() {
-            const items = document.querySelectorAll('.gallery-item');
-            items.forEach(item => {
-                const img = item.querySelector('img');
-                if (img.complete) {
-                    const height = img.offsetHeight;
-                    const rowSpan = Math.ceil(height / 10);
-                    item.style.gridRowEnd = `span ${rowSpan}`;
-                } else {
-                    img.addEventListener('load', () => {
-                        const height = img.offsetHeight;
-                        const rowSpan = Math.ceil(height / 10);
-                        item.style.gridRowEnd = `span ${rowSpan}`;
-                    });
-                }
-            });
-        }
-
-        // Call on load and resize
-        window.addEventListener('load', setGridSpans);
-        window.addEventListener('resize', setGridSpans);
 
         // Lightbox functionality
         const lightbox = document.getElementById('lightbox');
@@ -470,10 +444,3 @@
                 currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
                 showLightbox();
             } else if (e.key === 'ArrowRight') {
-                currentIndex = (currentIndex + 1) % galleryItems.length;
-                showLightbox();
-            }
-        });
-    </script>
-</body>
-</html>
