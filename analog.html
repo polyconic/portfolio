@@ -278,7 +278,7 @@
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
             </a>
-            <a href="/cdn-cgi/l/email-protection#89eefbeceee6fba7e8fbfdc9f9e4a7e4ec" aria-label="Email">
+            <a href="mailto:gregor.art@pm.me" aria-label="Email">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
@@ -368,15 +368,13 @@
         &copy; 2025 GREGOR EGAN
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Apply saved theme
             const currentTheme = localStorage.getItem('theme') || 'light';
             if (currentTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
             }
 
-            // Theme toggle
             const themeToggle = document.getElementById('themeToggle');
             themeToggle.addEventListener('click', function() {
                 const theme = document.documentElement.getAttribute('data-theme');
@@ -389,7 +387,6 @@
                 }
             });
 
-            // Initialize Masonry
             const gallery = document.getElementById('gallery');
             const msnry = new Masonry(gallery, {
                 itemSelector: '.gallery-item',
@@ -398,17 +395,14 @@
                 percentPosition: true
             });
 
-            // Layout after each image loads
             imagesLoaded(gallery).on('progress', function() {
                 msnry.layout();
             });
 
-            // Final layout after all images load
             imagesLoaded(gallery, function() {
                 msnry.layout();
             });
 
-            // Lightbox
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = lightbox.querySelector('img');
             const galleryItems = document.querySelectorAll('.gallery-item');
@@ -455,11 +449,17 @@
 
             document.addEventListener('keydown', function(e) {
                 if (!lightbox.classList.contains('active')) return;
-                
                 if (e.key === 'Escape') {
                     closeLightbox();
                 } else if (e.key === 'ArrowLeft') {
                     currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
                     showLightbox();
                 } else if (e.key === 'ArrowRight') {
-                    currentIndex = (curren
+                    currentIndex = (currentIndex + 1) % galleryItems.length;
+                    showLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
