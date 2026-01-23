@@ -231,7 +231,7 @@
                 transform: none;
                 max-width: 100%;
                 margin-bottom: 50px;
-                font-size: 12px;
+                font-size: 10px;
                 line-height: 1.7;
                 cursor: default;
             }
@@ -366,20 +366,22 @@
         const bio = document.querySelector('.floating-bio');
         let isDragging = false;
         let startX, startY, initialLeft, initialTop;
-        let hasBeenDragged = false;
 
-        function initDrag(clientX, clientY) {
-            isDragging = true;
-            
-            if (!hasBeenDragged) {
+        // Set initial position on load (desktop only)
+        function initBioPosition() {
+            if (window.innerWidth > 900) {
                 const rect = bio.getBoundingClientRect();
                 bio.style.right = 'auto';
                 bio.style.transform = 'none';
                 bio.style.left = rect.left + 'px';
                 bio.style.top = rect.top + 'px';
-                hasBeenDragged = true;
             }
-            
+        }
+        initBioPosition();
+
+        function initDrag(clientX, clientY) {
+            if (window.innerWidth <= 900) return;
+            isDragging = true;
             startX = clientX;
             startY = clientY;
             initialLeft = parseInt(bio.style.left);
