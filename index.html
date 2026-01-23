@@ -154,25 +154,11 @@
             right: 450px;
             top: 30%;
             transform: translateY(-80%);
-            max-width: 320px;
             font-size: 12px;
             line-height: 1.6;
             color: var(--text-color);
             opacity: 0.8;
-            cursor: grab;
-            user-select: none;
-        }
-
-        .floating-bio:active {
-            cursor: grabbing;
-        }
-
-        .floating-bio p {
-            margin-bottom: 1em;
-        }
-
-        .floating-bio p:last-child {
-            margin-bottom: 0;
+            white-space: nowrap;
         }
 
         /* ==================== FOOTER ==================== */
@@ -186,7 +172,6 @@
         /* ==================== RESPONSIVE ==================== */
         @media (max-width: 1100px) {
             .floating-bio {
-                max-width: 280px;
                 font-size: 11px;
             }
         }
@@ -233,7 +218,7 @@
                 margin-bottom: 50px;
                 font-size: 12px;
                 line-height: 1.7;
-                cursor: default;
+                white-space: normal;
             }
 
             .section-title h2 {
@@ -319,9 +304,7 @@
     </header>
 
     <main>
-        <div class="floating-bio">
-            <p>Los Angeles-based photographer, graphic designer, and music producer.</p>
-        </div>
+        <div class="floating-bio" data-text="Los Angeles-based photographer, graphic designer, and music producer."></div>
 
         <div class="sections">
             <a href="photos.html" class="section-item">
@@ -362,67 +345,45 @@
             }
         });
 
-        // Draggable bio
+        // Text scramble effect
+        function scrambleText(element) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            const finalText = element.dataset.text;
+            const duration = 600; // total duration in ms
+            const fps = 60;
+            const totalFrames = duration / (1000 / fps);
+            let frame = 0;
+            
+            const animate = () => {
+                let output = '';
+                const progress = frame / totalFrames;
+                
+                for (let i = 0; i < finalText.length; i++) {
+                    if (finalText[i] === ' ') {
+                        output += ' ';
+                    } else if (i < finalText.length * progress) {
+                        output += finalText[i];
+                    } else {
+                        output += chars[Math.floor(Math.random() * chars.length)];
+                    }
+                }
+                
+                element.textContent = output;
+                frame++;
+                
+                if (frame <= totalFrames) {
+                    requestAnimationFrame(animate);
+                } else {
+                    element.textContent = finalText;
+                }
+            };
+            
+            animate();
+        }
+
+        // Run on load
         const bio = document.querySelector('.floating-bio');
-        let isDragging = false;
-        let startX, startY, initialLeft, initialTop;
-        let hasBeenDragged = false;
-
-        function initDrag(clientX, clientY) {
-            isDragging = true;
-            
-            if (!hasBeenDragged) {
-                const rect = bio.getBoundingClientRect();
-                bio.style.right = 'auto';
-                bio.style.transform = 'none';
-                bio.style.left = rect.left + 'px';
-                bio.style.top = rect.top + 'px';
-                hasBeenDragged = true;
-            }
-            
-            startX = clientX;
-            startY = clientY;
-            initialLeft = parseInt(bio.style.left);
-            initialTop = parseInt(bio.style.top);
-        }
-
-        function doDrag(clientX, clientY) {
-            if (!isDragging) return;
-            const dx = clientX - startX;
-            const dy = clientY - startY;
-            bio.style.left = (initialLeft + dx) + 'px';
-            bio.style.top = (initialTop + dy) + 'px';
-        }
-
-        function endDrag() {
-            isDragging = false;
-        }
-
-        // Mouse events
-        bio.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            initDrag(e.clientX, e.clientY);
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            doDrag(e.clientX, e.clientY);
-        });
-
-        document.addEventListener('mouseup', endDrag);
-
-        // Touch events
-        bio.addEventListener('touchstart', (e) => {
-            initDrag(e.touches[0].clientX, e.touches[0].clientY);
-        }, { passive: false });
-
-        document.addEventListener('touchmove', (e) => {
-            if (isDragging) {
-                e.preventDefault();
-                doDrag(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        }, { passive: false });
-
-        document.addEventListener('touchend', endDrag);
+        scrambleText(bio);
     </script>
 </body>
 </html>
