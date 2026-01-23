@@ -108,36 +108,31 @@
             display: block;
         }
 
-        .bio {
-            max-width: 380px;
-            font-size: 14px;
-            line-height: 1.5;
-            text-align: left;
-        }
-
-        .bio em {
-            font-style: italic;
-        }
-
         /* ==================== MAIN CONTENT ==================== */
         main {
             flex: 1;
             display: flex;
             padding: 60px 40px;
+            position: relative;
         }
 
         .sections {
-            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            align-items: flex-start;
             gap: 80px;
+            flex: 1;
         }
 
         .section-item {
             cursor: pointer;
             text-decoration: none;
             color: inherit;
+        }
+
+        .section-title {
+            display: inline-block;
         }
 
         .section-title h2 {
@@ -153,6 +148,33 @@
             transition: opacity 0.2s ease;
         }
 
+        /* ==================== FLOATING BIO ==================== */
+        .floating-bio {
+            position: absolute;
+            right: 140px;
+            top: 50%;
+            transform: translateY(-80%);
+            max-width: 320px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--text-color);
+            opacity: 0.8;
+            cursor: grab;
+            user-select: none;
+        }
+
+        .floating-bio:active {
+            cursor: grabbing;
+        }
+
+        .floating-bio p {
+            margin-bottom: 1em;
+        }
+
+        .floating-bio p:last-child {
+            margin-bottom: 0;
+        }
+
         /* ==================== FOOTER ==================== */
         footer {
             padding: 24px 40px;
@@ -162,14 +184,17 @@
         }
 
         /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1100px) {
+            .floating-bio {
+                max-width: 280px;
+                font-size: 11px;
+            }
+        }
+
         @media (max-width: 900px) {
             header {
                 padding: 20px;
                 align-items: center;
-            }
-
-            .bio {
-                font-size: 12px;
             }
 
             .logo {
@@ -198,6 +223,12 @@
                 padding: 40px 20px;
             }
 
+            .floating-bio {
+                right: 80px;
+                max-width: 200px;
+                font-size: 10px;
+            }
+
             .section-title h2 {
                 font-size: 64px;
                 letter-spacing: -1.5px;
@@ -219,16 +250,18 @@
                 gap: 12px;
             }
 
-            .bio {
-                font-size: 11px;
-            }
-
             .logo {
                 font-size: 11px;
             }
 
             .nav-links {
                 gap: 12px;
+            }
+
+            .floating-bio {
+                right: 40px;
+                max-width: 140px;
+                font-size: 9px;
             }
 
             .section-title h2 {
@@ -293,6 +326,12 @@
                 </div>
             </a>
         </div>
+
+        <div class="floating-bio">
+            <p>Gregor Egan is a Los Angeles-based photographer, graphic designer, and music producer. His work captures moments of stillness—oceans, stars, rocks, skies, humans.</p>
+            <p>In graphic design, he specializes in book design, typography, and surreal visuals. Rhythm juxtaposed with chaos.</p>
+            <p>As a producer, he makes driving hypnotic techno.</p>
+        </div>
     </main>
 
     <footer>
@@ -318,6 +357,67 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
+
+        // Draggable bio
+        const bio = document.querySelector('.floating-bio');
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+        let hasBeenDragged = false;
+
+        function initDrag(clientX, clientY) {
+            isDragging = true;
+            
+            if (!hasBeenDragged) {
+                const rect = bio.getBoundingClientRect();
+                bio.style.right = 'auto';
+                bio.style.transform = 'none';
+                bio.style.left = rect.left + 'px';
+                bio.style.top = rect.top + 'px';
+                hasBeenDragged = true;
+            }
+            
+            startX = clientX;
+            startY = clientY;
+            initialLeft = parseInt(bio.style.left);
+            initialTop = parseInt(bio.style.top);
+        }
+
+        function doDrag(clientX, clientY) {
+            if (!isDragging) return;
+            const dx = clientX - startX;
+            const dy = clientY - startY;
+            bio.style.left = (initialLeft + dx) + 'px';
+            bio.style.top = (initialTop + dy) + 'px';
+        }
+
+        function endDrag() {
+            isDragging = false;
+        }
+
+        // Mouse events
+        bio.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            initDrag(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            doDrag(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('mouseup', endDrag);
+
+        // Touch events
+        bio.addEventListener('touchstart', (e) => {
+            initDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+                doDrag(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchend', endDrag);
     </script>
 </body>
 </html>
