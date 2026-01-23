@@ -221,12 +221,19 @@
 
             main {
                 padding: 40px 20px;
+                flex-direction: column;
             }
 
             .floating-bio {
-                right: 80px;
-                max-width: 200px;
-                font-size: 10px;
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                max-width: 100%;
+                margin-bottom: 50px;
+                font-size: 12px;
+                line-height: 1.7;
+                cursor: default;
             }
 
             .section-title h2 {
@@ -259,9 +266,8 @@
             }
 
             .floating-bio {
-                right: 40px;
-                max-width: 140px;
-                font-size: 9px;
+                font-size: 11px;
+                margin-bottom: 40px;
             }
 
             .section-title h2 {
@@ -313,6 +319,12 @@
     </header>
 
     <main>
+        <div class="floating-bio">
+            <p>Gregor Egan is a Los Angeles-based photographer, graphic designer, and music producer. His work captures moments of stillness. Oceans, stars, rocks, skies, humans.</p>
+            <p>In graphic design, he specializes in book design, typography, and surreal visuals. Rhythm and controlled chaos.</p>
+            <p>As a producer, he makes hypnotic techno.</p>
+        </div>
+
         <div class="sections">
             <a href="photos.html" class="section-item">
                 <div class="section-title">
@@ -325,12 +337,6 @@
                     <h2>Design</h2>
                 </div>
             </a>
-        </div>
-
-        <div class="floating-bio">
-            <p>Gregor Egan is a Los Angeles-based photographer, graphic designer, and music producer. His work captures moments of stillness—oceans, stars, rocks, skies, humans.</p>
-            <p>In graphic design, he specializes in book design, typography, and surreal visuals. Rhythm juxtaposed with chaos.</p>
-            <p>As a producer, he makes driving hypnotic techno.</p>
         </div>
     </main>
 
@@ -409,13 +415,14 @@
         // Touch events
         bio.addEventListener('touchstart', (e) => {
             initDrag(e.touches[0].clientX, e.touches[0].clientY);
-        }, { passive: true });
+        }, { passive: false });
 
         document.addEventListener('touchmove', (e) => {
             if (isDragging) {
+                e.preventDefault();
                 doDrag(e.touches[0].clientX, e.touches[0].clientY);
             }
-        }, { passive: true });
+        }, { passive: false });
 
         document.addEventListener('touchend', endDrag);
     </script>
