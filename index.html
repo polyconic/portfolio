@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>art by gregor</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="art by gregor">
     <meta property="og:description" content="Photography and Design">
     <meta property="og:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
     <meta property="og:url" content="https://gregoregan.com">
-    
+
     <style>
         * {
             margin: 0;
@@ -20,34 +20,103 @@
         }
 
         :root {
-            --bg-color: #fafaf8;
-            --text-color: #000;
+            --text-color: #f5f5f5;
+            --overlay-gradient: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.80) 0%,
+                rgba(0, 0, 0, 0.25) 45%,
+                rgba(0, 0, 0, 0.10) 100%
+            );
         }
 
         [data-theme="dark"] {
-            --bg-color: #141414;
             --text-color: #f5f5f5;
+            --overlay-gradient: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.80) 0%,
+                rgba(0, 0, 0, 0.25) 45%,
+                rgba(0, 0, 0, 0.10) 100%
+            );
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: var(--bg-color);
+            background-color: #0a0a0a;
             color: var(--text-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
         }
 
-        /* ==================== HEADER ==================== */
-        header {
+        /* ==================== BACKGROUND ==================== */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            /* Swap in your image: */
+            background-image: url('YOUR_IMAGE.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Cinematic gradient overlay -- darkens bottom for name legibility */
+            background-color: #0a0a0a;
+        }
+
+        .bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--overlay-gradient);
+        }
+
+        /* ==================== LAYOUT ==================== */
+        .wrapper {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 36px 40px;
+        }
+
+        /* ==================== TOP ROW ==================== */
+        .top-row {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding: 24px 40px;
-            flex-wrap: wrap;
-            gap: 20px;
+        }
+
+        /* Stacked nav -- top left */
+        nav.main-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        nav.main-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            opacity: 0.75;
+            transition: opacity 0.2s ease;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        nav.main-nav a:hover {
+            opacity: 1;
+        }
+
+        /* Utility icons -- top right */
+        .utility-nav {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
         .theme-toggle {
@@ -57,282 +126,163 @@
             padding: 0;
             display: flex;
             align-items: center;
-            gap: 4px;
-            color: inherit;
+            gap: 3px;
+            color: var(--text-color);
+            opacity: 0.6;
             transition: opacity 0.2s ease;
             line-height: 1;
-            position: relative;
-            top: 1px;
         }
 
         .theme-toggle:hover {
-            opacity: 0.7;
+            opacity: 1;
         }
 
         .theme-toggle svg {
-            width: 18px;
-            height: 18px;
+            width: 15px;
+            height: 15px;
         }
 
         .theme-toggle .slash {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 300;
         }
 
-        .logo {
-            font-weight: 700;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-        }
-
-        .nav-links a {
+        .utility-nav a {
             color: var(--text-color);
-            text-decoration: none;
-            transition: opacity 0.2s ease;
-            display: flex;
-            align-items: center;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.5;
-        }
-
-        .nav-links svg {
-            display: block;
-        }
-
-        /* ==================== MAIN CONTENT ==================== */
-        main {
-            flex: 1;
-            display: flex;
-            padding: 60px 40px;
-            position: relative;
-        }
-
-        .sections {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 80px;
-            flex: 1;
-        }
-
-        .section-item {
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .section-title {
-            display: inline-block;
-        }
-
-        .section-title h2 {
-            font-size: clamp(48px, 10vw, 120px);
-            font-weight: 700;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-
-        .section-item:hover .section-title h2 {
             opacity: 0.6;
             transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
         }
 
-        /* ==================== FLOATING BIO ==================== */
-        .floating-bio {
+        .utility-nav a:hover {
+            opacity: 1;
+        }
+
+        /* ==================== BOTTOM ROW ==================== */
+        .bottom-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .site-name {
+            font-size: clamp(52px, 9vw, 130px);
+            font-weight: 700;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            line-height: 0.88;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        .bio {
             position: absolute;
             right: 450px;
             top: 30%;
             transform: translateY(-80%);
             font-size: 12px;
             line-height: 1.6;
-            color: var(--text-color);
             opacity: 0.8;
             white-space: nowrap;
         }
 
-        /* ==================== FOOTER ==================== */
-        footer {
-            padding: 24px 40px;
-            font-size: 10px;
-            color: var(--text-color);
-            text-align: center;
-        }
-
         /* ==================== RESPONSIVE ==================== */
-        @media (max-width: 1100px) {
-            .floating-bio {
-                font-size: 11px;
-            }
-        }
-
         @media (max-width: 900px) {
-            header {
-                padding: 20px;
-                align-items: center;
+            .wrapper {
+                padding: 28px 24px;
             }
 
-            .logo {
-                font-size: 12px;
+            .site-name {
+                letter-spacing: -2px;
             }
 
-            .nav-links {
-                gap: 16px;
-            }
-
-            .nav-links svg {
-                width: 18px;
-                height: 18px;
-            }
-
-            .theme-toggle svg {
-                width: 16px;
-                height: 16px;
-            }
-
-            .theme-toggle .slash {
-                font-size: 16px;
-            }
-
-            main {
-                padding: 40px 20px;
-                flex-direction: column;
-            }
-
-            .floating-bio {
-                position: relative;
-                right: auto;
-                top: auto;
-                transform: none;
-                max-width: 200px;
-                margin-bottom: 50px;
-                font-size: 10px;
-                line-height: 1.7;
-            }
-
-            .section-title h2 {
-                font-size: 64px;
-                letter-spacing: -1.5px;
-            }
-
-            .sections {
-                gap: 60px;
-            }
-
-            footer {
-                padding: 20px;
-                font-size: 9px;
+            .bio {
+                display: none;
             }
         }
 
         @media (max-width: 600px) {
-            header {
-                padding: 16px 20px;
-                gap: 12px;
+            .wrapper {
+                padding: 22px 20px;
             }
 
-            .logo {
-                font-size: 11px;
+            .site-name {
+                font-size: 44px;
+                letter-spacing: -1.5px;
             }
 
-            .nav-links {
-                gap: 12px;
-            }
-
-            .floating-bio {
-                font-size: 9px;
-                margin-bottom: 40px;
-                max-width: 180px;
-            }
-
-            .section-title h2 {
-                font-size: 48px;
-                letter-spacing: -1px;
-            }
-
-            .sections {
-                gap: 50px;
+            nav.main-nav a {
+                font-size: 12px;
+                letter-spacing: 2px;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Gregor Egan</div>
-        <nav class="nav-links">
-            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="5"/>
-                    <line x1="12" y1="1" x2="12" y2="3"/>
-                    <line x1="12" y1="21" x2="12" y2="23"/>
-                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                    <line x1="1" y1="12" x2="3" y2="12"/>
-                    <line x1="21" y1="12" x2="23" y2="12"/>
-                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                </svg>
-                <span class="slash">/</span>
-                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                </svg>
-            </button>
-            <a href="https://www.instagram.com/gregor.egan" target="_blank" aria-label="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-            </a>
-            <a href="mailto:gregor.art@pm.me" aria-label="Email">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                    <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-            </a>
-        </nav>
-    </header>
 
-    <main>
-        <div class="floating-bio" data-text="Los Angeles based photographer, designer, and sound artist."></div>
+    <div class="bg"></div>
 
-        <div class="sections">
-            <a href="photos.html" class="section-item">
-                <div class="section-title">
-                    <h2>Photo</h2>
-                </div>
-            </a>
+    <div class="wrapper">
 
-            <a href="design.html" class="section-item">
-                <div class="section-title">
-                    <h2>Design</h2>
-                </div>
-            </a>
+        <!-- TOP -->
+        <div class="top-row">
+            <nav class="main-nav">
+                <a href="photos.html">Photo</a>
+                <a href="design.html">Design</a>
+            </nav>
+
+            <div class="utility-nav">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <span class="slash">/</span>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <a href="https://www.instagram.com/gregor.egan" target="_blank" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="mailto:gregor.art@pm.me" aria-label="Email">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                </a>
+            </div>
         </div>
-    </main>
 
-    <footer>
-        &copy; 2026 GREGOR EGAN
-    </footer>
+        <!-- BOTTOM -->
+        <div class="bottom-row">
+            <div class="site-name">Gregor Egan</div>
+        </div>
+
+        <!-- FLOATING BIO -->
+        <div class="bio" data-text="Los Angeles based photographer, designer, and sound artist."></div>
+
+    </div>
 
     <script>
-        // Check for saved theme preference or default to light mode
+        // Theme -- matches original pattern: no attribute = light, data-theme="dark" = dark
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
 
-        // Toggle theme
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
             const theme = document.documentElement.getAttribute('data-theme');
@@ -345,19 +295,19 @@
             }
         });
 
-        // Text scramble effect
+        // Text scramble on bio
         function scrambleText(element) {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
             const finalText = element.dataset.text;
-            const duration = 2000; // total duration in ms
+            const duration = 2000;
             const fps = 60;
             const totalFrames = duration / (1000 / fps);
             let frame = 0;
-            
+
             const animate = () => {
                 let output = '';
                 const progress = frame / totalFrames;
-                
+
                 for (let i = 0; i < finalText.length; i++) {
                     if (finalText[i] === ' ') {
                         output += ' ';
@@ -367,23 +317,23 @@
                         output += chars[Math.floor(Math.random() * chars.length)];
                     }
                 }
-                
+
                 element.textContent = output;
                 frame++;
-                
+
                 if (frame <= totalFrames) {
                     requestAnimationFrame(animate);
                 } else {
                     element.textContent = finalText;
                 }
             };
-            
+
             animate();
         }
 
-        // Run on load
-        const bio = document.querySelector('.floating-bio');
-        scrambleText(bio);
+        const bio = document.querySelector('.bio');
+        if (bio) scrambleText(bio);
     </script>
+
 </body>
 </html>
