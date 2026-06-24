@@ -13,11 +13,6 @@
         }
 
         :root {
-            --bg-color: #fafaf8;
-            --text-color: #141414;
-        }
-
-        [data-theme="dark"] {
             --bg-color: #141414;
             --text-color: #f5f5f5;
         }
@@ -218,10 +213,6 @@
     </footer>
 
     <script>
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
     </script>
 </body>
 </html>
