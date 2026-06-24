@@ -79,7 +79,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 36px 40px 60px;
+            padding: 36px 40px;
         }
 
         /* ==================== TOP ROW ==================== */
@@ -119,34 +119,6 @@
             gap: 14px;
         }
 
-        .theme-toggle {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            gap: 3px;
-            color: var(--text-color);
-            opacity: 0.6;
-            transition: opacity 0.2s ease;
-            line-height: 1;
-        }
-
-        .theme-toggle:hover {
-            opacity: 1;
-        }
-
-        .theme-toggle svg {
-            width: 15px;
-            height: 15px;
-        }
-
-        .theme-toggle .slash {
-            font-size: 15px;
-            font-weight: 300;
-        }
-
         .utility-nav a {
             color: var(--text-color);
             opacity: 0.6;
@@ -167,7 +139,7 @@
         }
 
         .site-name {
-            font-size: clamp(36px, 7vw, 100px);
+            font-size: clamp(28px, 5vw, 72px);
             font-weight: 700;
             letter-spacing: -3px;
             text-transform: uppercase;
@@ -233,23 +205,6 @@
             </nav>
 
             <div class="utility-nav">
-                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="5"/>
-                        <line x1="12" y1="1" x2="12" y2="3"/>
-                        <line x1="12" y1="21" x2="12" y2="23"/>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-                        <line x1="1" y1="12" x2="3" y2="12"/>
-                        <line x1="21" y1="12" x2="23" y2="12"/>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-                    </svg>
-                    <span class="slash">/</span>
-                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-                    </svg>
-                </button>
                 <a href="https://www.instagram.com/gregor.egan" target="_blank" aria-label="Instagram">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
@@ -277,23 +232,11 @@
     </div>
 
     <script>
-        // Theme -- matches original pattern: no attribute = light, data-theme="dark" = dark
+        // Apply saved theme for cross-page consistency (toggle lives on other pages)
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
-
-        const themeToggle = document.getElementById('themeToggle');
-        themeToggle.addEventListener('click', () => {
-            const theme = document.documentElement.getAttribute('data-theme');
-            if (theme === 'dark') {
-                document.documentElement.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
 
         // Text scramble on bio
         function scrambleText(element) {
