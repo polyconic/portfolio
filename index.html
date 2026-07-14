@@ -11,6 +11,7 @@
     <meta property="og:description" content="Photography and Design">
     <meta property="og:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
     <meta property="og:url" content="https://gregoregan.com">
+    <meta name="description" content="Gregor Egan is a Los Angeles based photographer, designer, and sound artist.">
 
     <style>
         * {
@@ -135,8 +136,16 @@
             transform: translateY(-80%);
             font-size: 12px;
             line-height: 1.6;
-            opacity: 0.8;
             white-space: nowrap;
+        }
+
+        .bio-real {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .bio-scramble {
+            opacity: 0.8;
         }
 
         /* ==================== RESPONSIVE ==================== */
@@ -207,7 +216,10 @@
         </div>
 
         <!-- FLOATING BIO -->
-        <div class="bio" data-text="Los Angeles based photographer, designer, and sound artist."></div>
+        <div class="bio">
+            <span class="bio-real">Los Angeles based photographer, designer, and sound artist.</span>
+            <span class="bio-scramble" aria-hidden="true"></span>
+        </div>
 
     </div>
 
@@ -218,10 +230,12 @@
             document.documentElement.setAttribute('data-theme', 'dark');
         }
 
-        // Text scramble on bio
-        function scrambleText(element) {
+        // Text scramble on bio -- animates a decorative overlay only.
+        // The real sentence lives in .bio-real the whole time, so crawlers
+        // and screen readers always see the actual text, never garbled mid-animation frames.
+        function scrambleText(realEl, scrambleEl) {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
-            const finalText = element.dataset.text;
+            const finalText = realEl.textContent;
             const duration = 2000;
             const fps = 60;
             const totalFrames = duration / (1000 / fps);
@@ -241,21 +255,22 @@
                     }
                 }
 
-                element.textContent = output;
+                scrambleEl.textContent = output;
                 frame++;
 
                 if (frame <= totalFrames) {
                     requestAnimationFrame(animate);
                 } else {
-                    element.textContent = finalText;
+                    scrambleEl.textContent = finalText;
                 }
             };
 
             animate();
         }
 
-        const bio = document.querySelector('.bio');
-        if (bio) scrambleText(bio);
+        const realBio = document.querySelector('.bio-real');
+        const scrambleBio = document.querySelector('.bio-scramble');
+        if (realBio && scrambleBio) scrambleText(realBio, scrambleBio);
     </script>
 
 </body>
