@@ -40,7 +40,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* Cinematic gradient overlay -- darkens bottom for name legibility */
+            /* gradient overlay. darkens bottom for name legibility */
             background-color: #0a0a0a;
         }
 
@@ -224,15 +224,15 @@
     </div>
 
     <script>
-        // Apply saved theme for cross-page consistency (toggle lives on other pages)
+        // apply saved theme for cross page consistency (toggle is on other pages)
         const currentTheme = localStorage.getItem('theme') || 'light';
         if (currentTheme === 'dark') {
             document.documentElement.setAttribute('data-theme', 'dark');
         }
 
-        // Text scramble on bio -- animates a decorative overlay only.
-        // The real sentence lives in .bio-real the whole time, so crawlers
-        // and screen readers always see the actual text, never garbled mid-animation frames.
+        // text scramble on bio - animates a decorative overlay only
+        // real sentence lives in .bio-real the whole time, so crawlers
+        // and screen readers always see the actual text, never garbled mid-animation frames - Gregor.
         function scrambleText(realEl, scrambleEl) {
             const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
             const finalText = realEl.textContent;
