@@ -3,28 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>gregor egan ///</title>
+
+    <title>gregor egan /// graphic designer, photographer, los angeles</title>
+    <link rel="canonical" href="https://gregoregan.com/">
+    <meta name="description" content="Gregor Egan is a graphic designer, photographer and sound artist based in Los Angeles. Book design, typography, portraits, analog and cityscape photography.">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="gregor egan ///">
-    <meta property="og:description" content="Photography and Design">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="gregor egan">
+    <meta property="og:title" content="gregor egan /// graphic designer, photographer, los angeles">
+    <meta property="og:description" content="Graphic design, photography and sound. Based in Los Angeles.">
     <meta property="og:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
-    <meta property="og:url" content="https://gregoregan.com">
-    <meta name="description" content="Photographer, designer, and sound artist.">
+    <meta property="og:url" content="https://gregoregan.com/">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="gregor egan /// graphic designer, photographer, los angeles">
+    <meta name="twitter:description" content="Graphic design, photography and sound. Based in Los Angeles.">
+    <meta name="twitter:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
+
+    <!-- Person schema. The sameAs array is the disambiguation lever:
+         add every profile you control so Google can separate you from
+         Gregory Mark Egan the novelist. -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Gregor Egan",
+      "url": "https://gregoregan.com/",
+      "jobTitle": "Photographer, Graphic Designer",
+      "description": "Graphic designer, photographer and sound artist based in Los Angeles.",
+      "image": "https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Los Angeles",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "knowsAbout": ["Graphic Design", "Book Design", "Typography", "Photography", "Sound Design"],
+      "sameAs": [
+        "https://www.instagram.com/gregor.egan",
+        "https://www.audiospatials.com/gregor-egan"
+      ]
+    }
+    </script>
 
     <style>
+        :root {
+            --text-color: #ffffff;
+            --overlay-gradient: linear-gradient(
+                to bottom,
+                rgba(10, 10, 10, 0.25) 0%,
+                rgba(10, 10, 10, 0.00) 35%,
+                rgba(10, 10, 10, 0.55) 100%
+            );
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
- 
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: #0a0a0a;
-            color: #0a0a0a;
+            color: var(--text-color);
             height: 100vh;
             height: 100dvh;
             overflow: hidden;
@@ -35,12 +81,10 @@
             position: fixed;
             inset: 0;
             z-index: 0;
-            /* Swap in your image: */
             background-image: url('BLUR.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* gradient overlay. darkens bottom for name legibility */
             background-color: #0a0a0a;
         }
 
@@ -70,7 +114,6 @@
             align-items: flex-start;
         }
 
-        /* Stacked nav -- top left */
         nav.main-nav {
             display: flex;
             flex-direction: column;
@@ -93,7 +136,6 @@
             opacity: 1;
         }
 
-        /* Utility icons -- top right */
         .utility-nav {
             display: flex;
             align-items: center;
@@ -129,6 +171,13 @@
             white-space: nowrap;
         }
 
+        .site-name .slashes {
+            position: relative;
+            bottom: 5px;
+            display: inline-block;
+            transform: scaleY(0.8);
+        }
+
         .bio {
             position: absolute;
             right: 450px;
@@ -158,8 +207,19 @@
                 letter-spacing: -2px;
             }
 
+            /* visually hidden rather than display:none, so the bio text
+               still counts on Google's mobile-first crawl */
             .bio {
-                display: none;
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip: rect(0 0 0 0);
+                clip-path: inset(50%);
+                white-space: nowrap;
+                right: auto;
+                top: auto;
+                transform: none;
             }
         }
 
@@ -178,6 +238,11 @@
                 letter-spacing: 2px;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bio-real { opacity: 0.8; position: static; }
+            .bio-scramble { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -194,15 +259,15 @@
             </nav>
 
             <div class="utility-nav">
-                <a href="https://www.instagram.com/gregor.egan" target="_blank" aria-label="Instagram">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener" aria-label="Instagram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                     </svg>
                 </a>
                 <a href="mailto:gregor.art@pm.me" aria-label="Email">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                         <polyline points="22,6 12,13 2,6"></polyline>
                     </svg>
@@ -212,12 +277,12 @@
 
         <!-- BOTTOM -->
         <div class="bottom-row">
-            <div class="site-name">Gregor Egan <span style="position: relative; bottom: 5px; display: inline-block; transform: scaleY(0.8);"> / / /</span></div>
+            <h1 class="site-name">Gregor Egan <span class="slashes"> / / /</span></h1>
         </div>
 
         <!-- FLOATING BIO -->
         <div class="bio">
-            <span class="bio-real">Los Angeles based photographer, designer, and sound artist.</span>
+            <span class="bio-real">Los Angeles based photographer, graphic designer, and sound artist.</span>
             <span class="bio-scramble" aria-hidden="true"></span>
         </div>
 
@@ -270,7 +335,8 @@
 
         const realBio = document.querySelector('.bio-real');
         const scrambleBio = document.querySelector('.bio-scramble');
-        if (realBio && scrambleBio) scrambleText(realBio, scrambleBio);
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (realBio && scrambleBio && !reduceMotion) scrambleText(realBio, scrambleBio);
     </script>
 
 </body>
