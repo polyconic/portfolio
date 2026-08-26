@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artists - Gregor Egan</title>
+    <link rel="canonical" href="https://gregoregan.com/artists/">
+    <meta name="description" content="Photography and design by Gregor Egan for Tunde Adebimpe, Croz Boyce, Chrome Sparks, Dillstradamus, Diplo and Sierra Hull.">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 24px 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.5;
+        }
+
+        .nav-links svg {
+            display: block;
+        }
+
+        /* ==================== MAIN ==================== */
+        main {
+            flex: 1;
+            padding: 40px 40px 80px;
+        }
+
+        .page-title {
+            font-size: clamp(48px, 10vw, 120px);
+            font-weight: 700;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .page-intro {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.55;
+            margin-bottom: 80px;
+        }
+
+        /* ==================== ARTIST BLOCK ==================== */
+        .artist {
+            margin-bottom: 90px;
+        }
+
+        .artist:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .artist-head {
+            border-top: 1px solid rgba(245, 245, 245, 0.18);
+            padding-top: 14px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 20px;
+        }
+
+        .artist-tag {
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            border: 1px solid rgba(245, 245, 245, 0.3);
+            padding: 5px 10px 4px;
+            white-space: nowrap;
+        }
+
+        .artist-head h2 {
+            font-size: clamp(28px, 5vw, 56px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .artist-credit {
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-top: 10px;
+        }
+
+        /* ==================== GRID ==================== */
+        .grid {
+            column-count: 3;
+            column-gap: 16px;
+        }
+
+        .grid figure {
+            break-inside: avoid;
+            margin: 0 0 16px;
+        }
+
+        .grid img {
+            display: block;
+            width: 100%;
+            height: auto;
+            cursor: zoom-in;
+            transition: opacity 0.2s ease;
+        }
+
+        .grid img:hover {
+            opacity: 0.75;
+        }
+
+        /* ==================== LIGHTBOX ==================== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.96);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            cursor: zoom-out;
+        }
+
+        .lightbox.open {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        /* ==================== FOOTER ==================== */
+        footer {
+            padding: 24px 40px;
+            font-size: 12px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 900px) {
+            header {
+                padding: 20px;
+                align-items: center;
+            }
+
+            .logo {
+                font-size: 12px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            main {
+                padding: 32px 20px 60px;
+            }
+
+            .page-title {
+                font-size: 64px;
+                letter-spacing: -1.5px;
+            }
+
+            .page-intro {
+                margin-bottom: 56px;
+            }
+
+            .grid {
+                column-count: 2;
+            }
+
+            .artist {
+                margin-bottom: 64px;
+            }
+
+            .artist-head {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            footer {
+                padding: 20px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 20px;
+                gap: 12px;
+            }
+
+            .logo {
+                font-size: 11px;
+            }
+
+            .page-title {
+                font-size: 48px;
+                letter-spacing: -1px;
+            }
+
+            .grid {
+                column-count: 1;
+            }
+
+            .lightbox {
+                padding: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">Gregor Egan</a>
+        <nav class="nav-links">
+            <a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="mailto:gregor.art@pm.me" aria-label="Email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title">Artists</h1>
+        <p class="page-intro">Photography and design through TMWRK</p>
+
+        <!-- ==================== TUNDE ADEBIMPE ==================== -->
+        <section class="artist">
+            <div class="artist-head">
+                <div>
+                    <h2>Tunde Adebimpe</h2>
+                    <p class="artist-credit">TV on the Radio</p>
+                </div>
+                <span class="artist-tag">Photo</span>
+            </div>
+            <div class="grid">
+                <figure><img src="tunde%204.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+                <figure><img src="tunde%205.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+                <figure><img src="tunde%206.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+                <figure><img src="tunde%2014.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+                <figure><img src="tunde%2015.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+                <figure><img src="tunde%2016.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+                <figure><img src="tunde%2018.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+                <figure><img src="tunde%2030.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async"></figure>
+            </div>
+        </section>
+
+        <!-- ==================== CROZ BOYCE ==================== -->
+        <section class="artist">
+            <div class="artist-head">
+                <div>
+                    <h2>Croz Boyce</h2>
+                    <p class="artist-credit">Avey Tare &amp; Geologist of Animal Collective</p>
+                </div>
+                <span class="artist-tag">Photo</span>
+            </div>
+            <div class="grid">
+                <figure><img src="croz%201.webp" alt="Croz Boyce" loading="lazy" decoding="async"></figure>
+                <figure><img src="croz%203.webp" alt="Croz Boyce" loading="lazy" decoding="async"></figure>
+            </div>
+        </section>
+
+        <!-- ==================== CHROME SPARKS ==================== -->
+        <section class="artist">
+            <div class="artist-head">
+                <div>
+                    <h2>Chrome Sparks</h2>
+                    <p class="artist-credit">Album Art</p>
+                </div>
+                <span class="artist-tag">Design</span>
+            </div>
+            <div class="grid">
+                <figure><img src="CS%201.webp" alt="Chrome Sparks album art" loading="lazy" decoding="async"></figure>
+                <figure><img src="CS%202.webp" alt="Chrome Sparks album art" loading="lazy" decoding="async"></figure>
+            </div>
+        </section>
+
+        <!-- ==================== DILLSTRADAMUS ==================== -->
+        <section class="artist">
+            <div class="artist-head">
+                <div>
+                    <h2>Dillstradamus</h2>
+                    <p class="artist-credit">Dillon Francis &amp; Flosstradamus &mdash; Merch</p>
+                </div>
+                <span class="artist-tag">Design</span>
+            </div>
+            <div class="grid">
+                <figure><img src="dill%201.webp" alt="Dillstradamus merch design" loading="lazy" decoding="async"></figure>
+                <figure><img src="dill%203.webp" alt="Dillstradamus merch design" loading="lazy" decoding="async"></figure>
+                <figure><img src="dill%204.webp" alt="Dillstradamus merch design" loading="lazy" decoding="async"></figure>
+            </div>
+        </section>
+
+        <!-- ==================== DIPLO ==================== -->
+        <section class="artist">
+            <div class="artist-head">
+                <div>
+                    <h2>Diplo</h2>
+                    <p class="artist-credit">Grammy For Your Consideration</p>
+                </div>
+                <span class="artist-tag">Design</span>
+            </div>
+            <div class="grid">
+                <figure><img src="diplo%201.webp" alt="Diplo Grammy For Your Consideration campaign design" loading="lazy" decoding="async"></figure>
+            </div>
+        </section>
+
+        <!-- ==================== SIERRA HULL ==================== -->
+        <section class="artist">
+            <div class="artist-head">
+                <div>
+                    <h2>Sierra Hull</h2>
+                    <p class="artist-credit">Vinyl Laser Etching &amp; Album Art</p>
+                </div>
+                <span class="artist-tag">Design</span>
+            </div>
+            <div class="grid">
+                <figure><img src="sierra%201.webp" alt="Sierra Hull vinyl laser etching and album art" loading="lazy" decoding="async"></figure>
+                <figure><img src="sierra%202.webp" alt="Sierra Hull vinyl laser etching and album art" loading="lazy" decoding="async"></figure>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 GREGOR EGAN
+    </footer>
+
+    <!-- ==================== LIGHTBOX ==================== -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        document.querySelectorAll('.grid img').forEach(img => {
+            img.addEventListener('click', () => {
+                lightboxImg.src = img.src;
+                lightboxImg.alt = img.alt;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('open');
+            lightboxImg.src = '';
+            document.body.style.overflow = '';
+        }
+
+        lightbox.addEventListener('click', closeLightbox);
+        lightboxClose.addEventListener('click', closeLightbox);
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+
+</body>
+</html>
