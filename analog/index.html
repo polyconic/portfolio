@@ -7,9 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <script>
-        // Resolve the saved theme before first paint so there is no flash.
-        // This page is light by default; the handler at the end of <body>
-        // still wires up the toggle itself.
+        // Must stay in <head>: moving it later reintroduces the theme flash.
         (function () {
             try {
                 if (localStorage.getItem('theme') === 'dark') {

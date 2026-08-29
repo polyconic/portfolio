@@ -9,9 +9,7 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
     <script>
-        // Resolve the saved theme before first paint so there is no flash.
-        // This page is dark by default; every page shares one "theme" key, so
-        // an explicit choice made anywhere on the site still wins here.
+        // Must stay in <head>: moving it later reintroduces the theme flash.
         (function () {
             try {
                 if (localStorage.getItem('theme') === 'light') {
@@ -48,7 +46,6 @@
             --lightbox-bg: rgba(10, 10, 10, 0.96);
         }
 
-        /* An explicit light choice. Untouched, this page stays dark. */
         [data-theme="light"] {
             --bg-color: #fafaf8;
             --text-color: #141414;
