@@ -130,7 +130,7 @@
         }
 
         nav.main-nav a:hover {
-            opacity: 1;
+            opacity: 0.5;
         }
 
         .utility-nav {
@@ -148,7 +148,7 @@
         }
 
         .utility-nav a:hover {
-            opacity: 1;
+            opacity: 0.5;
         }
 
         /* ==================== BOTTOM ROW ==================== */
@@ -287,12 +287,6 @@
     </div>
 
     <script>
-        // apply saved theme for cross page consistency (toggle is on other pages)
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-        }
-
         // text scramble on bio - animates a decorative overlay only
         // real sentence lives in .bio-real the whole time, so crawlers
         // and screen readers always see the actual text, never garbled mid-animation frames - Gregor.
