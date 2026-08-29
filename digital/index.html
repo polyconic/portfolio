@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital - Gregor Egan</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <script>
+        // Resolve the saved theme before first paint so there is no flash.
+        // This page is light by default; the handler at the end of <body>
+        // still wires up the toggle itself.
+        (function () {
+            try {
+                if (localStorage.getItem('theme') === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <link rel="canonical" href="https://gregoregan.com/digital/">
     <meta name="description" content="Digital photography by Gregor Egan: portraits, cityscapes and personal work made in Los Angeles.">
 
