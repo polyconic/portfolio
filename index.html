@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
 
     <title>gregor egan ///</title>
     <link rel="canonical" href="https://gregoregan.com/">
@@ -10,6 +11,9 @@
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script type="speculationrules">
+    {"prerender": [{"where": {"href_matches": "/*"}, "eagerness": "moderate"}]}
+    </script>
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
@@ -238,7 +242,16 @@
             }
         }
 
+        @view-transition {
+            navigation: auto;
+        }
+
         @media (prefers-reduced-motion: reduce) {
+            ::view-transition-group(*),
+            ::view-transition-old(*),
+            ::view-transition-new(*) {
+                animation: none !important;
+            }
             .bio-real { opacity: 0.8; position: static; }
             .bio-scramble { display: none; }
         }
@@ -330,7 +343,11 @@
         const realBio = document.querySelector('.bio-real');
         const scrambleBio = document.querySelector('.bio-scramble');
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (realBio && scrambleBio && !reduceMotion) scrambleText(realBio, scrambleBio);
+        function startScramble() {
+            if (realBio && scrambleBio && !reduceMotion) scrambleText(realBio, scrambleBio);
+        }
+        if (document.prerendering) document.addEventListener('prerenderingchange', startScramble, { once: true });
+        else startScramble();
     </script>
 
 </body>

@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
     <title>Photos - Gregor Egan</title>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script type="speculationrules">
+    {"prerender": [{"where": {"href_matches": "/*"}, "eagerness": "moderate"}]}
+    </script>
 
     <script>
         // Must stay in <head>: moving it later reintroduces the theme flash.
@@ -14,6 +18,7 @@
             try {
                 if (localStorage.getItem('theme') === 'light') {
                     document.documentElement.setAttribute('data-theme', 'light');
+                    document.querySelector('meta[name="theme-color"]').content = '#fafaf8';
                 }
             } catch (e) {}
         })();
@@ -99,6 +104,7 @@
         }
 
         .logo {
+            view-transition-name: site-logo;
             font-weight: 700;
             font-size: 14px;
             letter-spacing: 0.5px;
@@ -106,6 +112,7 @@
         }
 
         .nav-links {
+            view-transition-name: site-utils;
             display: flex;
             gap: 24px;
             align-items: center;
@@ -125,6 +132,27 @@
 
         .nav-links svg {
             display: block;
+        }
+
+        .section-nav {
+            display: flex;
+            gap: 20px;
+            margin: 2px auto 0 32px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .section-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+        }
+
+        .section-nav a:hover,
+        .section-nav a[aria-current] {
+            opacity: 1;
         }
 
         main {
@@ -218,6 +246,13 @@
                 font-size: 11px;
             }
 
+            .section-nav {
+                order: 3;
+                width: 100%;
+                margin: 0;
+                gap: 16px;
+            }
+
             .nav-links {
                 gap: 12px;
             }
@@ -231,11 +266,27 @@
                 gap: 50px;
             }
         }
+        @view-transition {
+            navigation: auto;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-group(*),
+            ::view-transition-old(*),
+            ::view-transition-new(*) {
+                animation: none !important;
+            }
+        }
     </style>
 </head>
 <body>
     <header>
         <a href="/" class="logo" style="text-decoration: none; color: inherit;">Gregor Egan</a>
+        <nav class="section-nav" aria-label="Sections">
+            <a href="/photos/" aria-current="page">Photo</a>
+            <a href="/design/">Design</a>
+            <a href="/artists/">Artists</a>
+        </nav>
         <nav class="nav-links">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" aria-pressed="false">
                 <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -254,7 +305,7 @@
                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
                 </svg>
             </button>
-            <a href="https://www.instagram.com/gregor.egan" target="_blank" aria-label="Instagram">
+            <a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener" aria-label="Instagram">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -294,6 +345,7 @@
         (function () {
             var root = document.documentElement;
             var btn = document.getElementById('themeToggle');
+            var themeColor = document.querySelector('meta[name="theme-color"]');
 
             function sync() {
                 btn.setAttribute('aria-pressed',
@@ -303,9 +355,11 @@
             btn.addEventListener('click', function () {
                 if (root.getAttribute('data-theme') === 'light') {
                     root.removeAttribute('data-theme');
+                    themeColor.content = '#0a0a0a';
                     try { localStorage.setItem('theme', 'dark'); } catch (e) {}
                 } else {
                     root.setAttribute('data-theme', 'light');
+                    themeColor.content = '#fafaf8';
                     try { localStorage.setItem('theme', 'light'); } catch (e) {}
                 }
                 sync();
