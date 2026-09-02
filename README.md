@@ -1,7 +1,9 @@
 # gregoregan.com
 
 Portfolio site for Gregor Egan — graphic designer, photographer and sound artist
-based in Los Angeles. Photography, book design and typography.
+based in Los Angeles. Photography and graphic design.
+
+Music to be added soon.
 
 Live at **[gregoregan.com](https://gregoregan.com)**.
 
@@ -60,21 +62,6 @@ no toggle.
 
 Each themed page resolves the theme in an inline `<head>` script that runs before
 first paint, which is what keeps the wrong theme from flashing on load.
-
-## Local preview
-
-Serve from the repo root so root-absolute paths resolve:
-
-```
-python3 -m http.server 8000
-```
-
-Then open <http://localhost:8000>.
-
-## Deploy
-
-GitHub Pages from `main`; `CNAME` points at `gregoregan.com`. **Pushing to `main`
-publishes the live site** — there is no staging. The rebuild takes a minute or two.
 
 ## Contact
 
