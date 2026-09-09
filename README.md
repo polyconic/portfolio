@@ -10,3 +10,5 @@ Live at **[gregoregan.com](https://gregoregan.com)**.
 ## Contact
 
 [gregor.art@pm.me](mailto:gregor.art@pm.me) · [instagram](https://www.instagram.com/gregor.egan)
+
+## © GREGOR EGAN
