@@ -59,6 +59,7 @@
         }
 
         body {
+            overflow-x: clip;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-color);
@@ -349,6 +350,20 @@
                 gap: 16px;
             }
         }
+        .arrive {
+            display: inline-block;
+            white-space: pre;
+        }
+
+        .arrive-text {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
         @view-transition {
             navigation: auto;
         }
@@ -409,7 +424,8 @@
     <main>
         <div class="gallery-header">
             <a href="/photos/" class="back-link">← Back to Photos</a>
-            <h1>Digital</h1>
+            <h1 data-arrive>Digital</h1>
+            <script src="/arrive.js"></script>
         </div>
         
         <div class="gallery-grid" id="gallery">

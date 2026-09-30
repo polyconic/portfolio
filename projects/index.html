@@ -49,7 +49,6 @@
             --bg-color: #0a0a0a;
             --text-color: #f5f5f5;
             --rule-color: rgba(245, 245, 245, 0.18);
-            --chip-border: rgba(245, 245, 245, 0.3);
             --lightbox-bg: rgba(10, 10, 10, 0.96);
             --placeholder: rgba(245, 245, 245, 0.07);
         }
@@ -58,12 +57,12 @@
             --bg-color: #fafaf8;
             --text-color: #141414;
             --rule-color: rgba(20, 20, 20, 0.16);
-            --chip-border: rgba(20, 20, 20, 0.28);
             --lightbox-bg: rgba(250, 250, 248, 0.97);
             --placeholder: rgba(20, 20, 20, 0.06);
         }
 
         body {
+            overflow-x: clip;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: var(--bg-color);
@@ -206,18 +205,6 @@
             justify-content: space-between;
             align-items: baseline;
             gap: 20px;
-        }
-
-        .artist-tag {
-            flex-shrink: 0;
-            font-size: 10px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.5;
-            border: 1px solid var(--chip-border);
-            padding: 5px 10px 4px;
-            white-space: nowrap;
         }
 
         .artist-head h2 {
@@ -453,6 +440,20 @@
             }
         }
 
+        .arrive {
+            display: inline-block;
+            white-space: pre;
+        }
+
+        .arrive-text {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
         @view-transition {
             navigation: auto;
         }
@@ -515,7 +516,8 @@
     </header>
 
     <main>
-        <h1 class="page-title">Projects</h1>
+        <h1 class="page-title" data-arrive>Projects</h1>
+        <script src="/arrive.js"></script>
         <p class="page-intro">Selected projects.</p>
 
         <!-- ==================== TUNDE ADEBIMPE ==================== -->
@@ -525,7 +527,6 @@
                     <h2>Tunde Adebimpe</h2>
                     <p class="artist-credit">TV on the Radio</p>
                 </div>
-                <span class="artist-tag">Photo</span>
             </div>
             <div class="grid">
                 <figure><img src="tunde%205.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
@@ -544,7 +545,6 @@
                     <h2>Croz Boyce</h2>
                     <p class="artist-credit">Avey Tare &amp; Geologist of Animal Collective</p>
                 </div>
-                <span class="artist-tag">Photo</span>
             </div>
             <div class="grid">
                 <figure><img src="croz%201.webp" alt="Croz Boyce" loading="lazy" decoding="async" width="2560" height="1707"></figure>
