@@ -5,19 +5,43 @@
     const held = [];
     document.querySelectorAll('[data-arrive]:not([data-arrived])').forEach(el => {
         el.setAttribute('data-arrived', '');
-        const text = el.textContent.replace(/\s+/g, ' ').trim();
+        if (el.dataset.arrive === 'once') {
+            const key = 'arrived:' + location.pathname;
+            try {
+                if (sessionStorage.getItem(key)) return;
+                sessionStorage.setItem(key, '1');
+            } catch (e) {}
+        }
+
         const shown = document.createElement('span');
         shown.setAttribute('aria-hidden', 'true');
-        const letters = [...text].map(ch => {
-            const span = document.createElement('span');
-            span.className = 'arrive';
-            span.textContent = ch;
-            shown.appendChild(span);
-            return span;
-        });
+        const letters = [];
+        let lastSpace = true;
+        (function walk(node, into) {
+            [...node.childNodes].forEach(c => {
+                if (c.nodeType === 1) {
+                    const copy = c.cloneNode(false);
+                    into.appendChild(copy);
+                    walk(c, copy);
+                    return;
+                }
+                if (c.nodeType !== 3) return;
+                for (const ch of c.textContent.replace(/\s+/g, ' ')) {
+                    if (ch === ' ' && lastSpace) continue;
+                    lastSpace = ch === ' ';
+                    const span = document.createElement('span');
+                    span.className = 'arrive';
+                    span.textContent = ch;
+                    into.appendChild(span);
+                    letters.push(span);
+                }
+            });
+        })(el, shown);
+        if (lastSpace && letters.length) letters.pop().remove();
+
         const sr = document.createElement('span');
         sr.className = 'arrive-text';
-        sr.textContent = text;
+        sr.textContent = el.textContent.replace(/\s+/g, ' ').trim();
         el.replaceChildren(shown, sr);
 
         let seed = 7;

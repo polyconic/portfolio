@@ -181,6 +181,20 @@
             transform: scaleY(0.8);
         }
 
+        .arrive {
+            display: inline-block;
+            white-space: pre;
+        }
+
+        .arrive-text {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
         .bio {
             position: absolute;
             right: min(380px, calc(100vw - 740px));
@@ -291,7 +305,8 @@
 
         <!-- BOTTOM -->
         <div class="bottom-row">
-            <h1 class="site-name">Gregor Egan <span class="slashes"> / / /</span></h1>
+            <h1 class="site-name" data-arrive="once">Gregor Egan <span class="slashes"> / / /</span></h1>
+            <script src="/arrive.js"></script>
         </div>
 
         <!-- FLOATING BIO -->
