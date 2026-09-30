@@ -5,13 +5,6 @@
     const held = [];
     document.querySelectorAll('[data-arrive]:not([data-arrived])').forEach(el => {
         el.setAttribute('data-arrived', '');
-        if (el.dataset.arrive === 'once') {
-            const key = 'arrived:' + location.pathname;
-            try {
-                if (sessionStorage.getItem(key)) return;
-                sessionStorage.setItem(key, '1');
-            } catch (e) {}
-        }
 
         const shown = document.createElement('span');
         shown.setAttribute('aria-hidden', 'true');
