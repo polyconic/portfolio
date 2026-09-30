@@ -239,7 +239,7 @@
         }
 
         .lightbox img {
-            max-width: 90%;
+            max-width: calc(100% - 128px);
             max-height: 90vh;
             object-fit: contain;
             opacity: 0;
@@ -276,15 +276,24 @@
         }
 
         .lightbox-prev {
-            left: 20px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
+            padding: 12px;
         }
 
         .lightbox-next {
-            right: 20px;
+            right: 16px;
             top: 50%;
             transform: translateY(-50%);
+            padding: 12px;
+        }
+
+        .lightbox-prev svg,
+        .lightbox-next svg {
+            display: block;
+            width: 18px;
+            height: 40px;
         }
 
         footer {
@@ -307,10 +316,24 @@
                 width: calc(50% - 8px);
             }
 
-            .lightbox-prev,
+            .lightbox img {
+                max-width: calc(100% - 64px);
+            }
+
+            .lightbox-prev {
+                left: 4px;
+                padding: 8px;
+            }
+
             .lightbox-next {
-                font-size: 30px;
-                padding: 10px;
+                right: 4px;
+                padding: 8px;
+            }
+
+            .lightbox-prev svg,
+            .lightbox-next svg {
+                width: 12px;
+                height: 28px;
             }
         }
 
@@ -443,8 +466,8 @@
 
     <div id="lightbox" class="lightbox">
         <button class="lightbox-close" aria-label="Close">&times;</button>
-        <button class="lightbox-prev" aria-label="Previous">‹</button>
-        <button class="lightbox-next" aria-label="Next">›</button>
+        <button class="lightbox-prev" aria-label="Previous"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="16,2 2,20 16,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
+        <button class="lightbox-next" aria-label="Next"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="2,2 16,20 2,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
         <img src="" alt="">
     </div>
 
