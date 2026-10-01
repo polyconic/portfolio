@@ -224,19 +224,29 @@
                 letter-spacing: -2px;
             }
 
-            /* visually hidden rather than display:none, so the bio text
-               still counts on Google's mobile-first crawl */
+            .bottom-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+
+            /* The real sentence sets the height so the scramble can't shift the name while it resolves. */
             .bio {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                overflow: hidden;
-                clip: rect(0 0 0 0);
-                clip-path: inset(50%);
-                white-space: nowrap;
+                position: relative;
                 right: auto;
                 top: auto;
                 transform: none;
+                max-width: 340px;
+                white-space: normal;
+            }
+
+            .bio-real {
+                position: static;
+            }
+
+            .bio-scramble {
+                position: absolute;
+                inset: 0;
             }
         }
 
@@ -307,12 +317,10 @@
         <div class="bottom-row">
             <h1 class="site-name" data-arrive>Gregor Egan <span class="slashes"> / / /</span></h1>
             <script src="/arrive.js"></script>
-        </div>
-
-        <!-- FLOATING BIO -->
-        <div class="bio">
-            <span class="bio-real">a digital footprint /// los angeles /// photographer /// graphic designer /// sound artist</span>
-            <span class="bio-scramble" aria-hidden="true"></span>
+            <div class="bio">
+                <span class="bio-real">a digital footprint /// los angeles /// photographer /// graphic designer /// sound artist</span>
+                <span class="bio-scramble" aria-hidden="true"></span>
+            </div>
         </div>
 
     </div>

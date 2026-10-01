@@ -480,7 +480,7 @@
         </div>
     </main>
 
-    <div id="lightbox" class="lightbox">
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
         <button class="lightbox-close" aria-label="Close">&times;</button>
         <button class="lightbox-prev" aria-label="Previous"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="16,2 2,20 16,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
         <button class="lightbox-next" aria-label="Next"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="2,2 16,20 2,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
@@ -541,10 +541,15 @@
                 return galleryItems[(i + count) % count].querySelector('img').src;
             }
 
+            function altAt(i) {
+                return galleryItems[(i + count) % count].querySelector('img').alt;
+            }
+
             function showLightbox() {
                 const token = ++loadToken;
                 lightboxImg.classList.remove('loaded');
                 lightboxImg.src = srcAt(currentIndex);
+                lightboxImg.alt = altAt(currentIndex);
                 lightboxImg.decode().catch(function() {}).then(function() {
                     if (token === loadToken) lightboxImg.classList.add('loaded');
                 });
