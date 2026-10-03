@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0a">
-    <title>Projects - Gregor Egan</title>
-    <link rel="canonical" href="https://gregoregan.com/projects/">
-    <meta name="description" content="Photography and design projects by Gregor Egan, including portraits of Tunde Adebimpe and Croz Boyce.">
+    <title>Music - Gregor Egan</title>
+    <link rel="canonical" href="https://gregoregan.com/music/">
+    <meta name="description" content="Music and sound by Gregor Egan, a sound artist based in Los Angeles.">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -28,15 +28,15 @@
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="gregor egan">
-    <meta property="og:title" content="Projects — Gregor Egan">
-    <meta property="og:description" content="Photography and design projects by Gregor Egan, including portraits of Tunde Adebimpe and Croz Boyce.">
-    <meta property="og:image" content="https://gregoregan.com/projects/tunde%205.webp">
-    <meta property="og:url" content="https://gregoregan.com/projects/">
+    <meta property="og:title" content="Music — Gregor Egan">
+    <meta property="og:description" content="Music and sound by Gregor Egan, a sound artist based in Los Angeles.">
+    <meta property="og:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
+    <meta property="og:url" content="https://gregoregan.com/music/">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Projects — Gregor Egan">
-    <meta name="twitter:description" content="Photography and design projects by Gregor Egan, including portraits of Tunde Adebimpe and Croz Boyce.">
-    <meta name="twitter:image" content="https://gregoregan.com/projects/tunde%205.webp">
+    <meta name="twitter:title" content="Music — Gregor Egan">
+    <meta name="twitter:description" content="Music and sound by Gregor Egan, a sound artist based in Los Angeles.">
+    <meta name="twitter:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
 
     <style>
         * {
@@ -202,151 +202,63 @@
             margin-bottom: 80px;
         }
 
-        /* ==================== ARTIST BLOCK ==================== */
-        .artist {
-            margin-bottom: 90px;
+        
+        /* ==================== TEXT + LINKS ==================== */
+        .about {
+            max-width: 640px;
+            font-size: 18px;
+            line-height: 1.6;
         }
 
-        .artist:last-of-type {
-            margin-bottom: 0;
+        .about p + p {
+            margin-top: 1em;
         }
 
-        .artist-head {
+        .about .lead {
+            font-size: 24px;
+            line-height: 1.4;
+        }
+
+        .links {
+            list-style: none;
+            border-bottom: 1px solid var(--rule-color);
+            margin-top: 80px;
+        }
+
+        .page-intro + .links {
+            margin-top: 0;
+        }
+
+        .links li {
             border-top: 1px solid var(--rule-color);
-            padding-top: 14px;
-            margin-bottom: 24px;
+        }
+
+        .links a {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             gap: 20px;
-        }
-
-        .artist-head h2 {
-            font-size: clamp(28px, 5vw, 56px);
+            padding: 18px 0;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: clamp(24px, 4vw, 44px);
             font-weight: 700;
-            letter-spacing: -1.5px;
+            letter-spacing: -1px;
             text-transform: uppercase;
             line-height: 1;
-        }
-
-        .artist-credit {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.5;
-            margin-top: 10px;
-        }
-
-        /* ==================== GRID ==================== */
-        .grid {
-            column-count: 3;
-            column-gap: 16px;
-        }
-
-        .grid figure {
-            break-inside: avoid;
-            margin: 0 0 16px;
-            background: var(--placeholder);
-        }
-
-        .grid img {
-            display: block;
-            width: 100%;
-            height: auto;
-            cursor: zoom-in;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .grid img.loaded {
-            opacity: 1;
-        }
-
-        @media (hover: hover) {
-            .grid img:hover {
-                opacity: 0.75;
-            }
-        }
-
-        /* ==================== LIGHTBOX ==================== */
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: var(--lightbox-bg);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 90px;
-            cursor: zoom-out;
-        }
-
-        .lightbox.open {
-            display: flex;
-        }
-
-        .lightbox img {
-            max-width: 100%;
-            max-height: 100%;
-            width: auto;
-            height: auto;
-            opacity: 0;
-            transition: opacity 0.25s ease;
-        }
-
-        .lightbox img.loaded {
-            opacity: 1;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: 24px;
-            right: 32px;
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 28px;
-            line-height: 1;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .lightbox-prev,
-        .lightbox-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            padding: 12px;
             transition: opacity 0.2s ease;
         }
 
-        .lightbox-prev {
-            left: 36px;
+        .links a:hover {
+            opacity: 0.5;
         }
 
-        .lightbox-next {
-            right: 36px;
+        .links .out {
+            font-size: 0.5em;
+            font-weight: 400;
+            letter-spacing: 0;
         }
 
-        .lightbox-prev svg,
-        .lightbox-next svg {
-            display: block;
-            width: 18px;
-            height: 40px;
-        }
-
-        @media (hover: hover) {
-            .lightbox-prev:hover,
-            .lightbox-next:hover {
-                opacity: 0.5;
-            }
-        }
-
-        /* ==================== FOOTER ==================== */
         footer {
             padding: 24px 40px;
             font-size: 12px;
@@ -354,7 +266,6 @@
             text-align: center;
         }
 
-        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 900px) {
             header {
                 padding: 20px;
@@ -387,18 +298,8 @@
                 margin-bottom: 56px;
             }
 
-            .grid {
-                column-count: 2;
-            }
-
-            .artist {
-                margin-bottom: 64px;
-            }
-
-            .artist-head {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
+            .links {
+                margin-top: 56px;
             }
 
             footer {
@@ -430,28 +331,12 @@
                 letter-spacing: -1px;
             }
 
-            .grid {
-                column-count: 1;
+            .about {
+                font-size: 16px;
             }
 
-            .lightbox {
-                padding: 16px 40px;
-            }
-
-            .lightbox-prev {
-                left: 12px;
-                padding: 8px;
-            }
-
-            .lightbox-next {
-                right: 12px;
-                padding: 8px;
-            }
-
-            .lightbox-prev svg,
-            .lightbox-next svg {
-                width: 12px;
-                height: 28px;
+            .about .lead {
+                font-size: 20px;
             }
         }
 
@@ -484,7 +369,6 @@
             }
         }
     </style>
-    <noscript><style>.grid img { opacity: 1; }</style></noscript>
 </head>
 <body>
 
@@ -493,9 +377,9 @@
         <nav class="section-nav" aria-label="Sections">
             <a href="/photos/">Photo</a>
             <a href="/design/">Design</a>
-            <a href="/music/">Music</a>
+            <a href="/music/" aria-current="page">Music</a>
             <a href="/artists/">Artists</a>
-            <a href="/projects/" aria-current="page">Projects</a>
+            <a href="/projects/">Projects</a>
             <a href="/about/">About</a>
         </nav>
         <nav class="nav-links">
@@ -534,118 +418,18 @@
 
     <main>
         <a href="/" class="back-link">← Back</a>
-        <h1 class="page-title" data-arrive>Projects</h1>
+        <h1 class="page-title" data-arrive>Music</h1>
         <script src="/arrive.js"></script>
-        <p class="page-intro">Selected projects.</p>
+        <p class="page-intro">Sound</p>
 
-        <!-- ==================== TUNDE ADEBIMPE ==================== -->
-        <section class="artist">
-            <div class="artist-head">
-                <div>
-                    <h2>Tunde Adebimpe</h2>
-                    <p class="artist-credit">TV on the Radio</p>
-                </div>
-            </div>
-            <div class="grid">
-                <figure><img src="tunde%205.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="tunde%206.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="tunde%2014.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="tunde%2016.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="tunde%2018.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="tunde%2030.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-            </div>
-        </section>
-
-        <!-- ==================== CROZ BOYCE ==================== -->
-        <section class="artist">
-            <div class="artist-head">
-                <div>
-                    <h2>Croz Boyce</h2>
-                    <p class="artist-credit">Avey Tare &amp; Geologist of Animal Collective</p>
-                </div>
-            </div>
-            <div class="grid">
-                <figure><img src="croz%201.webp" alt="Croz Boyce" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="croz%202.webp" alt="Croz Boyce" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="croz%203.webp" alt="Croz Boyce" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-            </div>
-        </section>
-
+        <ul class="links">
+            <li><a href="https://www.audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true">↗</span></a></li>
+        </ul>
     </main>
 
     <footer>
         &copy; 2026 GREGOR EGAN
     </footer>
-
-    <!-- ==================== LIGHTBOX ==================== -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
-        <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-        <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="16,2 2,20 16,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
-        <button class="lightbox-next" id="lightboxNext" aria-label="Next"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="2,2 16,20 2,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
-        <img id="lightboxImg" src="" alt="">
-    </div>
-
-    <script>
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxClose = document.getElementById('lightboxClose');
-
-        const gridImgs = [...document.querySelectorAll('.grid img')];
-        const count = gridImgs.length;
-        let current = 0;
-
-        lightboxImg.addEventListener('load', () => lightboxImg.classList.add('loaded'));
-
-        function show(i) {
-            current = (i + count) % count;
-            const img = gridImgs[current];
-            lightboxImg.classList.remove('loaded');
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-            lightboxImg.decode().catch(() => {}).then(() => {
-                if (lightboxImg.src === img.src) lightboxImg.classList.add('loaded');
-            });
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
-            new Image().src = gridImgs[(current + 1) % count].src;
-            new Image().src = gridImgs[(current - 1 + count) % count].src;
-        }
-
-        gridImgs.forEach((img, i) => {
-            if (img.complete && img.naturalWidth) img.classList.add('loaded');
-            else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-            img.addEventListener('click', () => show(i));
-        });
-
-        function closeLightbox() {
-            lightbox.classList.remove('open');
-            lightboxImg.src = '';
-            document.body.style.overflow = '';
-        }
-
-        lightbox.addEventListener('click', closeLightbox);
-        lightboxClose.addEventListener('click', closeLightbox);
-        document.getElementById('lightboxPrev').addEventListener('click', e => { e.stopPropagation(); show(current - 1); });
-        document.getElementById('lightboxNext').addEventListener('click', e => { e.stopPropagation(); show(current + 1); });
-
-        let touchX = 0, touchY = 0;
-        lightbox.addEventListener('touchstart', e => {
-            touchX = e.changedTouches[0].clientX;
-            touchY = e.changedTouches[0].clientY;
-        }, { passive: true });
-        lightbox.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - touchX;
-            const dy = e.changedTouches[0].clientY - touchY;
-            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
-        }, { passive: true });
-
-        document.addEventListener('keydown', e => {
-            if (!lightbox.classList.contains('open')) return;
-            if (e.key === 'Escape') closeLightbox();
-            else if (e.key === 'ArrowLeft') show(current - 1);
-            else if (e.key === 'ArrowRight') show(current + 1);
-        });
-    </script>
 
     <script>
         (function () {
