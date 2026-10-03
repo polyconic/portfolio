@@ -11,11 +11,13 @@
         const letters = [];
         let lastSpace = true;
         (function walk(node, into) {
+            let word = null;
             [...node.childNodes].forEach(c => {
                 if (c.nodeType === 1) {
                     const copy = c.cloneNode(false);
                     into.appendChild(copy);
                     walk(c, copy);
+                    word = null;
                     return;
                 }
                 if (c.nodeType !== 3) return;
@@ -25,7 +27,17 @@
                     const span = document.createElement('span');
                     span.className = 'arrive';
                     span.textContent = ch;
-                    into.appendChild(span);
+                    if (ch === ' ') {
+                        word = null;
+                        into.appendChild(span);
+                    } else {
+                        if (!word) {
+                            word = document.createElement('span');
+                            word.style.cssText = 'display:inline-block;white-space:nowrap';
+                            into.appendChild(word);
+                        }
+                        word.appendChild(span);
+                    }
                     letters.push(span);
                 }
             });

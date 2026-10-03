@@ -47,7 +47,9 @@
       "knowsAbout": ["Graphic Design", "Book Design", "Typography", "Photography", "Sound Design"],
       "sameAs": [
         "https://www.instagram.com/gregor.egan",
-        "https://www.audiospatials.com/gregor-egan"
+        "https://audiospatials.com/gregor-egan",
+        "https://open.spotify.com/artist/6r2SStoFHVne6EukVUKl1s",
+        "https://soundcloud.com/gregoregan"
       ]
     }
     </script>
@@ -113,30 +115,8 @@
         /* ==================== TOP ROW ==================== */
         .top-row {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: flex-start;
-        }
-
-        nav.main-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        nav.main-nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 14px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 1;
-            transition: opacity 0.2s ease;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-
-        nav.main-nav a:hover {
-            opacity: 0.5;
         }
 
         .utility-nav {
@@ -282,11 +262,6 @@
                 font-size: 44px;
                 letter-spacing: -1.5px;
             }
-
-            nav.main-nav a {
-                font-size: 12px;
-                letter-spacing: 2px;
-            }
         }
 
         @view-transition {
@@ -310,15 +285,6 @@
 
         <!-- TOP -->
         <div class="top-row">
-            <nav class="main-nav">
-                <a href="/photos/">Photo</a>
-                <a href="/design/">Design</a>
-                <a href="/music/">Music</a>
-                <a href="/artists/">Artists</a>
-                <a href="/projects/">Projects</a>
-                <a href="/about/">About</a>
-            </nav>
-
             <div class="utility-nav">
                 <a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener" aria-label="Instagram">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -341,11 +307,12 @@
             <h1 class="site-name" data-arrive>Gregor Egan <span class="slashes"> / / /</span></h1>
             <script src="/arrive.js"></script>
             <div class="bio">
-                <p><span class="scr">a digital footprint</span> <span class="scr" aria-hidden="true">///</span> <span class="scr">los angeles</span> <span class="scr" aria-hidden="true">///</span></p>
+                <p><span class="scr">a digital footprint</span> <span class="scr" aria-hidden="true">Δ</span> <span class="scr">los angeles</span></p>
                 <ul class="bio-links">
                     <li><a class="bio-link" href="/photos/"><span class="scr">photographer</span></a> <span class="scr" aria-hidden="true">///</span></li>
                     <li><a class="bio-link" href="/design/"><span class="scr">graphic designer</span></a> <span class="scr" aria-hidden="true">///</span></li>
-                    <li><a class="bio-link" href="/music/"><span class="scr">sound artist</span></a></li>
+                    <li><a class="bio-link" href="/music/"><span class="scr">sound artist</span></a> <span class="scr" aria-hidden="true">///</span></li>
+                    <li><a class="bio-link" href="/about/"><span class="scr">about</span></a> <span class="scr" aria-hidden="true">///</span></li>
                 </ul>
             </div>
         </div>
