@@ -61,12 +61,6 @@
     <style>
         :root {
             --text-color: #ffffff;
-            --overlay-gradient: linear-gradient(
-                to bottom,
-                rgba(10, 10, 10, 0.25) 0%,
-                rgba(10, 10, 10, 0.00) 35%,
-                rgba(10, 10, 10, 0.55) 100%
-            );
         }
 
         * {
@@ -85,29 +79,47 @@
             overflow: hidden;
         }
 
-        /* ==================== BACKGROUND ==================== */
-        .bg {
+        /* ==================== PORTRAIT + GRAIN ==================== */
+        .portrait {
             position: fixed;
-            inset: 0;
+            top: 50%;
+            left: 50%;
             z-index: 0;
-            background-image: url('BLUR.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #0a0a0a;
+            width: clamp(200px, 26vw, 420px);
+            height: auto;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 1.2s ease;
         }
 
-        .bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: var(--overlay-gradient);
+        .portrait.loaded {
+            opacity: 1;
+        }
+
+        /* One tile of noise is drawn at load and stepped around the page, so the motion costs nothing. */
+        .static {
+            position: fixed;
+            inset: -50%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.045;
+            background-size: 180px 180px;
+            image-rendering: pixelated;
+            animation: static 0.9s steps(9) infinite;
+        }
+
+        @keyframes static {
+            0% { transform: translate(0, 0); }       11% { transform: translate(-7%, 3%); }
+            22% { transform: translate(4%, -9%); }   33% { transform: translate(-11%, -2%); }
+            44% { transform: translate(9%, 6%); }    55% { transform: translate(-3%, 11%); }
+            66% { transform: translate(12%, -5%); }  77% { transform: translate(-9%, -8%); }
+            88% { transform: translate(5%, 9%); }    100% { transform: translate(0, 0); }
         }
 
         /* ==================== LAYOUT ==================== */
         .wrapper {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             height: 100vh;
             height: 100dvh;
             display: flex;
@@ -181,7 +193,7 @@
 
         .bio {
             position: absolute;
-            right: 17vw;
+            right: 13vw;
             top: 63%;
             transform: translateY(-80%);
             font-size: 12px;
@@ -234,6 +246,11 @@
                 padding: 28px 24px;
             }
 
+            .portrait {
+                top: 42%;
+                width: min(56vw, 360px);
+            }
+
             .site-name {
                 letter-spacing: -2px;
             }
@@ -279,12 +296,15 @@
             ::view-transition-new(*) {
                 animation: none !important;
             }
+            .static { animation: none; }
+            .portrait { transition: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg"></div>
+    <img class="portrait" src="/gregor-portrait.webp" alt="Portrait of Gregor Egan" width="2560" height="2088" fetchpriority="high" decoding="async">
+    <div class="static" aria-hidden="true"></div>
 
     <div class="wrapper">
 
@@ -323,6 +343,24 @@
         </div>
 
     </div>
+
+    <script>
+        (function () {
+            const c = document.createElement('canvas');
+            c.width = c.height = 180;
+            const x = c.getContext('2d'), img = x.createImageData(180, 180);
+            for (let i = 0; i < img.data.length; i += 4) {
+                img.data[i] = img.data[i + 1] = img.data[i + 2] = Math.random() * 255;
+                img.data[i + 3] = 255;
+            }
+            x.putImageData(img, 0, 0);
+            document.querySelector('.static').style.backgroundImage = `url(${c.toDataURL()})`;
+
+            const p = document.querySelector('.portrait');
+            const show = () => p.classList.add('loaded');
+            if (p.complete) show(); else p.addEventListener('load', show, { once: true });
+        })();
+    </script>
 
     <script>
         // The real text stays in .scr-real the whole time; only the decorative overlay is scrambled,
