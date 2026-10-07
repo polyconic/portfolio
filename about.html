@@ -234,40 +234,20 @@
 
         .about-photos {
             flex: none;
-            width: clamp(200px, calc((100vh - 420px) / 2), 400px);
+            width: clamp(240px, min(calc((100vh - 400px) * 0.75), 30vw), 600px);
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
             align-items: start;
         }
 
-        .about-figure {
-            margin: 0;
-        }
-
         .about-photos img {
             display: block;
             width: 100%;
             height: auto;
+            aspect-ratio: 3 / 2;
             object-fit: cover;
             background: var(--placeholder);
-        }
-
-        .about-photo {
-            aspect-ratio: 3 / 4;
-        }
-
-        .about-gig {
-            aspect-ratio: 3 / 2;
-        }
-
-        .about-figure figcaption {
-            margin-top: 12px;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-align: center;
-            opacity: 0.55;
         }
 
         .links {
@@ -364,17 +344,13 @@
             .about-photos {
                 width: 100%;
                 max-width: 680px;
-                grid-template-columns: 1fr 2fr;
+                grid-template-columns: 1fr 1fr;
             }
         }
 
         @media (max-width: 700px) {
             .about-photos {
                 grid-template-columns: 1fr;
-            }
-
-            .about-figure {
-                width: min(100%, 360px);
             }
         }
 
@@ -546,11 +522,8 @@
                 </ul>
             </div>
             <div class="about-photos">
-                <figure class="about-figure">
-                    <img class="about-photo" src="/img/about/gregor-passport.webp" alt="Portrait of Gregor Egan" width="1920" height="2560" decoding="async">
-                    <figcaption>Passport photo, circa 2023</figcaption>
-                </figure>
-                <img class="about-gig" src="/img/about/gregor-decks.webp" alt="Gregor Egan DJing" width="2560" height="1707" decoding="async">
+                <img src="/img/about/gregor-red.webp" alt="Portrait of Gregor Egan in red light" width="2560" height="1707" decoding="async">
+                <img src="/img/about/gregor-decks.webp" alt="Gregor Egan DJing" width="2560" height="1707" decoding="async">
             </div>
         </div>
     </main>
