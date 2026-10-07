@@ -223,7 +223,8 @@
         .about-layout {
             display: flex;
             align-items: flex-start;
-            gap: 80px;
+            justify-content: space-between;
+            gap: 60px;
         }
 
         .about-main {
@@ -233,16 +234,33 @@
             container-type: inline-size;
         }
 
-        .about-figure {
+        .about-photos {
             flex: none;
-            width: min(340px, 28vw);
+            width: min(44vw, 1000px);
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 20px;
+            align-items: start;
         }
 
-        .about-photo {
+        .about-figure {
+            margin: 0;
+        }
+
+        .about-photos img {
             display: block;
             width: 100%;
             height: auto;
+            object-fit: cover;
             background: var(--placeholder);
+        }
+
+        .about-photo {
+            aspect-ratio: 3 / 4;
+        }
+
+        .about-gig {
+            aspect-ratio: 3 / 2;
         }
 
         .about-figure figcaption {
@@ -252,20 +270,6 @@
             text-transform: uppercase;
             text-align: center;
             opacity: 0.55;
-        }
-
-        .about-photos {
-            max-width: 770px;
-            margin: 80px auto 0;
-        }
-
-        .about-photos img {
-            display: block;
-            width: 100%;
-            height: auto;
-            aspect-ratio: 3 / 2;
-            object-fit: cover;
-            background: var(--placeholder);
         }
 
         .links {
@@ -336,21 +340,26 @@
             text-align: center;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .about-layout {
                 flex-direction: column;
                 gap: 56px;
                 align-items: stretch;
             }
 
-            .about-figure {
-                width: min(100%, 360px);
+            .about-photos {
+                width: 100%;
+                max-width: 900px;
             }
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 700px) {
             .about-photos {
-                margin: 56px auto 0;
+                grid-template-columns: 1fr;
+            }
+
+            .about-figure {
+                width: min(100%, 360px);
             }
         }
 
@@ -521,14 +530,13 @@
                     <li><a href="https://soundcloud.com/gregoregan" target="_blank" rel="noopener">SoundCloud <span class="out" aria-hidden="true"></span></a></li>
                 </ul>
             </div>
-            <figure class="about-figure">
-                <img class="about-photo" src="gregor-passport.webp" alt="Portrait of Gregor Egan" width="1920" height="2560" decoding="async">
-                <figcaption>Passport photo, circa 2023</figcaption>
-            </figure>
-        </div>
-
-        <div class="about-photos">
-            <img src="gregor-decks.webp" alt="Gregor Egan DJing" width="2560" height="1707" loading="lazy" decoding="async">
+            <div class="about-photos">
+                <figure class="about-figure">
+                    <img class="about-photo" src="gregor-passport.webp" alt="Portrait of Gregor Egan" width="1920" height="2560" decoding="async">
+                    <figcaption>Passport photo, circa 2023</figcaption>
+                </figure>
+                <img class="about-gig" src="gregor-decks.webp" alt="Gregor Egan DJing" width="2560" height="1707" decoding="async">
+            </div>
         </div>
     </main>
 
