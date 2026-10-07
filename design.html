@@ -504,7 +504,7 @@
     </div>
 
     <footer>
-        &copy; 2026 GREGOR EGAN
+        &copy; <span data-yr>2026</span> GREGOR EGAN
     </footer>
 
     <script>
@@ -619,5 +619,6 @@
             });
         });
     </script>
+<script>document.querySelectorAll("[data-yr]").forEach(function(e){e.textContent=new Date().getFullYear()})</script>
 </body>
 </html>
