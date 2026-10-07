@@ -219,6 +219,25 @@
             line-height: 1.4;
         }
 
+        .about-layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 80px;
+        }
+
+        .about-main {
+            flex: 1;
+            min-width: 0;
+            max-width: 640px;
+        }
+
+        .about-photo {
+            flex: none;
+            width: min(340px, 28vw);
+            height: auto;
+            background: var(--placeholder);
+        }
+
         .links {
             list-style: none;
             border-bottom: 1px solid var(--rule-color);
@@ -321,6 +340,15 @@
 
             .links {
                 margin-top: 56px;
+            }
+
+            .about-layout {
+                flex-direction: column;
+                gap: 56px;
+            }
+
+            .about-photo {
+                width: min(100%, 360px);
             }
 
             footer {
@@ -441,18 +469,23 @@
         <script src="/arrive.js"></script>
         <p class="page-intro">Los Angeles</p>
 
-        <div class="about">
-            <p class="lead">Gregor Egan is a photographer, graphic designer and sound artist based in Los Angeles.</p>
-            <p>He specializes in portraits, cityscapes and landscapes, and experimental long-exposure work. He designs books and brands, and makes dark, textured techno.</p>
-        </div>
+        <div class="about-layout">
+            <div class="about-main">
+                <div class="about">
+                    <p class="lead">Gregor Egan is a photographer, graphic designer and sound artist based in Los Angeles.</p>
+                    <p>He specializes in portraits, cityscapes and landscapes, and experimental long-exposure work. He designs books and brands, and makes dark, textured techno.</p>
+                </div>
 
-        <ul class="links small">
-            <li><a href="mailto:gregor.art@pm.me">Email <span class="out" aria-hidden="true"></span></a></li>
-            <li><a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener">Instagram <span class="out" aria-hidden="true"></span></a></li>
-            <li><a href="https://audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true"></span></a></li>
-            <li><a href="https://open.spotify.com/artist/6r2SStoFHVne6EukVUKl1s" target="_blank" rel="noopener">Spotify <span class="out" aria-hidden="true"></span></a></li>
-            <li><a href="https://soundcloud.com/gregoregan" target="_blank" rel="noopener">SoundCloud <span class="out" aria-hidden="true"></span></a></li>
-        </ul>
+                <ul class="links small">
+                    <li><a href="mailto:gregor.art@pm.me">Email <span class="out" aria-hidden="true"></span></a></li>
+                    <li><a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener">Instagram <span class="out" aria-hidden="true"></span></a></li>
+                    <li><a href="https://audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true"></span></a></li>
+                    <li><a href="https://open.spotify.com/artist/6r2SStoFHVne6EukVUKl1s" target="_blank" rel="noopener">Spotify <span class="out" aria-hidden="true"></span></a></li>
+                    <li><a href="https://soundcloud.com/gregoregan" target="_blank" rel="noopener">SoundCloud <span class="out" aria-hidden="true"></span></a></li>
+                </ul>
+            </div>
+            <img class="about-photo" src="gregor-passport.webp" alt="Portrait of Gregor Egan" width="1920" height="2560" decoding="async">
+        </div>
     </main>
 
     <footer>
