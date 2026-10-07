@@ -89,17 +89,11 @@
             height: auto;
             transform: translate(-50%, -50%);
             opacity: 0;
-            transition: opacity 1.2s ease, filter 0.6s ease;
+            transition: opacity 1.2s ease;
         }
 
         .portrait.loaded {
             opacity: 1;
-        }
-
-        @media (hover: hover) {
-            .portrait.loaded:hover {
-                filter: grayscale(1);
-            }
         }
 
         /* One tile of noise is drawn at load and stepped around the page, so the motion costs nothing. */
@@ -380,6 +374,32 @@
             const p = document.querySelector('.portrait');
             const show = () => p.classList.add('loaded');
             if (p.complete) show(); else p.addEventListener('load', show, { once: true });
+
+            // Hover: black and white; held 5s longer it inverts to a color negative, then returns to color.
+            // Both functions sit in every keyframe so the browser can blend between them.
+            const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const hold = [
+                { filter: 'grayscale(0) invert(0)', offset: 0, easing: 'ease-in-out' },
+                { filter: 'grayscale(1) invert(0)', offset: 0.6 / 10.4, easing: 'ease-in-out' },
+                { filter: 'grayscale(1) invert(0)', offset: 5.6 / 10.4, easing: 'ease-in-out' },
+                { filter: 'grayscale(0) invert(1)', offset: 7.4 / 10.4, easing: 'ease-in-out' },
+                { filter: 'grayscale(0) invert(1)', offset: 8.6 / 10.4, easing: 'ease-in-out' },
+                { filter: 'grayscale(0) invert(0)', offset: 1, easing: 'ease-in-out' }
+            ];
+            let anim = null;
+            p.addEventListener('pointerenter', e => {
+                if (e.pointerType === 'touch' || !p.classList.contains('loaded')) return;
+                if (anim) anim.cancel();
+                anim = still
+                    ? p.animate([{ filter: 'grayscale(1)' }], { duration: 1, fill: 'forwards' })
+                    : p.animate(hold, { duration: 10400, fill: 'forwards' });
+            });
+            p.addEventListener('pointerleave', () => {
+                if (!anim) return;
+                const from = getComputedStyle(p).filter;
+                anim.cancel();
+                anim = still ? null : p.animate([{ filter: from }, { filter: 'grayscale(0) invert(0)' }], { duration: 600, easing: 'ease' });
+            });
         })();
     </script>
 
