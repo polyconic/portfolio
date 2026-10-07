@@ -254,9 +254,30 @@
         }
 
         .links .out {
-            font-size: 0.5em;
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: currentColor;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .links.small {
+            max-width: 640px;
+            margin-top: 56px;
+        }
+
+        .links.small a {
+            align-items: center;
+            padding: 15px 0;
+            font-size: 15px;
             font-weight: 400;
-            letter-spacing: 0;
+            letter-spacing: -0.005em;
+            text-transform: none;
+        }
+
+        .links.small .out {
+            width: 7px;
+            height: 7px;
         }
 
         footer {
@@ -424,12 +445,12 @@
             <p class="lead">Gregor Egan is a photographer, graphic designer and sound artist based in Los Angeles.</p>
         </div>
 
-        <ul class="links">
-            <li><a href="mailto:gregor.art@pm.me">Email <span class="out" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener">Instagram <span class="out" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://open.spotify.com/artist/6r2SStoFHVne6EukVUKl1s" target="_blank" rel="noopener">Spotify <span class="out" aria-hidden="true">↗</span></a></li>
-            <li><a href="https://soundcloud.com/gregoregan" target="_blank" rel="noopener">SoundCloud <span class="out" aria-hidden="true">↗</span></a></li>
+        <ul class="links small">
+            <li><a href="mailto:gregor.art@pm.me">Email <span class="out" aria-hidden="true"></span></a></li>
+            <li><a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener">Instagram <span class="out" aria-hidden="true"></span></a></li>
+            <li><a href="https://audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true"></span></a></li>
+            <li><a href="https://open.spotify.com/artist/6r2SStoFHVne6EukVUKl1s" target="_blank" rel="noopener">Spotify <span class="out" aria-hidden="true"></span></a></li>
+            <li><a href="https://soundcloud.com/gregoregan" target="_blank" rel="noopener">SoundCloud <span class="out" aria-hidden="true"></span></a></li>
         </ul>
     </main>
 
