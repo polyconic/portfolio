@@ -234,7 +234,7 @@
 
         .about-photos {
             flex: none;
-            width: clamp(240px, min(calc((100vh - 400px) * 1.5), 30vw), 600px);
+            width: clamp(200px, min(calc((100vh - 420px) / 2), 30vw), 400px);
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
@@ -248,6 +248,10 @@
             aspect-ratio: 3 / 2;
             object-fit: cover;
             background: var(--placeholder);
+        }
+
+        .about-photos .portrait {
+            aspect-ratio: 3 / 4;
         }
 
         .links {
@@ -344,6 +348,7 @@
             .about-photos {
                 width: 100%;
                 max-width: 680px;
+                grid-template-columns: 1fr 2fr;
             }
         }
 
@@ -521,6 +526,7 @@
                 </ul>
             </div>
             <div class="about-photos">
+                <img class="portrait" src="/img/about/gregor-vision.webp" alt="Gregor Egan wearing an Apple Vision Pro" width="1920" height="2560" decoding="async">
                 <img src="/img/about/gregor-decks.webp" alt="Gregor Egan DJing" width="2560" height="1707" decoding="async">
             </div>
         </div>
