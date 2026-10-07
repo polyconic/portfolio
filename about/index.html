@@ -215,8 +215,9 @@
         }
 
         .about .lead {
-            font-size: 24px;
+            font-size: min(24px, calc(100cqw / 32));
             line-height: 1.4;
+            white-space: nowrap;
         }
 
         .about-layout {
@@ -228,7 +229,8 @@
         .about-main {
             flex: 1;
             min-width: 0;
-            max-width: 640px;
+            max-width: 770px;
+            container-type: inline-size;
         }
 
         .about-figure {
@@ -248,7 +250,25 @@
             font-size: 11px;
             letter-spacing: 1px;
             text-transform: uppercase;
+            text-align: center;
             opacity: 0.55;
+        }
+
+        .about-photos {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1190px;
+            margin-top: 80px;
+        }
+
+        .about-photos img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3 / 2;
+            object-fit: cover;
+            background: var(--placeholder);
         }
 
         .links {
@@ -319,6 +339,25 @@
             text-align: center;
         }
 
+        @media (max-width: 1100px) {
+            .about-layout {
+                flex-direction: column;
+                gap: 56px;
+                align-items: stretch;
+            }
+
+            .about-figure {
+                width: min(100%, 360px);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .about-photos {
+                grid-template-columns: 1fr;
+                margin-top: 56px;
+            }
+        }
+
         @media (max-width: 900px) {
             header {
                 padding: 20px;
@@ -355,14 +394,6 @@
                 margin-top: 56px;
             }
 
-            .about-layout {
-                flex-direction: column;
-                gap: 56px;
-            }
-
-            .about-figure {
-                width: min(100%, 360px);
-            }
 
             footer {
                 padding: 20px;
@@ -397,9 +428,6 @@
                 font-size: 16px;
             }
 
-            .about .lead {
-                font-size: 20px;
-            }
         }
 
         .arrive {
@@ -501,6 +529,11 @@
                 <img class="about-photo" src="gregor-passport.webp" alt="Portrait of Gregor Egan" width="1920" height="2560" decoding="async">
                 <figcaption>Passport photo, circa 2023</figcaption>
             </figure>
+        </div>
+
+        <div class="about-photos">
+            <img src="gregor-decks.webp" alt="Gregor Egan DJing" width="2560" height="1707" loading="lazy" decoding="async">
+            <img src="gregor-bridge.webp" alt="Gregor Egan standing on a bridge, shot on film" width="1818" height="1228" loading="lazy" decoding="async">
         </div>
     </main>
 
