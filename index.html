@@ -83,7 +83,7 @@
         .portrait {
             position: fixed;
             top: 40%;
-            left: calc(50% + 5vw);
+            left: calc(50% - 6vw);
             z-index: 0;
             width: clamp(200px, 26vw, 420px);
             height: auto;
@@ -94,13 +94,6 @@
 
         .portrait.loaded {
             opacity: 1;
-        }
-
-        /* Narrow desktops: keep the portrait clear of the bio. */
-        @media (min-width: 901px) and (max-width: 1100px) {
-            .portrait {
-                left: 50%;
-            }
         }
 
         /* One tile of noise is drawn at load and stepped around the page, so the motion costs nothing. */
