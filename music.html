@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0a0a0a">
-    <title>About - Gregor Egan</title>
-    <link rel="canonical" href="https://gregoregan.com/about/">
-    <meta name="description" content="Gregor Egan is a photographer, graphic designer and sound artist based in Los Angeles. Portraits, cityscapes and landscapes, long-exposure work, book and brand design, and dark, textured techno.">
+    <title>Music - Gregor Egan</title>
+    <link rel="canonical" href="https://gregoregan.com/music">
+    <meta name="description" content="Hypnotic, textural techno by Gregor Egan, LA producer and DJ.">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -28,14 +28,14 @@
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="gregor egan">
-    <meta property="og:title" content="About — Gregor Egan">
-    <meta property="og:description" content="Gregor Egan is a photographer, graphic designer and sound artist based in Los Angeles. Portraits, cityscapes and landscapes, long-exposure work, book and brand design, and dark, textured techno.">
+    <meta property="og:title" content="Music — Gregor Egan">
+    <meta property="og:description" content="Hypnotic, textural techno by Gregor Egan, LA producer and DJ.">
     <meta property="og:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
-    <meta property="og:url" content="https://gregoregan.com/about/">
+    <meta property="og:url" content="https://gregoregan.com/music">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About — Gregor Egan">
-    <meta name="twitter:description" content="Gregor Egan is a photographer, graphic designer and sound artist based in Los Angeles. Portraits, cityscapes and landscapes, long-exposure work, book and brand design, and dark, textured techno.">
+    <meta name="twitter:title" content="Music — Gregor Egan">
+    <meta name="twitter:description" content="Hypnotic, textural techno by Gregor Egan, LA producer and DJ.">
     <meta name="twitter:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
 
     <style>
@@ -215,60 +215,17 @@
         }
 
         .about .lead {
-            font-size: min(24px, calc(100cqw / 32));
+            font-size: 24px;
             line-height: 1.4;
-            white-space: nowrap;
         }
 
-        .about-layout {
-            display: flex;
-            align-items: flex-start;
-            gap: 80px;
-        }
-
-        .about-main {
-            flex: 1;
-            min-width: 0;
-            max-width: 770px;
-            container-type: inline-size;
-        }
-
-        .about-photos {
-            flex: none;
-            width: clamp(200px, calc((100vh - 460px) / 2), 400px);
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            align-items: start;
-        }
-
-        .about-figure {
-            margin: 0;
-        }
-
-        .about-photos img {
+        .music-photo {
             display: block;
             width: 100%;
+            max-width: 760px;
             height: auto;
-            object-fit: cover;
+            margin: 0 auto;
             background: var(--placeholder);
-        }
-
-        .about-photo {
-            aspect-ratio: 3 / 4;
-        }
-
-        .about-gig {
-            aspect-ratio: 3 / 2;
-        }
-
-        .about-figure figcaption {
-            margin-top: 12px;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-align: center;
-            opacity: 0.55;
         }
 
         .links {
@@ -313,54 +270,11 @@
             clip-path: polygon(0 0, 100% 0, 100% 100%);
         }
 
-        .links.small {
-            max-width: 640px;
-            margin-top: 56px;
-        }
-
-        .links.small a {
-            align-items: center;
-            padding: 15px 0;
-            font-size: 15px;
-            font-weight: 400;
-            letter-spacing: -0.005em;
-            text-transform: none;
-        }
-
-        .links.small .out {
-            width: 7px;
-            height: 7px;
-        }
-
         footer {
             padding: 24px 40px;
             font-size: 12px;
             color: var(--text-color);
             text-align: center;
-        }
-
-        @media (max-width: 1100px) {
-            .about-layout {
-                flex-direction: column;
-                gap: 56px;
-                align-items: stretch;
-            }
-
-            .about-photos {
-                width: 100%;
-                max-width: 900px;
-                grid-template-columns: 1fr 2fr;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .about-photos {
-                grid-template-columns: 1fr;
-            }
-
-            .about-figure {
-                width: min(100%, 360px);
-            }
         }
 
         @media (max-width: 900px) {
@@ -399,7 +313,6 @@
                 margin-top: 56px;
             }
 
-
             footer {
                 padding: 20px;
                 font-size: 11px;
@@ -433,6 +346,9 @@
                 font-size: 16px;
             }
 
+            .about .lead {
+                font-size: 20px;
+            }
         }
 
         .arrive {
@@ -470,10 +386,10 @@
     <header>
         <a href="/" class="logo">Gregor Egan</a>
         <nav class="section-nav" aria-label="Sections">
-            <a href="/photos/">Photo</a>
-            <a href="/design/">Design</a>
-            <a href="/music/">Music</a>
-            <a href="/about/" aria-current="page">About</a>
+            <a href="/photos">Photo</a>
+            <a href="/design">Design</a>
+            <a href="/music" aria-current="page">Music</a>
+            <a href="/about">About</a>
         </nav>
         <nav class="nav-links">
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" aria-pressed="false">
@@ -511,33 +427,17 @@
 
     <main>
         <a href="/" class="back-link">← Back</a>
-        <h1 class="page-title" data-arrive>About</h1>
+        <h1 class="page-title" data-arrive>Music</h1>
         <script src="/arrive.js"></script>
-        <p class="page-intro">From Chicago. Based in Los Angeles.</p>
+        <p class="page-intro">Textural techno.</p>
 
-        <div class="about-layout">
-            <div class="about-main">
-                <div class="about">
-                    <p class="lead">Gregor Egan is a photographer, graphic designer and sound artist.</p>
-                    <p>He specializes in portraits, cityscapes and landscapes, and experimental long-exposure work. He designs books and brands, and makes dark, textured techno.</p>
-                </div>
+        <img class="music-photo" src="/img/music/gregor-egan-grain.webp" alt="Gregor Egan performing, in silhouette" width="1523" height="1015" decoding="async">
 
-                <ul class="links small">
-                    <li><a href="mailto:gregor.art@pm.me">Email <span class="out" aria-hidden="true"></span></a></li>
-                    <li><a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener">Instagram <span class="out" aria-hidden="true"></span></a></li>
-                    <li><a href="https://audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true"></span></a></li>
-                    <li><a href="https://open.spotify.com/artist/6r2SStoFHVne6EukVUKl1s" target="_blank" rel="noopener">Spotify <span class="out" aria-hidden="true"></span></a></li>
-                    <li><a href="https://soundcloud.com/gregoregan" target="_blank" rel="noopener">SoundCloud <span class="out" aria-hidden="true"></span></a></li>
-                </ul>
-            </div>
-            <div class="about-photos">
-                <figure class="about-figure">
-                    <img class="about-photo" src="gregor-passport.webp" alt="Portrait of Gregor Egan" width="1920" height="2560" decoding="async">
-                    <figcaption>Passport photo, circa 2023</figcaption>
-                </figure>
-                <img class="about-gig" src="gregor-decks.webp" alt="Gregor Egan DJing" width="2560" height="1707" decoding="async">
-            </div>
-        </div>
+        <ul class="links">
+            <li><a href="https://audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true"></span></a></li>
+            <li><a href="https://open.spotify.com/artist/6r2SStoFHVne6EukVUKl1s" target="_blank" rel="noopener">Spotify <span class="out" aria-hidden="true"></span></a></li>
+            <li><a href="https://soundcloud.com/gregoregan" target="_blank" rel="noopener">SoundCloud <span class="out" aria-hidden="true"></span></a></li>
+        </ul>
     </main>
 
     <footer>

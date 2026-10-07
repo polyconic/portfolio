@@ -6,6 +6,13 @@
     <meta name="theme-color" content="#0a0a0a">
     <title>Not found - Gregor Egan</title>
     <meta name="robots" content="noindex">
+    <script>
+        // Pages used to live at /about/, /photos/ and so on. Send old links to the new address.
+        (function () {
+            var m = location.pathname.match(/^\/(photos|digital|analog|design|music|artists|projects|about)\/(index\.html)?$/);
+            if (m) location.replace('/' + m[1] + location.search + location.hash);
+        })();
+    </script>
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
