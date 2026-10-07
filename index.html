@@ -218,15 +218,23 @@
         }
 
         .bio-link {
+            display: inline-block;
+            transform-origin: left center;
             color: inherit;
             text-decoration: none;
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
             padding-bottom: 1px;
-            transition: opacity 0.2s ease, border-color 0.2s ease;
+            transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.25s ease;
         }
 
         .bio-link:hover {
             opacity: 0.5;
+        }
+
+        @media (hover: hover) {
+            .bio-link:hover {
+                transform: scale(1.12);
+            }
         }
 
         .bio-link:focus-visible {
@@ -310,6 +318,7 @@
             }
             .static { animation: none; }
             .portrait { transition: none; }
+            .bio-link { transition: none; }
         }
     </style>
 </head>
