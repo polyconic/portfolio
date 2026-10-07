@@ -223,8 +223,7 @@
         .about-layout {
             display: flex;
             align-items: flex-start;
-            justify-content: space-between;
-            gap: 60px;
+            gap: 80px;
         }
 
         .about-main {
@@ -236,9 +235,9 @@
 
         .about-photos {
             flex: none;
-            width: min(44vw, 1000px);
+            width: clamp(200px, calc((100vh - 460px) / 2), 400px);
             display: grid;
-            grid-template-columns: 1fr 2fr;
+            grid-template-columns: 1fr;
             gap: 20px;
             align-items: start;
         }
@@ -340,7 +339,7 @@
             text-align: center;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1100px) {
             .about-layout {
                 flex-direction: column;
                 gap: 56px;
@@ -350,6 +349,7 @@
             .about-photos {
                 width: 100%;
                 max-width: 900px;
+                grid-template-columns: 1fr 2fr;
             }
         }
 
