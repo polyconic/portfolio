@@ -219,11 +219,13 @@
             white-space: nowrap;
         }
 
+        /* Sits toward the middle of the screen on desktop; the extra space grows with the window height. */
         .about-layout {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 80px;
+            margin-top: clamp(0px, calc((100vh - 760px) / 2), 220px);
         }
 
         .about-main {
@@ -333,6 +335,7 @@
             .about-layout {
                 flex-direction: column;
                 gap: 56px;
+                margin-top: 0;
             }
 
             .about-main {
