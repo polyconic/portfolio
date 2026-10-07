@@ -89,11 +89,17 @@
             height: auto;
             transform: translate(-50%, -50%);
             opacity: 0;
-            transition: opacity 1.2s ease;
+            transition: opacity 1.2s ease, filter 0.6s ease;
         }
 
         .portrait.loaded {
             opacity: 1;
+        }
+
+        @media (hover: hover) {
+            .portrait.loaded:hover {
+                filter: grayscale(1);
+            }
         }
 
         /* One tile of noise is drawn at load and stepped around the page, so the motion costs nothing. */
@@ -126,6 +132,11 @@
             flex-direction: column;
             justify-content: space-between;
             padding: 36px 40px;
+            pointer-events: none;
+        }
+
+        .wrapper a {
+            pointer-events: auto;
         }
 
         /* ==================== TOP ROW ==================== */
