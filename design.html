@@ -190,6 +190,40 @@
             text-transform: uppercase;
         }
 
+        .title-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .shuffle {
+            display: flex;
+            padding: 6px;
+            border: 0;
+            background: none;
+            color: inherit;
+            cursor: pointer;
+            opacity: 0.55;
+            transition: opacity 0.2s ease;
+        }
+
+        .shuffle svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .shuffle:focus-visible {
+            opacity: 1;
+            outline: 1px solid currentColor;
+            outline-offset: 2px;
+        }
+
+        @media (hover: hover) {
+            .shuffle:hover {
+                opacity: 1;
+            }
+        }
+
         .sub-link {
             display: inline-block;
             margin-top: 14px;
@@ -442,7 +476,10 @@
     <main>
         <div class="gallery-header">
             <a href="/" class="back-link">← Back</a>
-            <h1 data-arrive>Design</h1>
+            <div class="title-row">
+                <h1 data-arrive>Design</h1>
+                <button class="shuffle" id="shuffle" type="button" aria-label="Shuffle the order" title="Shuffle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></button>
+            </div>
             <script src="/arrive.js"></script>
             <a href="/artists" class="sub-link">More design work for TMWRK Management →</a>
         </div>
@@ -523,12 +560,14 @@
                 }
             });
 
+            const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
             const gallery = document.getElementById('gallery');
             const msnry = new Masonry(gallery, {
                 itemSelector: '.gallery-item',
                 columnWidth: '.gallery-item',
                 gutter: 16,
-                percentPosition: true
+                percentPosition: true,
+                transitionDuration: still ? 0 : '0.6s'
             });
 
             imagesLoaded(gallery).on('progress', function() {
@@ -546,7 +585,7 @@
 
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = lightbox.querySelector('img');
-            const galleryItems = document.querySelectorAll('.gallery-item');
+            let galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
             const count = galleryItems.length;
             let currentIndex = 0;
             let loadToken = 0;
@@ -585,11 +624,26 @@
                 document.body.style.overflow = '';
             }
 
-            galleryItems.forEach(function(item, index) {
+            galleryItems.forEach(function(item) {
                 item.addEventListener('click', function() {
-                    currentIndex = index;
+                    currentIndex = galleryItems.indexOf(item);
                     showLightbox();
                 });
+            });
+
+            // The curated order shows on load; shuffling re-lays the grid so the pieces glide to new spots.
+            document.getElementById('shuffle').addEventListener('click', function() {
+                const order = galleryItems.slice();
+                for (let i = order.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [order[i], order[j]] = [order[j], order[i]];
+                }
+                order.forEach(function(item) { gallery.appendChild(item); });
+                galleryItems = order;
+                msnry.reloadItems();
+                msnry.layout();
+                if (!still) this.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-180deg)' }],
+                    { duration: 500, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' });
             });
 
             document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
