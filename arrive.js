@@ -61,5 +61,14 @@
             if (waiting) { a.pause(); held.push(a); }
         });
     });
+    // Controls that sit beside a title (the shuffle button) trail in after its letters, as one piece.
+    document.querySelectorAll('[data-arrive-after]:not([data-arrived])').forEach(el => {
+        el.setAttribute('data-arrived', '');
+        const a = el.animate([
+            { transform: 'translateX(6em)', opacity: 0 },
+            { transform: 'none' }
+        ], { duration: 1400, delay: 300, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'backwards' });
+        if (waiting) { a.pause(); held.push(a); }
+    });
     if (waiting) document.addEventListener('prerenderingchange', () => held.forEach(a => a.play()), { once: true });
 })();
