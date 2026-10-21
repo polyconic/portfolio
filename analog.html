@@ -50,12 +50,14 @@
             --bg-color: #0a0a0a;
             --text-color: #f5f5f5;
             --placeholder: rgba(245, 245, 245, 0.07);
+            --rule-color: rgba(245, 245, 245, 0.18);
         }
 
         [data-theme="light"] {
             --bg-color: #fafaf8;
             --text-color: #141414;
             --placeholder: rgba(20, 20, 20, 0.06);
+            --rule-color: rgba(20, 20, 20, 0.16);
         }
 
         body {
@@ -227,6 +229,23 @@
             .shuffle:hover {
                 opacity: 1;
             }
+        }
+
+        .sub-link {
+            display: inline-block;
+            margin-top: 14px;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--rule-color);
+            padding-bottom: 2px;
+            transition: opacity 0.2s ease;
+        }
+
+        .sub-link:hover {
+            opacity: 0.5;
         }
 
         .gallery-grid {
@@ -469,6 +488,7 @@
                 <button class="shuffle" id="shuffle" type="button" data-arrive-after aria-label="Shuffle the order" title="Shuffle"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg></button>
             </div>
             <script src="/arrive.js"></script>
+            <a href="/from-the-archives" class="sub-link">Flip through the book, From the Archives →</a>
         </div>
         
         <div class="gallery-grid" id="gallery">
