@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Book Design - Gregor Egan</title>
+    <link rel="canonical" href="https://gregoregan.com/book-design">
+    <meta name="description" content="Book design by Gregor Egan: photo books laid out, sequenced and typeset by him.">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script type="speculationrules">
+    {"prerender": [{"where": {"href_matches": "/*"}, "eagerness": "moderate"}]}
+    </script>
+
+    <script>
+        // Must stay in <head>: moving it later reintroduces the theme flash.
+        (function () {
+            try {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    document.querySelector('meta[name="theme-color"]').content = '#fafaf8';
+                }
+            } catch (e) {}
+        })();
+    </script>
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="gregor egan">
+    <meta property="og:title" content="Book Design — Gregor Egan">
+    <meta property="og:description" content="Book design by Gregor Egan: photo books laid out, sequenced and typeset by him.">
+    <meta property="og:image" content="https://gregoregan.com/img/books/from-the-archives/cover.webp">
+    <meta property="og:url" content="https://gregoregan.com/book-design">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Book Design — Gregor Egan">
+    <meta name="twitter:description" content="Book design by Gregor Egan: photo books laid out, sequenced and typeset by him.">
+    <meta name="twitter:image" content="https://gregoregan.com/img/books/from-the-archives/cover.webp">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #f5f5f5;
+            --rule-color: rgba(245, 245, 245, 0.18);
+            --lightbox-bg: rgba(10, 10, 10, 0.96);
+            --placeholder: rgba(245, 245, 245, 0.07);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #fafaf8;
+            --text-color: #141414;
+            --rule-color: rgba(20, 20, 20, 0.16);
+            --lightbox-bg: rgba(250, 250, 248, 0.97);
+            --placeholder: rgba(20, 20, 20, 0.06);
+        }
+
+        body {
+            overflow-x: clip;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ==================== HEADER ==================== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 24px 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: inherit;
+            transition: opacity 0.2s ease;
+            line-height: 1;
+            position: relative;
+            top: 1px;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.7;
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .theme-toggle .slash {
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .logo {
+            view-transition-name: site-logo;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .nav-links {
+            view-transition-name: site-utils;
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: opacity 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.5;
+        }
+
+        .nav-links svg {
+            display: block;
+        }
+
+        .section-nav {
+            display: flex;
+            gap: 20px;
+            margin: 2px auto 0 32px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .section-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+        }
+
+        .section-nav a:hover,
+        .section-nav a[aria-current] {
+            opacity: 1;
+        }
+
+        /* ==================== MAIN ==================== */
+        main {
+            flex: 1;
+            padding: 40px 40px 80px;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+            transition: opacity 0.2s ease;
+        }
+
+        .back-link:hover {
+            opacity: 1;
+        }
+
+        .shelf-header h1 {
+            font-size: clamp(36px, 6vw, 64px);
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+            line-height: 1.15;
+        }
+
+        /* ==================== SHELF ==================== */
+        .shelf {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 56px 48px;
+            margin-top: clamp(40px, 8vh, 96px);
+        }
+
+        .book-card {
+            flex: 0 1 440px;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .book-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: var(--placeholder);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.45);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @media (hover: hover) {
+            .book-card:hover img {
+                transform: translateY(-6px) scale(1.02);
+            }
+        }
+
+        .book-card:focus-visible img {
+            transform: translateY(-6px) scale(1.02);
+        }
+
+        .book-title {
+            margin-top: 20px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .book-meta {
+            margin-top: 6px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.55;
+        }
+
+        [data-theme="light"] .book-card img {
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.18);
+        }
+
+        footer {
+            padding: 24px 40px;
+            font-size: 12px;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            header {
+                padding: 20px;
+                align-items: center;
+            }
+
+            .logo {
+                font-size: 12px;
+            }
+
+            .nav-links {
+                gap: 16px;
+            }
+
+            .nav-links svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            main {
+                padding: 32px 20px 60px;
+            }
+
+            footer {
+                padding: 20px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 16px 20px;
+                gap: 12px;
+            }
+
+            .logo {
+                font-size: 11px;
+            }
+
+            .section-nav {
+                order: 3;
+                width: 100%;
+                margin: 0;
+                gap: 6px 16px;
+                flex-wrap: wrap;
+            }
+        }
+
+        .arrive {
+            display: inline-block;
+            white-space: pre;
+        }
+
+        .arrive-text {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+
+        @view-transition {
+            navigation: auto;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            ::view-transition-group(*),
+            ::view-transition-old(*),
+            ::view-transition-new(*) {
+                animation: none !important;
+            }
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="/" class="logo">Gregor Egan</a>
+        <nav class="section-nav" aria-label="Sections">
+            <a href="/photos">Photo</a>
+            <a href="/design" aria-current="page">Design</a>
+            <a href="/music">Music</a>
+            <a href="/about">About</a>
+        </nav>
+        <nav class="nav-links">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" aria-pressed="false">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <span class="slash">/</span>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+            <a href="https://www.instagram.com/gregor.egan" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="mailto:gregor.art@pm.me" aria-label="Email">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="shelf-header">
+            <a href="/design" class="back-link">← Back to Design</a>
+            <h1 data-arrive>Book Design</h1>
+            <script src="/arrive.js"></script>
+        </div>
+
+        <div class="shelf">
+            <a class="book-card" href="/from-the-archives">
+                <img src="/img/books/from-the-archives/cover.webp" alt="Cover of From the Archives: Analog Photography" width="2560" height="2156" decoding="async">
+                <p class="book-title">From the Archives: Analog Photography</p>
+                <p class="book-meta">2025 · 74 pages</p>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; <span data-yr>2026</span> GREGOR EGAN
+    </footer>
+
+    <script>
+        (function () {
+            var root = document.documentElement;
+            var btn = document.getElementById('themeToggle');
+            var themeColor = document.querySelector('meta[name="theme-color"]');
+
+            function sync() {
+                btn.setAttribute('aria-pressed',
+                    String(root.getAttribute('data-theme') === 'light'));
+            }
+
+            btn.addEventListener('click', function () {
+                if (root.getAttribute('data-theme') === 'light') {
+                    root.removeAttribute('data-theme');
+                    themeColor.content = '#0a0a0a';
+                    try { localStorage.setItem('theme', 'dark'); } catch (e) {}
+                } else {
+                    root.setAttribute('data-theme', 'light');
+                    themeColor.content = '#fafaf8';
+                    try { localStorage.setItem('theme', 'light'); } catch (e) {}
+                }
+                sync();
+            });
+
+            sync();
+        })();
+    </script>
+
+<script>document.querySelectorAll("[data-yr]").forEach(function(e){e.textContent=new Date().getFullYear()})</script>
+</body>
+</html>
