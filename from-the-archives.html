@@ -214,6 +214,7 @@
         }
 
         .book {
+            will-change: transform;
             transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
@@ -499,6 +500,17 @@
                     if (img && !img.src) img.src = img.dataset.src;
                 }
             }
+
+            // Pages are 684 x 576 (19:16), so a page width in steps of 19px keeps every page a whole number
+            // of pixels. Fractional sizes let a hairline of the page underneath show along the bottom mid-turn.
+            function snap() {
+                frame.style.width = '';
+                var w = frame.getBoundingClientRect().width;
+                var step = w < 500 ? 19 : 38;
+                frame.style.width = Math.floor(w / step) * step + 'px';
+            }
+            snap();
+            window.addEventListener('resize', snap);
 
             var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             var pf = new St.PageFlip(book, {
