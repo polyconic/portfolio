@@ -540,6 +540,15 @@
             pf.loadFromHTML(book.querySelectorAll('.page'));
             update(0);
 
+            // The boards jerk around when a corner follows the mouse, so only paper pages peel on hover.
+            var boards = [0, 1, last - 1, last];
+            book.addEventListener('mousemove', function (e) {
+                var i = pf.getCurrentPageIndex();
+                var r = book.getBoundingClientRect();
+                var under = pf.getOrientation() === 'landscape' && e.clientX >= r.left + r.width / 2 ? i + 1 : i;
+                pf.getSettings().showPageCorners = boards.indexOf(under) === -1;
+            });
+
             pf.on('flip', function (e) { update(e.data); });
             pf.on('changeOrientation', function () { update(pf.getCurrentPageIndex()); });
 
