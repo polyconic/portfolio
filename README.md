@@ -9,5 +9,5 @@ Live at **[gregoregan.com](https://gregoregan.com)**.
 
 ## Contact
 
-[gregor.art@pm.me](mailto:gregor.art@pm.me) · [instagram](https://www.instagram.com/gregor.egan) · © gregor egan
+[hi@gregoregan.com](mailto:hi@gregoregan.com) · [instagram](https://www.instagram.com/gregor.egan) · © gregor egan
 
