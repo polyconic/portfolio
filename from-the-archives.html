@@ -202,6 +202,7 @@
 
         /* ==================== BOOK ==================== */
         .book-frame {
+            position: relative;
             width: 100%;
             max-width: max(520px, min(1500px, calc((100svh - 370px) * 2.375)));
             margin: 32px auto 0;
@@ -224,6 +225,48 @@
             cursor: pointer;
             user-select: none;
             -webkit-user-select: none;
+        }
+
+        .book.zoomable .page {
+            cursor: zoom-in;
+        }
+
+        .book.turning .page {
+            cursor: none;
+        }
+
+        .turn-hint {
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(10, 10, 10, 0.6);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            scale: 0.6;
+            transition: opacity 0.18s ease, scale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 50;
+        }
+
+        .turn-hint.show {
+            opacity: 1;
+            scale: 1;
+        }
+
+        .turn-hint svg {
+            display: block;
+            width: 8px;
+            height: 18px;
+        }
+
+        .turn-hint.prev svg {
+            transform: scaleX(-1);
         }
 
         .page img {
@@ -257,6 +300,114 @@
 
         [data-theme="light"] .page {
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+        }
+
+        /* ==================== ZOOM ==================== */
+        .zoom {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .zoom.active {
+            display: block;
+        }
+
+        .zoom img {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            max-width: calc(100% - 180px);
+            max-height: calc(100% - 120px);
+            transform: translate(-50%, -50%);
+            cursor: zoom-in;
+            user-select: none;
+            -webkit-user-drag: none;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .zoom img.loaded {
+            opacity: 1;
+        }
+
+        .zoom.zoomed img {
+            max-width: none;
+            max-height: none;
+            transform: none;
+            cursor: zoom-out;
+        }
+
+        .zoom-close,
+        .zoom-prev,
+        .zoom-next {
+            position: fixed;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+            z-index: 1001;
+        }
+
+        .zoom-close:hover,
+        .zoom-prev:hover,
+        .zoom-next:hover {
+            opacity: 0.7;
+        }
+
+        .zoom-close {
+            top: 20px;
+            right: 20px;
+            padding: 20px;
+            font-size: 40px;
+            line-height: 1;
+        }
+
+        .zoom-prev,
+        .zoom-next {
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 12px;
+        }
+
+        .zoom-prev {
+            left: 36px;
+        }
+
+        .zoom-next {
+            right: 36px;
+        }
+
+        .zoom-prev svg,
+        .zoom-next svg {
+            display: block;
+            width: 18px;
+            height: 40px;
+        }
+
+        .zoom.zoomed .zoom-prev,
+        .zoom.zoomed .zoom-next {
+            display: none;
+        }
+
+        .zoom-count {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 24px;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            opacity: 0.55;
+            font-variant-numeric: tabular-nums;
+            pointer-events: none;
         }
 
         .book-controls {
@@ -335,6 +486,28 @@
             footer {
                 padding: 20px;
                 font-size: 11px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .zoom img {
+                max-width: calc(100% - 80px);
+            }
+
+            .zoom-prev {
+                left: 12px;
+                padding: 8px;
+            }
+
+            .zoom-next {
+                right: 12px;
+                padding: 8px;
+            }
+
+            .zoom-prev svg,
+            .zoom-next svg {
+                width: 12px;
+                height: 28px;
             }
         }
 
@@ -454,6 +627,7 @@
 
         <div class="book-frame" id="bookFrame">
             <div class="book" id="book"></div>
+            <div class="turn-hint" id="turnHint" aria-hidden="true"><svg viewBox="0 0 18 40"><polyline points="2,2 16,20 2,38" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></div>
             <noscript><img src="/img/books/from-the-archives/cover.webp" alt="Front cover of From the Archives: Analog Photography by Gregor Egan" width="2560" height="2156" style="display:block;width:100%;max-width:700px;height:auto;margin:0 auto"></noscript>
         </div>
 
@@ -463,6 +637,14 @@
             <button id="bookNext" type="button" aria-label="Next page"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="2,2 16,20 2,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
         </div>
     </main>
+
+    <div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-label="Enlarged page">
+        <button class="zoom-close" type="button" aria-label="Close">&times;</button>
+        <button class="zoom-prev" type="button" aria-label="Previous page"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="16,2 2,20 16,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
+        <button class="zoom-next" type="button" aria-label="Next page"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="2,2 16,20 2,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
+        <img id="zoomImg" src="" alt="" draggable="false">
+        <p class="zoom-count" id="zoomCount"></p>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -531,7 +713,19 @@
                 usePortrait: true,
                 mobileScrollSupport: true,
                 maxShadowOpacity: 0.45,
-                flippingTime: still ? 300 : 900
+                flippingTime: still ? 300 : 900,
+                disableFlipByClick: true
+            });
+
+            // disableFlipByClick also blocks StPageFlip's own flipPrev on phones (its aim point there isn't a
+            // corner), which would break the back arrow, back key and back swipe. Lift it for those calls.
+            ['flipNext', 'flipPrev'].forEach(function (name) {
+                var raw = pf[name].bind(pf);
+                pf[name] = function (corner) {
+                    pf.getSettings().disableFlipByClick = false;
+                    raw(corner);
+                    pf.getSettings().disableFlipByClick = true;
+                };
             });
 
             function label(i) {
@@ -560,11 +754,12 @@
             // The boards jerk around when a corner follows the mouse, so only paper pages peel on hover.
             var boards = [0, 1, last - 1, last];
             book.addEventListener('mousemove', function (e) {
-                var i = pf.getCurrentPageIndex();
-                var r = book.getBoundingClientRect();
-                var under = pf.getOrientation() === 'landscape' && e.clientX >= r.left + r.width / 2 ? i + 1 : i;
-                pf.getSettings().showPageCorners = boards.indexOf(under) === -1;
+                var hit = target(e);
+                pf.getSettings().showPageCorners = hit.paper;
+                book.classList.toggle('zoomable', hit.paper && !hit.edge);
+                hint(e, hit);
             });
+            book.addEventListener('mouseleave', function () { hint(null); });
 
             pf.on('flip', function (e) { update(e.data); });
             pf.on('changeOrientation', function () { update(pf.getCurrentPageIndex()); });
@@ -583,12 +778,202 @@
                 pf.flipNext();
             }
 
+            // Which page a point is over and what a click there does. The outer edge of each page (and its outer
+            // corners, which StPageFlip turns on its own) turns the page; the rest of a paper page zooms. Covers
+            // and blank endpapers turn wherever you click.
+            function target(e) {
+                var r = book.querySelector('.stf__block').getBoundingClientRect();
+                var i = pf.getCurrentPageIndex();
+                var wide = pf.getOrientation() === 'landscape';
+                var left = e.clientX < r.left + r.width / 2;
+                var under = wide && !left ? i + 1 : i;
+                var pw = wide ? r.width / 2 : r.width;
+                var x = e.clientX - r.left - (wide && !left ? pw : 0);
+                var y = e.clientY - r.top;
+                var band = Math.max(48, pw * 0.22);
+                var c = Math.sqrt(pw * pw + r.height * r.height) / 5;
+                var nearLeft = wide ? left && x < band : x < band;
+                var nearRight = wide ? !left && x > pw - band : x > pw - band;
+                var cornerX = wide ? (left ? x < c : x > pw - c) : (x < c || x > pw - c);
+                var corner = cornerX && (y < c || y > r.height - c);
+                var paper = under >= 2 && under <= interior + 1;
+                var dir;
+                if (paper) dir = wide ? (left ? -1 : 1) : (x < pw / 2 ? -1 : 1);
+                else dir = under === last || (left && i !== 0) ? -1 : 1;
+                return {
+                    index: under,
+                    paper: paper,
+                    edge: !paper || nearLeft || nearRight || corner,
+                    empty: wide && ((i === 0 && left) || (i === last && !left)),
+                    dir: dir
+                };
+            }
+
+            var hintEl = document.getElementById('turnHint');
+            var hintTimer = 0;
+            function hint(e, hit) {
+                clearTimeout(hintTimer);
+                if (!e || !hit || hit.empty || !hit.edge) {
+                    hintEl.classList.remove('show');
+                    book.classList.remove('turning');
+                    return;
+                }
+                var f = frame.getBoundingClientRect();
+                hintEl.style.translate = (e.clientX - f.left) + 'px ' + (e.clientY - f.top) + 'px';
+                hintEl.classList.toggle('prev', hit.dir < 0);
+                hintEl.classList.add('show');
+                book.classList.add('turning');
+            }
+
+            var downX = 0, downY = 0, touch = false;
+            book.addEventListener('pointerdown', function (e) {
+                downX = e.clientX;
+                downY = e.clientY;
+                touch = e.pointerType !== 'mouse';
+            });
+            book.addEventListener('click', function (e) {
+                if (Math.abs(e.clientX - downX) > 6 || Math.abs(e.clientY - downY) > 6) return;
+                if (pf.getState() !== 'read' && pf.getState() !== 'fold_corner') return;
+                var hit = target(e);
+                if (hit.empty) return;
+                if (!hit.edge) { openZoom(hit.index); return; }
+                if (touch) {
+                    hint(e, hit);
+                    hintTimer = setTimeout(function () { hint(null); }, 450);
+                }
+                if (hit.dir < 0) pf.flipPrev();
+                else forward();
+            });
+
             prev.addEventListener('click', function () { pf.flipPrev(); });
             next.addEventListener('click', forward);
             document.addEventListener('keydown', function (e) {
-                if (e.altKey || e.ctrlKey || e.metaKey) return;
+                if (e.altKey || e.ctrlKey || e.metaKey || zoom.classList.contains('active')) return;
                 if (e.key === 'ArrowRight') forward();
                 else if (e.key === 'ArrowLeft') pf.flipPrev();
+            });
+
+            // Zoom view: one page at a time, fit to the screen; click it to go closer and move to look around.
+            var zoom = document.getElementById('zoom');
+            var zoomImg = document.getElementById('zoomImg');
+            var zoomCount = document.getElementById('zoomCount');
+            var zoomIndex = 2;
+            var zoomToken = 0;
+            var pan = { x: 0.5, y: 0.5 };
+
+            function showZoom() {
+                var token = ++zoomToken;
+                setZoomed(false);
+                zoomImg.classList.remove('loaded');
+                zoomImg.src = imgs[zoomIndex].dataset.src;
+                zoomImg.alt = imgs[zoomIndex].alt;
+                zoomImg.decode().catch(function () {}).then(function () {
+                    if (token === zoomToken) zoomImg.classList.add('loaded');
+                });
+                zoomCount.textContent = (zoomIndex - 1) + ' / ' + interior;
+                if (zoomIndex < interior + 1) new Image().src = imgs[zoomIndex + 1].dataset.src;
+                if (zoomIndex > 2) new Image().src = imgs[zoomIndex - 1].dataset.src;
+            }
+
+            function openZoom(i) {
+                zoomIndex = i;
+                showZoom();
+                zoom.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                zoom.querySelector('.zoom-close').focus({ preventScroll: true });
+            }
+
+            function closeZoom() {
+                zoom.classList.remove('active');
+                document.body.style.overflow = '';
+                var i = pf.getCurrentPageIndex();
+                if (zoomIndex !== i && !(pf.getOrientation() === 'landscape' && zoomIndex === i + 1)) {
+                    pf.turnToPage(zoomIndex);
+                    update(pf.getCurrentPageIndex());
+                }
+            }
+
+            function stepZoom(dir) {
+                var i = zoomIndex + dir;
+                if (i < 2 || i > interior + 1) return;
+                zoomIndex = i;
+                showZoom();
+            }
+
+            function place() {
+                var w = zoomImg.offsetWidth, h = zoomImg.offsetHeight;
+                var vw = zoom.clientWidth, vh = zoom.clientHeight;
+                zoomImg.style.left = (w > vw ? -pan.x * (w - vw) : (vw - w) / 2) + 'px';
+                zoomImg.style.top = (h > vh ? -pan.y * (h - vh) : (vh - h) / 2) + 'px';
+            }
+
+            function setZoomed(on, e) {
+                if (!on) {
+                    zoom.classList.remove('zoomed');
+                    zoomImg.style.width = zoomImg.style.left = zoomImg.style.top = '';
+                    return;
+                }
+                var fit = zoomImg.getBoundingClientRect();
+                pan.x = Math.min(1, Math.max(0, (e.clientX - fit.left) / fit.width));
+                pan.y = Math.min(1, Math.max(0, (e.clientY - fit.top) / fit.height));
+                zoom.classList.add('zoomed');
+                zoomImg.style.width = Math.max(fit.width * 2, Math.min(zoom.clientWidth, 1600)) + 'px';
+                place();
+            }
+
+            zoomImg.addEventListener('click', function (e) {
+                if (moved) return;
+                setZoomed(!zoom.classList.contains('zoomed'), e);
+            });
+
+            zoom.addEventListener('mousemove', function (e) {
+                if (!zoom.classList.contains('zoomed')) return;
+                pan.x = e.clientX / zoom.clientWidth;
+                pan.y = e.clientY / zoom.clientHeight;
+                place();
+            });
+
+            // Touch: drag to look around when zoomed, swipe to change page when not.
+            var tx = 0, ty = 0, startPan = null, moved = false;
+            zoom.addEventListener('touchstart', function (e) {
+                tx = e.touches[0].clientX;
+                ty = e.touches[0].clientY;
+                startPan = { x: pan.x, y: pan.y };
+                moved = false;
+            }, { passive: true });
+            zoom.addEventListener('touchmove', function (e) {
+                var dx = e.touches[0].clientX - tx, dy = e.touches[0].clientY - ty;
+                if (Math.abs(dx) > 6 || Math.abs(dy) > 6) moved = true;
+                if (!zoom.classList.contains('zoomed')) return;
+                var w = zoomImg.offsetWidth - zoom.clientWidth, h = zoomImg.offsetHeight - zoom.clientHeight;
+                pan.x = Math.min(1, Math.max(0, startPan.x - (w > 0 ? dx / w : 0)));
+                pan.y = Math.min(1, Math.max(0, startPan.y - (h > 0 ? dy / h : 0)));
+                place();
+            }, { passive: true });
+            zoom.addEventListener('touchend', function (e) {
+                var dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+                if (!zoom.classList.contains('zoomed') && Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+                    stepZoom(dx < 0 ? 1 : -1);
+                }
+                setTimeout(function () { moved = false; }, 0);
+            }, { passive: true });
+
+            zoom.addEventListener('click', function (e) {
+                if (e.target === zoom) closeZoom();
+            });
+            zoom.querySelector('.zoom-close').addEventListener('click', closeZoom);
+            zoom.querySelector('.zoom-prev').addEventListener('click', function () { stepZoom(-1); });
+            zoom.querySelector('.zoom-next').addEventListener('click', function () { stepZoom(1); });
+            window.addEventListener('resize', function () {
+                if (zoom.classList.contains('zoomed')) setZoomed(false);
+            });
+            document.addEventListener('keydown', function (e) {
+                if (!zoom.classList.contains('active')) return;
+                if (e.key === 'Escape') {
+                    if (zoom.classList.contains('zoomed')) setZoomed(false);
+                    else closeZoom();
+                } else if (e.key === 'ArrowLeft') stepZoom(-1);
+                else if (e.key === 'ArrowRight') stepZoom(1);
             });
 
             var cover = imgs[0];
