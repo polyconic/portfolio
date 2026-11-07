@@ -175,11 +175,11 @@
             white-space: nowrap;
         }
 
+        /* Squashed to the lowercase x-height: baseline to top of "n", measured in the bold system font. */
         .site-name .slashes {
-            position: relative;
-            bottom: 0.07em;
             display: inline-block;
-            transform: scaleY(0.8);
+            transform-origin: 50% 0.55em;
+            transform: scaleY(0.61);
         }
 
         .arrive {
@@ -298,6 +298,20 @@
             .site-name {
                 font-size: min(44px, calc((100vw - 40px) / 8.2));
                 letter-spacing: -1.5px;
+            }
+        }
+
+        /* Phones upright: name centered above the portrait (0.408 = half its 2088/2560 height), bio lifted. */
+        @media (max-width: 900px) and (orientation: portrait) {
+            .site-name {
+                position: absolute;
+                left: 50%;
+                top: calc(42% - min(56vw, 360px) * 0.408 - 44px);
+                transform: translate(-50%, -100%);
+            }
+
+            .bottom-row {
+                padding-bottom: 7vh;
             }
         }
 
