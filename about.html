@@ -430,6 +430,23 @@
                 font-size: 16px;
             }
 
+            /* One line at any phone width; divisor measured for the current intro text. */
+            .page-intro {
+                font-size: min(12px, calc((100vw - 40px) / 33));
+                letter-spacing: 0.05em;
+                white-space: nowrap;
+            }
+
+            /* Phones: one line would drop the lead below the body text, so it breaks after "designer". */
+            .about .lead {
+                font-size: min(22px, calc(100cqw / 16));
+                white-space: normal;
+            }
+
+            .about .lead span {
+                white-space: nowrap;
+            }
+
         }
 
         .arrive {
@@ -520,7 +537,7 @@
         <div class="about-layout">
             <div class="about-main">
                 <div class="about">
-                    <p class="lead">photographer, graphic designer and sound artist. </p>
+                    <p class="lead"><span>photographer, graphic designer</span> <span>and sound artist.</span></p>
                     <p>i shoot portraits, cityscapes, landscapes and experimental long exposures + </p> 
                     <p>design books and brands +</p>
                      <p>produce dark psychedelic techno.</p>
