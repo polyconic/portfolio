@@ -190,7 +190,9 @@
             gap: 80px;
         }
 
+        /* Only as wide as its word, so empty space beside a short word isn't part of the link. */
         .section-item {
+            align-self: flex-start;
             cursor: pointer;
             text-decoration: none;
             color: inherit;
@@ -209,7 +211,7 @@
             transition: opacity 0.2s ease;
         }
 
-        /* Hover preview: a few photos from the section float beside the cursor, under the words (mouse only). */
+        /* Hover preview: photos from the section float beside the cursor, under the words (mouse only). */
         .peek {
             position: fixed;
             left: 0;
@@ -218,13 +220,21 @@
             width: clamp(240px, 26vw, 400px);
             aspect-ratio: 1;
             pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
             will-change: transform;
         }
 
-        .peek.on {
+        .peek-in {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(0.94);
+            transition: opacity 0.5s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .peek.on .peek-in {
             opacity: 1;
+            transform: none;
+            transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .peek img {
@@ -234,11 +244,17 @@
             height: 100%;
             object-fit: contain;
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.9s ease;
         }
 
         .peek img.on {
             opacity: 1;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .peek-in {
+                transform: none;
+            }
         }
 
         footer {
@@ -430,6 +446,9 @@
             var peek = document.createElement('div');
             peek.className = 'peek';
             peek.setAttribute('aria-hidden', 'true');
+            var inner = document.createElement('div');
+            inner.className = 'peek-in';
+            peek.appendChild(inner);
             document.body.appendChild(peek);
 
             var sets = new Map(), built = false;
@@ -442,7 +461,7 @@
                         img.decoding = 'async';
                         img.alt = '';
                         img.src = src;
-                        peek.appendChild(img);
+                        inner.appendChild(img);
                         return img;
                     }));
                 });
@@ -452,46 +471,59 @@
             if (document.readyState === 'complete') warm(); else addEventListener('load', warm);
             document.addEventListener('prerenderingchange', warm);
 
-            var x = 0, y = 0, tx = 0, ty = 0, raf = 0, timer = 0, shown = null, at = 0, fresh = true;
+            // `gone` is true only once the preview has fully faded out; until then it keeps gliding after
+            // the cursor, so moving from one word to the next is a crossfade, not a hide and a jump.
+            var x = 0, y = 0, tx = 0, ty = 0, raf = 0, cycle = 0, hideTimer = 0, goneTimer = 0;
+            var set = null, at = 0, gone = true;
             function aim(e) {
                 var w = peek.offsetWidth, gap = 28;
                 tx = e.clientX + gap + w > innerWidth ? e.clientX - gap - w : e.clientX + gap;
                 ty = Math.max(70, Math.min(innerHeight - w - 8, e.clientY - w / 2));
-                if (fresh || still) { x = tx; y = ty; fresh = false; }
+                if (gone || still) { x = tx; y = ty; }
                 if (!raf) raf = requestAnimationFrame(tick);
             }
             function tick() {
-                x += (tx - x) * 0.16;
-                y += (ty - y) * 0.16;
+                x += (tx - x) * 0.11;
+                y += (ty - y) * 0.11;
                 peek.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
-                raf = shown && (Math.abs(tx - x) > 0.3 || Math.abs(ty - y) > 0.3) ? requestAnimationFrame(tick) : 0;
+                raf = !gone && (Math.abs(tx - x) > 0.3 || Math.abs(ty - y) > 0.3) ? requestAnimationFrame(tick) : 0;
             }
             function show(i) {
                 at = i;
-                peek.querySelectorAll('img.on').forEach(function (m) { m.classList.remove('on'); });
-                shown[i].classList.add('on');
+                inner.querySelectorAll('img.on').forEach(function (m) { if (m !== set[i]) m.classList.remove('on'); });
+                set[i].classList.add('on');
+            }
+            function enter(a, e) {
+                clearTimeout(hideTimer);
+                clearTimeout(goneTimer);
+                build();
+                if (set !== sets.get(a)) {
+                    set = sets.get(a);
+                    show(0);
+                    clearInterval(cycle);
+                    if (!still) cycle = setInterval(function () { show((at + 1) % set.length); }, 1700);
+                }
+                aim(e);
+                gone = false;
+                peek.classList.add('on');
+            }
+            function hide() {
+                clearInterval(cycle);
+                set = null;
+                peek.classList.remove('on');
+                goneTimer = setTimeout(function () { gone = true; }, 550);
             }
             function leave() {
-                clearInterval(timer);
-                shown = null;
-                fresh = true;
-                peek.classList.remove('on');
+                clearTimeout(hideTimer);
+                hideTimer = setTimeout(hide, 260);
             }
 
             items.forEach(function (a) {
-                a.addEventListener('mouseenter', function (e) {
-                    build();
-                    shown = sets.get(a);
-                    show(0);
-                    aim(e);
-                    peek.classList.add('on');
-                    clearInterval(timer);
-                    if (!still) timer = setInterval(function () { show((at + 1) % shown.length); }, 1300);
-                });
-                a.addEventListener('mousemove', aim);
+                a.addEventListener('mouseenter', function (e) { enter(a, e); });
                 a.addEventListener('mouseleave', leave);
             });
-            addEventListener('pagehide', leave);
+            document.addEventListener('mousemove', function (e) { if (!gone) aim(e); });
+            addEventListener('pagehide', function () { clearTimeout(hideTimer); hide(); gone = true; });
         })();
     </script>
     <footer>
