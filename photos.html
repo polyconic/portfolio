@@ -182,6 +182,8 @@
         }
 
         .sections {
+            position: relative;
+            z-index: 6;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -205,6 +207,38 @@
         .section-item:hover .section-title h2 {
             opacity: 0.6;
             transition: opacity 0.2s ease;
+        }
+
+        /* Hover preview: a few photos from the section float beside the cursor, under the words (mouse only). */
+        .peek {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 5;
+            width: clamp(240px, 26vw, 400px);
+            aspect-ratio: 1;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            will-change: transform;
+        }
+
+        .peek.on {
+            opacity: 1;
+        }
+
+        .peek img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .peek img.on {
+            opacity: 1;
         }
 
         footer {
@@ -367,19 +401,19 @@
     <main>
         <a href="/" class="back-link">← Back</a>
         <div class="sections">
-            <a href="/digital" class="section-item">
+            <a href="/digital" class="section-item" data-peek="/photos%20webp/photo%20webp/digital/gregor.personals-20.webp|/photos%20webp/photo%20webp/digital/Gregor_Personal-0895.webp|/photos%20webp/photo%20webp/digital/greggy.personals-53.webp">
                 <div class="section-title">
                     <h2 data-arrive>Digital</h2>
                 </div>
             </a>
 
-            <a href="/analog" class="section-item">
+            <a href="/analog" class="section-item" data-peek="/photos%20webp/photo%20webp/analog/EGANGREGOR-19.webp|/photos%20webp/photo%20webp/analog/EGANGREGOR-33.webp|/photos%20webp/photo%20webp/analog/EGANGREGOR-000013320001.webp">
                 <div class="section-title">
                     <h2 data-arrive>Analog</h2>
                 </div>
             </a>
 
-            <a href="/projects" class="section-item">
+            <a href="/projects" class="section-item" data-peek="/img/projects/tunde%206.webp|/img/projects/croz%202.webp|/img/projects/tunde%2016.webp">
                 <div class="section-title">
                     <h2 data-arrive>Selected Projects</h2>
                 </div>
@@ -388,6 +422,78 @@
     </main>
     <script src="/arrive.js"></script>
 
+    <script>
+        (function () {
+            if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+            var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var items = [].slice.call(document.querySelectorAll('.section-item[data-peek]'));
+            var peek = document.createElement('div');
+            peek.className = 'peek';
+            peek.setAttribute('aria-hidden', 'true');
+            document.body.appendChild(peek);
+
+            var sets = new Map(), built = false;
+            function build() {
+                if (built) return;
+                built = true;
+                items.forEach(function (a) {
+                    sets.set(a, a.dataset.peek.split('|').map(function (src) {
+                        var img = new Image();
+                        img.decoding = 'async';
+                        img.alt = '';
+                        img.src = src;
+                        peek.appendChild(img);
+                        return img;
+                    }));
+                });
+            }
+            // Loaded once the page is settled, so the first hover is instant and the gallery is warm.
+            function warm() { if (!document.prerendering) (window.requestIdleCallback || setTimeout)(build, { timeout: 1500 }); }
+            if (document.readyState === 'complete') warm(); else addEventListener('load', warm);
+            document.addEventListener('prerenderingchange', warm);
+
+            var x = 0, y = 0, tx = 0, ty = 0, raf = 0, timer = 0, shown = null, at = 0, fresh = true;
+            function aim(e) {
+                var w = peek.offsetWidth, gap = 28;
+                tx = e.clientX + gap + w > innerWidth ? e.clientX - gap - w : e.clientX + gap;
+                ty = Math.max(70, Math.min(innerHeight - w - 8, e.clientY - w / 2));
+                if (fresh || still) { x = tx; y = ty; fresh = false; }
+                if (!raf) raf = requestAnimationFrame(tick);
+            }
+            function tick() {
+                x += (tx - x) * 0.16;
+                y += (ty - y) * 0.16;
+                peek.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+                raf = shown && (Math.abs(tx - x) > 0.3 || Math.abs(ty - y) > 0.3) ? requestAnimationFrame(tick) : 0;
+            }
+            function show(i) {
+                at = i;
+                peek.querySelectorAll('img.on').forEach(function (m) { m.classList.remove('on'); });
+                shown[i].classList.add('on');
+            }
+            function leave() {
+                clearInterval(timer);
+                shown = null;
+                fresh = true;
+                peek.classList.remove('on');
+            }
+
+            items.forEach(function (a) {
+                a.addEventListener('mouseenter', function (e) {
+                    build();
+                    shown = sets.get(a);
+                    show(0);
+                    aim(e);
+                    peek.classList.add('on');
+                    clearInterval(timer);
+                    if (!still) timer = setInterval(function () { show((at + 1) % shown.length); }, 1300);
+                });
+                a.addEventListener('mousemove', aim);
+                a.addEventListener('mouseleave', leave);
+            });
+            addEventListener('pagehide', leave);
+        })();
+    </script>
     <footer>
         &copy; <span data-yr>2026</span> GREGOR EGAN
     </footer>

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0a0a0a">
     <title>Music - Gregor Egan</title>
     <link rel="canonical" href="https://gregoregan.com/music">
-    <meta name="description" content="Hypnotic, textural techno by Gregor Egan, LA producer and DJ.">
+    <meta name="description" content="Dark psychedelic techno by Gregor Egan, LA producer and DJ. Two mixes to play on the page.">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -29,13 +29,13 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="gregor egan">
     <meta property="og:title" content="Music — Gregor Egan">
-    <meta property="og:description" content="Hypnotic, textural techno by Gregor Egan, LA producer and DJ.">
+    <meta property="og:description" content="Dark psychedelic techno by Gregor Egan, LA producer and DJ. Two mixes to play on the page.">
     <meta property="og:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
     <meta property="og:url" content="https://gregoregan.com/music">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Music — Gregor Egan">
-    <meta name="twitter:description" content="Hypnotic, textural techno by Gregor Egan, LA producer and DJ.">
+    <meta name="twitter:description" content="Dark psychedelic techno by Gregor Egan, LA producer and DJ. Two mixes to play on the page.">
     <meta name="twitter:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
 
     <style>
@@ -226,6 +226,216 @@
             height: auto;
             margin: 0 auto;
             background: var(--placeholder);
+        }
+
+        /* Track rows, ported from the Audiospatials artist pages (js/players.js there). */
+        .tracks {
+            max-width: 760px;
+            margin: 48px auto 0;
+        }
+
+        .track {
+            position: relative;
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            grid-template-rows: auto auto;
+            align-items: center;
+            column-gap: 18px;
+            row-gap: 9px;
+        }
+
+        .track + .track {
+            margin-top: 26px;
+        }
+
+        .track-play {
+            grid-row: 1 / span 2;
+            appearance: none;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            padding: 0;
+            border: 0;
+            background: var(--placeholder);
+            color: var(--text-color);
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .track-play i {
+            width: 11px;
+            height: 13px;
+            margin-left: 3px;
+            background: currentColor;
+            clip-path: polygon(0 0, 100% 50%, 0 100%);
+        }
+
+        .track[data-state="playing"] .track-play i {
+            width: 4px;
+            height: 12px;
+            margin-left: 0;
+            clip-path: none;
+            box-shadow: 6px 0 0 currentColor;
+            transform: translateX(-3px);
+        }
+
+        .track[data-state="loading"] .track-play i {
+            opacity: 0.4;
+        }
+
+        .track-play:focus-visible {
+            outline: 1px solid var(--text-color);
+            outline-offset: 3px;
+        }
+
+        @media (hover: hover) {
+            .track-play:hover {
+                background: var(--rule-color);
+            }
+        }
+
+        .track[data-state="playing"] .track-play {
+            background: var(--text-color);
+            color: var(--bg-color);
+        }
+
+        .track-name {
+            grid-column: 2;
+            align-self: end;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+        }
+
+        .track-title {
+            font-size: 16px;
+            letter-spacing: -0.005em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .track-sub,
+        .track-time {
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+
+        .track-time {
+            grid-column: 3;
+            align-self: end;
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+            opacity: 0.55;
+        }
+
+        .track-sub a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.55;
+            transition: opacity 0.2s;
+        }
+
+        .track-sub a::after {
+            content: "";
+            display: inline-block;
+            width: 0.5em;
+            height: 0.5em;
+            margin-left: 0.6em;
+            vertical-align: 0.22em;
+            background: currentColor;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .track-sub a:hover,
+        .track-sub a:focus-visible {
+            opacity: 1;
+        }
+
+        .track-bar {
+            grid-column: 2 / -1;
+            align-self: start;
+            height: 12px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .track-bar::before,
+        .track-bar span {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 5px;
+            height: 2px;
+            border-radius: 2px;
+        }
+
+        .track-bar::before {
+            background: var(--rule-color);
+        }
+
+        .track-bar span {
+            background: var(--text-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s linear;
+        }
+
+        .track[data-state="idle"] .track-bar {
+            cursor: default;
+        }
+
+        /* The real SoundCloud player stays hidden unless the browser refuses to play it that way. */
+        .track-frame {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .track-frame iframe {
+            display: block;
+            width: 100%;
+            border: 0;
+        }
+
+        .track.native .track-frame {
+            position: static;
+            grid-column: 1 / -1;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+            opacity: 1;
+            pointer-events: auto;
+            margin: 4px 0 14px;
+        }
+
+        .track.native .track-frame iframe {
+            height: 120px;
+        }
+
+        .track.native .track-bar {
+            display: none;
+        }
+
+        /* Phones: the time drops under the bar so long titles get the full row. */
+        @media (max-width: 600px) {
+            .track-name {
+                grid-column: 2 / -1;
+            }
+
+            .track-time {
+                grid-column: 2 / -1;
+                grid-row: 3;
+                justify-self: end;
+                margin-top: -6px;
+            }
         }
 
         .links {
@@ -465,9 +675,14 @@
         <a href="/" class="back-link">← Back</a>
         <h1 class="page-title" data-arrive>Music</h1>
         <script src="/arrive.js"></script>
-        <p class="page-intro">Textural techno.</p>
+        <p class="page-intro">Dark psychedelic techno.</p>
 
         <img class="music-photo" src="/img/music/gregor-egan-grain.webp" alt="Gregor Egan performing, in silhouette" width="1523" height="1015" decoding="async">
+
+        <div class="tracks">
+            <div class="track" data-src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fgregoregan%2Fspontaneous-friday-mix&amp;auto_play=false&amp;visual=false&amp;show_artwork=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;color=%23f5f5f5"><button type="button" class="track-play" aria-label="Play Spontaneous Friday Mix"><i></i></button><div class="track-name"><span class="track-title">Spontaneous Friday Mix</span><span class="track-sub"><a href="https://soundcloud.com/gregoregan/spontaneous-friday-mix" target="_blank" rel="noopener">SoundCloud</a></span></div><span class="track-time"></span><div class="track-bar" aria-hidden="true"><span></span></div></div>
+            <div class="track" data-src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fsoundcloud.com%2Fgregoregan%2Ffor-hor&amp;auto_play=false&amp;visual=false&amp;show_artwork=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;show_teaser=false&amp;color=%23f5f5f5"><button type="button" class="track-play" aria-label="Play for HÖR"><i></i></button><div class="track-name"><span class="track-title">for HÖR</span><span class="track-sub"><a href="https://soundcloud.com/gregoregan/for-hor" target="_blank" rel="noopener">SoundCloud</a></span></div><span class="track-time"></span><div class="track-bar" aria-hidden="true"><span></span></div></div>
+        </div>
 
         <ul class="links small">
             <li><a href="https://audiospatials.com/gregor-egan" target="_blank" rel="noopener">Audiospatials <span class="out" aria-hidden="true"></span></a></li>
@@ -505,6 +720,116 @@
             });
 
             sync();
+        })();
+    </script>
+
+    <script>
+        // Track rows. Nothing from SoundCloud loads until a row is near the screen; the hidden
+        // player is loaded early so one tap can start it (Safari won't play sound that starts later).
+        (function () {
+            var rows = [].slice.call(document.querySelectorAll('.track[data-src]'));
+            if (!rows.length) return;
+
+            var api = null;
+            function soundcloud() {
+                return api || (api = new Promise(function (ok, fail) {
+                    var s = document.createElement('script');
+                    s.src = 'https://w.soundcloud.com/player/api.js';
+                    s.onload = function () { ok(window.SC); };
+                    s.onerror = fail;
+                    document.head.appendChild(s);
+                }));
+            }
+
+            function clock(ms) {
+                var t = Math.max(0, Math.round(ms / 1000));
+                var h = Math.floor(t / 3600), m = Math.floor(t / 60) % 60, sec = String(t % 60).padStart(2, '0');
+                return h ? h + ':' + String(m).padStart(2, '0') + ':' + sec : m + ':' + sec;
+            }
+
+            var all = rows.map(function (row) {
+                var btn = row.querySelector('.track-play');
+                var time = row.querySelector('.track-time');
+                var fill = row.querySelector('.track-bar span');
+                var bar = row.querySelector('.track-bar');
+                var title = row.querySelector('.track-title').textContent;
+                var w = null, prep = null, want = false, playing = false, started = false, duration = 0, watch = 0;
+
+                function state(s) {
+                    row.dataset.state = s;
+                    btn.setAttribute('aria-label', (s === 'playing' ? 'Pause ' : 'Play ') + title);
+                }
+                function native() { row.classList.add('native'); state('idle'); }
+                function progress(pos) {
+                    if (duration) fill.style.transform = 'scaleX(' + Math.min(1, pos / duration) + ')';
+                    time.textContent = duration ? clock(pos) + ' / ' + clock(duration) : '';
+                }
+                // If it hasn't started after a few seconds the browser blocked it, so show the real player.
+                function start() {
+                    w.play();
+                    clearTimeout(watch);
+                    watch = setTimeout(function () { if (!playing) native(); }, 3500);
+                }
+
+                function prepare() {
+                    if (prep) return prep;
+                    var slot = document.createElement('div');
+                    slot.className = 'track-frame';
+                    var frame = document.createElement('iframe');
+                    frame.src = row.dataset.src;
+                    frame.allow = 'autoplay; encrypted-media';
+                    frame.title = title;
+                    slot.appendChild(frame);
+                    row.appendChild(slot);
+                    prep = soundcloud().then(function (SC) {
+                        var widget = SC.Widget(frame), E = SC.Widget.Events;
+                        widget.bind(E.PLAY, function () {
+                            clearTimeout(watch);
+                            started = playing = true;
+                            state('playing');
+                            row.classList.remove('native');
+                            widget.getDuration(function (d) { duration = d; });
+                            all.forEach(function (t) { if (t.row !== row) t.pause(); });
+                        });
+                        widget.bind(E.PAUSE, function () { playing = false; if (started) state('paused'); });
+                        widget.bind(E.FINISH, function () { playing = false; state('paused'); progress(0); });
+                        widget.bind(E.PLAY_PROGRESS, function (p) { progress(p.currentPosition); });
+                        widget.bind(E.READY, function () {
+                            widget.getDuration(function (d) { duration = d; progress(0); });
+                            w = widget;
+                            if (want) start();
+                        });
+                    }).catch(native);
+                    return prep;
+                }
+
+                btn.addEventListener('click', function () {
+                    if (w) { if (playing) w.pause(); else start(); return; }
+                    want = true;
+                    state('loading');
+                    prepare();
+                });
+                bar.addEventListener('click', function (e) {
+                    if (!w || !duration) return;
+                    var r = bar.getBoundingClientRect();
+                    w.seekTo(((e.clientX - r.left) / r.width) * duration);
+                    if (!playing) start();
+                });
+
+                state('idle');
+                return { row: row, prepare: prepare, pause: function () { if (w && playing) w.pause(); } };
+            });
+
+            if ('IntersectionObserver' in window) {
+                var near = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (e) {
+                        if (!e.isIntersecting) return;
+                        near.unobserve(e.target);
+                        all.filter(function (t) { return t.row === e.target; })[0].prepare();
+                    });
+                }, { rootMargin: '300px' });
+                rows.forEach(function (r) { near.observe(r); });
+            } else all.forEach(function (t) { t.prepare(); });
         })();
     </script>
 

@@ -50,12 +50,14 @@
             --bg-color: #0a0a0a;
             --text-color: #f5f5f5;
             --placeholder: rgba(245, 245, 245, 0.07);
+            --rule-color: rgba(245, 245, 245, 0.18);
         }
 
         [data-theme="light"] {
             --bg-color: #fafaf8;
             --text-color: #141414;
             --placeholder: rgba(20, 20, 20, 0.06);
+            --rule-color: rgba(20, 20, 20, 0.16);
         }
 
         body {
@@ -359,6 +361,59 @@
             height: 40px;
         }
 
+        /* End-of-page link to the next section, so a gallery doesn't dead-end at the footer. */
+        .next-page {
+            display: block;
+            margin-top: 96px;
+            padding-top: 22px;
+            border-top: 1px solid var(--rule-color);
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .next-page span {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.55;
+        }
+
+        .next-page strong {
+            display: inline-block;
+            font-size: clamp(32px, 6vw, 72px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .next-page:hover strong {
+            opacity: 0.6;
+        }
+
+        .next-page:focus-visible strong {
+            transform: translateX(10px);
+        }
+
+        @media (hover: hover) {
+            .next-page:hover strong {
+                transform: translateX(10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .next-page {
+                margin-top: 64px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .next-page strong {
+                transition: opacity 0.2s ease;
+            }
+        }
+
         footer {
             padding: 24px 40px;
             font-size: 12px;
@@ -505,48 +560,49 @@
         
         <div class="gallery-grid" id="gallery">
             <div class="gallery-item">
-                <img src="/design webp/CITYii.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/CITYii.webp" alt="Poster artwork of a city skyline in magenta, cyan, green and red color blocks" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/front cover.webp" alt="Design work" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/design webp/front cover.webp" alt="Book cover: A Six Year Journey of Visuals, a book by Gregor Egan" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/HAYDEN_CONCEPT BLUR COLORED copy.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/HAYDEN_CONCEPT BLUR COLORED copy.webp" alt="Concept artwork of three blurred dark silhouettes on white" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/thefinalverisonNDP_Original.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/thefinalverisonNDP_Original.webp" alt="New Dark Paradise artwork: a chrome lighter with a stylized flame and a city skyline" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/ALBUMART_perception perhaps.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/ALBUMART_perception perhaps.webp" alt="Perception Perhaps album art: an iridescent pink and teal sky with star trails" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/ART &amp; DESIGN Final Cover 3.webp" alt="Design work" loading="lazy" width="1920" height="1194" decoding="async">
+                <img src="/design webp/ART &amp; DESIGN Final Cover 3.webp" alt="Design &amp; Art book cover spread by Gregor Egan" loading="lazy" width="1920" height="1194" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/dejavillain EP.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/dejavillain EP.webp" alt="Déjàvillain EP cover: distorted, glitched lines of text in black and white" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/RAINBOW.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/RAINBOW.webp" alt="Artwork of a rainbow over a mountain in pink and teal false color" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/diamond copy.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/diamond copy.webp" alt="Diamond-pattern collage of many small colorful drawings" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/MOUNTAINPDF4.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/MOUNTAINPDF4.webp" alt="Wide-angle artwork of a stream through green hills under dramatic black-and-white clouds" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/UsVoyagerNOTEXT.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/UsVoyagerNOTEXT.webp" alt="Abstract artwork of a glowing pink star-shaped swirl on purple" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/DEJA VILLAIN.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/DEJA VILLAIN.webp" alt="Déjà Villain cover: the title over a pale blue field of fine distorted text" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/albumartFIRSTTAKE.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/albumartFIRSTTAKE.webp" alt="Abstract album art of smeared blue, orange and magenta color" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/design webp/VISUOS designs for hoodie (dragged) 2.webp" alt="Design work" loading="lazy" width="1920" height="1920" decoding="async">
+                <img src="/design webp/VISUOS designs for hoodie (dragged) 2.webp" alt="Visuospatials logo design: overlapping rotated rectangles in cyan, magenta, yellow and black on tan" loading="lazy" width="1920" height="1920" decoding="async">
             </div>
         </div>
+        <a href="/artists" class="next-page"><span>Next</span><strong>TMWRK Management →</strong></a>
     </main>
 
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">

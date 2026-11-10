@@ -355,6 +355,59 @@
             height: 40px;
         }
 
+        /* End-of-page link to the next section, so a gallery doesn't dead-end at the footer. */
+        .next-page {
+            display: block;
+            margin-top: 96px;
+            padding-top: 22px;
+            border-top: 1px solid var(--rule-color);
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .next-page span {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.55;
+        }
+
+        .next-page strong {
+            display: inline-block;
+            font-size: clamp(32px, 6vw, 72px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .next-page:hover strong {
+            opacity: 0.6;
+        }
+
+        .next-page:focus-visible strong {
+            transform: translateX(10px);
+        }
+
+        @media (hover: hover) {
+            .next-page:hover strong {
+                transform: translateX(10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .next-page {
+                margin-top: 64px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .next-page strong {
+                transition: opacity 0.2s ease;
+            }
+        }
+
         footer {
             padding: 24px 40px;
             font-size: 12px;
@@ -498,66 +551,67 @@
         
         <div class="gallery-grid" id="gallery">
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-19.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-19.webp" alt="Film photo of stacks of painted TV sets beside a desert road under a blue sky" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013320001.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013320001.webp" alt="Black-and-white film portrait of a woman with braids holding a camera, leaning on a stone doorway" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-51.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-51.webp" alt="Film photo of mountain ridges rising through low clouds at dusk" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000054080009.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000054080009.webp" alt="Film photo of a man in a white rash guard in profile on a rocky shore, a green island behind him" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013310006.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013310006.webp" alt="Black-and-white film photo of a concrete building with crisscrossing open stairways" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-33.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-33.webp" alt="Film photo of Joshua trees and boulders in the desert" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000074870010.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000074870010.webp" alt="Film photo of a graffiti-covered courtyard with a painted figure sign and a mural of lips" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/gregor.personals-12.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/gregor.personals-12.webp" alt="Film photo of a faint rainbow under storm clouds above desert mountains" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-45.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-45.webp" alt="Film portrait of a man in a beanie and brown sweatshirt smiling at sunset" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013330002.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013330002.webp" alt="Black-and-white film photo of an ornate stone church tower, seen from below" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/gregor.personals-37.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/gregor.personals-37.webp" alt="Film photo of a granite cliff and waterfall framed by pine trees" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-5.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-5.webp" alt="Film photo of a raven perched on a yellow caution sign in the desert" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000074870004.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000074870004.webp" alt="Film photo of a weathered radar dome above a forest under an overcast sky" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/gregor.personals-22.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/gregor.personals-22.webp" alt="Film portrait of a man in a hooded rain jacket and cap in profile on a green mountain trail" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-16.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-16.webp" alt="Film photo of a roofless concrete ruin with peeling paint" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000074880002.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000074880002.webp" alt="Film photo of a hazy valley town beneath mountain ridges, a contrail in the sky" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013310005.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000013310005.webp" alt="Black-and-white film photo of tram wires strung between buildings, seen from below" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/gregor.personals-10.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/gregor.personals-10.webp" alt="Film photo of a tabby cat lying on a stone wall" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/EGANGREGOR-000054070009.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/EGANGREGOR-000054070009.webp" alt="Film photo of a coastal neighborhood of houses and palms beside turquoise water, seen from above" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/analog/gregor.personals-38.webp" alt="Analog photo" loading="lazy" width="1920" height="1892" decoding="async">
+                <img src="/photos webp/photo webp/analog/gregor.personals-38.webp" alt="Film photo of clouds gathering over red mountain peaks and pine forest" loading="lazy" width="1920" height="1892" decoding="async">
             </div>
         </div>
+        <a href="/projects" class="next-page"><span>Next</span><strong>Selected Projects →</strong></a>
     </main>
 
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">

@@ -50,12 +50,14 @@
             --bg-color: #0a0a0a;
             --text-color: #f5f5f5;
             --placeholder: rgba(245, 245, 245, 0.07);
+            --rule-color: rgba(245, 245, 245, 0.18);
         }
 
         [data-theme="light"] {
             --bg-color: #fafaf8;
             --text-color: #141414;
             --placeholder: rgba(20, 20, 20, 0.06);
+            --rule-color: rgba(20, 20, 20, 0.16);
         }
 
         body {
@@ -336,6 +338,59 @@
             height: 40px;
         }
 
+        /* End-of-page link to the next section, so a gallery doesn't dead-end at the footer. */
+        .next-page {
+            display: block;
+            margin-top: 96px;
+            padding-top: 22px;
+            border-top: 1px solid var(--rule-color);
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .next-page span {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.55;
+        }
+
+        .next-page strong {
+            display: inline-block;
+            font-size: clamp(32px, 6vw, 72px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .next-page:hover strong {
+            opacity: 0.6;
+        }
+
+        .next-page:focus-visible strong {
+            transform: translateX(10px);
+        }
+
+        @media (hover: hover) {
+            .next-page:hover strong {
+                transform: translateX(10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .next-page {
+                margin-top: 64px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .next-page strong {
+                transition: opacity 0.2s ease;
+            }
+        }
+
         footer {
             padding: 24px 40px;
             font-size: 12px;
@@ -478,93 +533,94 @@
         
         <div class="gallery-grid" id="gallery">
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/gregor.personals-20.webp" alt="Digital photo" loading="lazy" width="1920" height="1281" decoding="async">
+                <img src="/photos webp/photo webp/digital/gregor.personals-20.webp" alt="Woman in a light blue slip dress standing in a lake at dusk, a city skyline on the horizon" loading="lazy" width="1920" height="1281" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/Gregor_Personal-0895.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/Gregor_Personal-0895.webp" alt="Legs dangling over a rooftop edge above a downtown skyline at dusk" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-17 copy.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-17 copy.webp" alt="Sunbeams cutting across a mountain valley" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-73.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-73.webp" alt="Close portrait of a woman with hoop earrings in warm low light, hand at her chin" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-9.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-9.webp" alt="Red and orange sunset clouds over the ocean" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/Gregor_Personal-3682.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/Gregor_Personal-3682.webp" alt="Woman in jeans and blue sneakers sitting on a ledge at the base of a white tower, seen from below" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/EGANGREGOR-3.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/EGANGREGOR-3.webp" alt="Man with a mustache in a plaid shirt on a bridge above rail yards" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals.dji-1.webp" alt="Digital photo" loading="lazy" width="1920" height="1281" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals.dji-1.webp" alt="Long exposure of an empty beach with dark rocks and streaked clouds" loading="lazy" width="1920" height="1281" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/gregor-personal-2310.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/gregor-personal-2310.webp" alt="Person in a gingham bucket hat and patterned jacket standing in a cornfield" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-59.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-59.webp" alt="Woman with long blonde hair crouched on lakefront rocks, a lighthouse behind her" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/gregor-personal-5692.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/gregor-personal-5692.webp" alt="Starry night sky with a meteor streak above snow-capped mountains" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-22.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-22.webp" alt="Woman in a black top and jeans framed by skyscrapers, seen from below" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-53.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-53.webp" alt="Couple sitting together in tall dry grass at dusk" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-2.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-2.webp" alt="Moonlit long exposure of the sea with rocks and short star trails" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/GREGOREGAN-32.webp" alt="Digital photo" loading="lazy" width="1920" height="2084" decoding="async">
+                <img src="/photos webp/photo webp/digital/GREGOREGAN-32.webp" alt="Man with curly hair and a mustache, arms crossed, in a black graphic t-shirt against a white wall" loading="lazy" width="1920" height="2084" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/gregor-personal-9049.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/gregor-personal-9049.webp" alt="Wide-angle view of a dark skyscraper and surrounding high-rises under streaked clouds" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-129.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-129.webp" alt="Woman in a white dress with her arms raised in a dry grass field at dusk" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/EGANGREGOR-1828.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/EGANGREGOR-1828.webp" alt="Black-and-white fisheye mirror self-portrait with a camera" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-31.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-31.webp" alt="Woman standing at the tip of a concrete pier surrounded by green water, seen from above" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-19.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-19.webp" alt="Blurred long-exposure silhouette of a person against a sunset over water" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/Gregor_Personal-8414.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/Gregor_Personal-8414.webp" alt="Woman sitting cross-legged in the middle of an empty road beside an overpass" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/gregor-personal-6534.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/gregor-personal-6534.webp" alt="Yellow coneflowers at blue hour with a city shoreline in the distance" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/GREGOREGAN-18.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/GREGOREGAN-18.webp" alt="Woman in a red plaid mesh top posing against a white wall" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/EGANGREGOR--2 copy 2.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/EGANGREGOR--2 copy 2.webp" alt="Red cliffs and a green hillside under a starry sky" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/Gregor_Personal-9770.webp" alt="Digital photo" loading="lazy" width="1707" height="2560" decoding="async">
+                <img src="/photos webp/photo webp/digital/Gregor_Personal-9770.webp" alt="Woman in a beanie crouching on a granite ledge between towers" loading="lazy" width="1707" height="2560" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/Gregor_Personal-0405.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/Gregor_Personal-0405.webp" alt="Woman on the phone at night, lit by flash, with city lights behind her" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/gregor_personal-5274.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/gregor_personal-5274.webp" alt="Woman smiling with her eyes down beside hazy water, a pink sun behind her" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/gregor.personals-9.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/gregor.personals-9.webp" alt="Two men seen from behind looking up at a small plane among clouds" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
             <div class="gallery-item">
-                <img src="/photos webp/photo webp/digital/greggy.personals-40.webp" alt="Digital photo" loading="lazy" width="1920" height="1280" decoding="async">
+                <img src="/photos webp/photo webp/digital/greggy.personals-40.webp" alt="Two women standing on street tracks at dusk, a train and glass towers behind them" loading="lazy" width="1920" height="1280" decoding="async">
             </div>
         </div>
+        <a href="/analog" class="next-page"><span>Next</span><strong>Analog →</strong></a>
     </main>
 
     <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">

@@ -347,6 +347,59 @@
         }
 
         /* ==================== FOOTER ==================== */
+        /* End-of-page link to the next section, so a gallery doesn't dead-end at the footer. */
+        .next-page {
+            display: block;
+            margin-top: 96px;
+            padding-top: 22px;
+            border-top: 1px solid var(--rule-color);
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .next-page span {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            letter-spacing: 1px;
+            opacity: 0.55;
+        }
+
+        .next-page strong {
+            display: inline-block;
+            font-size: clamp(32px, 6vw, 72px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1;
+            transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .next-page:hover strong {
+            opacity: 0.6;
+        }
+
+        .next-page:focus-visible strong {
+            transform: translateX(10px);
+        }
+
+        @media (hover: hover) {
+            .next-page:hover strong {
+                transform: translateX(10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .next-page {
+                margin-top: 64px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .next-page strong {
+                transition: opacity 0.2s ease;
+            }
+        }
+
         footer {
             padding: 24px 40px;
             font-size: 12px;
@@ -550,12 +603,12 @@
                 </div>
             </div>
             <div class="grid">
-                <figure><img src="/img/projects/tunde%205.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%206.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2014.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2016.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2018.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2030.webp" alt="Tunde Adebimpe" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/tunde%205.webp" alt="Tunde Adebimpe in glasses and a black shirt, palms behind him" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/tunde%206.webp" alt="Tunde Adebimpe in profile against a green hedge" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/tunde%2014.webp" alt="Tunde Adebimpe with his arms crossed in a narrow passage between walls" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/tunde%2016.webp" alt="Black-and-white portrait of Tunde Adebimpe against a white wall" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/tunde%2018.webp" alt="Black-and-white portrait of Tunde Adebimpe among palm fronds" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/tunde%2030.webp" alt="Black-and-white portrait of Tunde Adebimpe leaning on a wall with his arms crossed" loading="lazy" decoding="async" width="2560" height="1707"></figure>
             </div>
         </section>
 
@@ -568,12 +621,13 @@
                 </div>
             </div>
             <div class="grid">
-                <figure><img src="/img/projects/croz%201.webp" alt="Croz Boyce" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/croz%202.webp" alt="Croz Boyce" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/croz%203.webp" alt="Croz Boyce" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/croz%201.webp" alt="Croz Boyce performing in a garden, seen through tree branches" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/croz%202.webp" alt="Croz Boyce performing for a seated crowd in a garden" loading="lazy" decoding="async" width="2560" height="1707"></figure>
+                <figure><img src="/img/projects/croz%203.webp" alt="Croz Boyce at their equipment in a garden, framed by trees" loading="lazy" decoding="async" width="2560" height="1707"></figure>
             </div>
         </section>
 
+        <a href="/design" class="next-page"><span>Next</span><strong>Design →</strong></a>
     </main>
 
     <footer>
