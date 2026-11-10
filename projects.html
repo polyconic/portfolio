@@ -357,7 +357,7 @@
             text-decoration: none;
         }
 
-        .next-page span {
+        .next-page > span {
             display: block;
             margin-bottom: 10px;
             font-size: 12px;
@@ -365,26 +365,37 @@
             opacity: 0.55;
         }
 
+        /* Same corner triangle and hover glide as the About/Music link rows, sat right after the title. */
         .next-page strong {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.22em;
             font-size: clamp(32px, 6vw, 72px);
             font-weight: 700;
             letter-spacing: -1.5px;
             line-height: 1;
-            transition: opacity 0.2s ease, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.2s ease, padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .next-page .out {
+            flex: none;
+            width: 0.27em;
+            height: 0.27em;
+            background: currentColor;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
         }
 
         .next-page:hover strong {
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         .next-page:focus-visible strong {
-            transform: translateX(10px);
+            padding-left: 10px;
         }
 
         @media (hover: hover) {
             .next-page:hover strong {
-                transform: translateX(10px);
+                padding-left: 10px;
             }
         }
 
@@ -627,7 +638,7 @@
             </div>
         </section>
 
-        <a href="/design" class="next-page"><span>Next</span><strong>Design →</strong></a>
+        <a href="/design" class="next-page"><span>Next</span><strong><span class="next-title">Design</span><i class="out" aria-hidden="true"></i></strong></a>
     </main>
 
     <footer>
