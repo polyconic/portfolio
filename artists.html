@@ -202,57 +202,25 @@
             margin-bottom: 80px;
         }
 
-        /* ==================== ARTIST BLOCK ==================== */
-        .artist {
-            margin-bottom: 90px;
-        }
-
-        .artist:last-of-type {
-            margin-bottom: 0;
-        }
-
-        .artist-head {
-            border-top: 1px solid var(--rule-color);
-            padding-top: 14px;
-            margin-bottom: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            gap: 20px;
-        }
-
-        .artist-head h2 {
-            font-size: clamp(28px, 5vw, 56px);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-
-        .artist-credit {
-            font-size: 11px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.5;
-            margin-top: 10px;
-        }
-
         /* ==================== GRID ==================== */
+        /* One grid for all the pieces (all square), each captioned with artist and piece. */
         .grid {
-            column-count: 3;
-            column-gap: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 40px 16px;
         }
 
         .grid figure {
-            break-inside: avoid;
-            margin: 0 0 16px;
-            background: var(--placeholder);
+            margin: 0;
         }
 
         .grid img {
             display: block;
             width: 100%;
             height: auto;
+            aspect-ratio: 1;
+            object-fit: cover;
+            background: var(--placeholder);
             cursor: zoom-in;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -266,6 +234,28 @@
             .grid img:hover {
                 opacity: 0.75;
             }
+        }
+
+        .grid figcaption {
+            margin-top: 12px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+
+        .grid figcaption strong {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+
+        .grid figcaption {
+            color: color-mix(in srgb, var(--text-color) 55%, transparent);
+        }
+
+        .grid figcaption strong {
+            color: var(--text-color);
         }
 
         /* ==================== LIGHTBOX ==================== */
@@ -452,18 +442,11 @@
             }
 
             .grid {
-                column-count: 2;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 32px 12px;
             }
 
-            .artist {
-                margin-bottom: 64px;
-            }
 
-            .artist-head {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
 
             footer {
                 padding: 20px;
@@ -495,7 +478,8 @@
             }
 
             .grid {
-                column-count: 1;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 28px 10px;
             }
 
             .lightbox {
@@ -605,47 +589,32 @@
         <script src="/arrive.js"></script>
         <p class="page-intro">Design for Diplo, Dillstradamus and Sierra Hull.</p>
 
-        <!-- ==================== DIPLO ==================== -->
-        <section class="artist">
-            <div class="artist-head">
-                <div>
-                    <h2>Diplo</h2>
-                    <p class="artist-credit">Grammy For Your Consideration</p>
-                </div>
-            </div>
-            <div class="grid">
-                <figure><img src="/img/artists/diplo%201.webp" alt="Diplo Grammy For Your Consideration campaign design" loading="lazy" decoding="async" width="2048" height="2048"></figure>
-            </div>
-        </section>
-
-        <!-- ==================== DILLSTRADAMUS ==================== -->
-        <section class="artist">
-            <div class="artist-head">
-                <div>
-                    <h2>Dillstradamus</h2>
-                    <p class="artist-credit">Dillon Francis &amp; Flosstradamus &mdash; Merch</p>
-                </div>
-            </div>
-            <div class="grid">
-                <figure><img src="/img/artists/dill%201.webp" alt="Dillstradamus merch design" loading="lazy" decoding="async" width="2560" height="2560"></figure>
-                <figure><img src="/img/artists/dill%203.webp" alt="Dillstradamus merch design" loading="lazy" decoding="async" width="2560" height="2560"></figure>
-                <figure><img src="/img/artists/dill%204.webp" alt="Dillstradamus merch design" loading="lazy" decoding="async" width="2560" height="2560"></figure>
-            </div>
-        </section>
-
-        <!-- ==================== SIERRA HULL ==================== -->
-        <section class="artist">
-            <div class="artist-head">
-                <div>
-                    <h2>Sierra Hull</h2>
-                    <p class="artist-credit">Vinyl Laser Etching &amp; Album Art</p>
-                </div>
-            </div>
-            <div class="grid">
-                <figure><img src="/img/artists/sierra%201.webp" alt="Sierra Hull vinyl laser etching and album art" loading="lazy" decoding="async" width="2560" height="2560"></figure>
-                <figure><img src="/img/artists/sierra%202.webp" alt="Sierra Hull vinyl laser etching and album art" loading="lazy" decoding="async" width="2560" height="2559"></figure>
-            </div>
-        </section>
+        <div class="grid">
+            <figure>
+                <img src="/img/artists/diplo%201.webp" alt="Diplo Grammy For Your Consideration design: a CD hand-lettered with the track list" loading="lazy" decoding="async" width="2048" height="2048">
+                <figcaption><strong>Diplo</strong>Grammy For Your Consideration</figcaption>
+            </figure>
+            <figure>
+                <img src="/img/artists/dill%201.webp" alt="Dillstradamus Back 2 Back Champs 25/26 global tour design with a horned basketball" loading="lazy" decoding="async" width="2560" height="2560">
+                <figcaption><strong>Dillstradamus</strong>Back 2 Back Champs tour merch</figcaption>
+            </figure>
+            <figure>
+                <img src="/img/artists/dill%203.webp" alt="Dillstradamus B2B Jam design in the style of a retro basketball video game" loading="lazy" decoding="async" width="2560" height="2560">
+                <figcaption><strong>Dillstradamus</strong>B2B Jam merch</figcaption>
+            </figure>
+            <figure>
+                <img src="/img/artists/dill%204.webp" alt="Dillstradamus global tour championship design with a gold globe on navy" loading="lazy" decoding="async" width="2560" height="2560">
+                <figcaption><strong>Dillstradamus</strong>Global tour merch</figcaption>
+            </figure>
+            <figure>
+                <img src="/img/artists/sierra%201.webp" alt="Laser-etched vinyl for Sierra Hull's The Movements" loading="lazy" decoding="async" width="2560" height="2560">
+                <figcaption><strong>Sierra Hull</strong>Vinyl laser etching</figcaption>
+            </figure>
+            <figure>
+                <img src="/img/artists/sierra%202.webp" alt="Album cover for Sierra Hull's The Movements" loading="lazy" decoding="async" width="2560" height="2559">
+                <figcaption><strong>Sierra Hull</strong>Album art</figcaption>
+            </figure>
+        </div>
         <a href="/book-design" class="next-page"><span>Next</span><strong><span class="next-title">Book Design</span><i class="out" aria-hidden="true"></i></strong></a>
     </main>
 
