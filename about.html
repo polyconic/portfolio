@@ -220,7 +220,7 @@
         }
 
         .about .lead {
-            font-size: min(24px, calc(100cqw / 26));
+            font-size: min(24px, calc(100cqw / 21));
             line-height: 1.4;
             white-space: nowrap;
         }
@@ -434,14 +434,14 @@
 
             /* One line at any phone width; divisor measured for the current intro text. */
             .page-intro {
-                font-size: min(12px, calc((100vw - 40px) / 36));
+                font-size: min(12px, calc((100vw - 40px) / 29));
                 letter-spacing: 0.05em;
                 white-space: nowrap;
             }
 
             /* Phones: one line would drop the lead below the body text, so it breaks after "designer". */
             .about .lead {
-                font-size: min(22px, calc(100cqw / 17));
+                font-size: min(22px, calc(100cqw / 14));
                 white-space: normal;
             }
 
@@ -480,9 +480,9 @@
             }
         }
 
-        /* All caps, heavier and tightened (Gregor 2026-11-16; all lowercase before that). Weights: body 500, bold 800. */
+        /* All lowercase, heavier and tightened (Gregor 2026-11-16; caps were tried the same day and felt like yelling). Weights: body 500, bold 800. */
         *, *::before, *::after {
-            text-transform: uppercase !important;
+            text-transform: lowercase !important;
             letter-spacing: -0.04em !important;
         }
     </style>
