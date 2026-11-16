@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0a0a0a">
     <title>TMWRK artist work - Gregor Egan</title>
     <link rel="canonical" href="https://gregoregan.com/artists">
-    <meta name="description" content="Design by Gregor Egan for Diplo, Dillstradamus and Sierra Hull.">
+    <meta name="description" content="Design by Gregor Egan for Diplo, TV on the Radio, Animal Collective, Sierra Hull, Qendresa and Dillstradamus.">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -29,13 +29,13 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="gregor egan">
     <meta property="og:title" content="TMWRK artist work - Gregor Egan">
-    <meta property="og:description" content="Design by Gregor Egan for Diplo, Dillstradamus and Sierra Hull.">
+    <meta property="og:description" content="Design by Gregor Egan for Diplo, TV on the Radio, Animal Collective, Sierra Hull, Qendresa and Dillstradamus.">
     <meta property="og:image" content="https://gregoregan.com/img/artists/diplo%201.webp">
     <meta property="og:url" content="https://gregoregan.com/artists">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="TMWRK artist work - Gregor Egan">
-    <meta name="twitter:description" content="Design by Gregor Egan for Diplo, Dillstradamus and Sierra Hull.">
+    <meta name="twitter:description" content="Design by Gregor Egan for Diplo, TV on the Radio, Animal Collective, Sierra Hull, Qendresa and Dillstradamus.">
     <meta name="twitter:image" content="https://gregoregan.com/img/artists/diplo%201.webp">
 
     <style>
@@ -203,14 +203,19 @@
         }
 
         /* ==================== GRID ==================== */
-        /* One grid for all the pieces (all square), each captioned with artist and piece. */
+        /* Square tiles, artist and piece under each. Tall posters sit whole inside their square (.poster).
+           Flex so a short last row centers instead of hanging left. */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 40px 16px;
+            --cols: 3;
+            --gap: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px var(--gap);
         }
 
         .grid figure {
+            flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
             margin: 0;
         }
 
@@ -228,6 +233,11 @@
 
         .grid img.loaded {
             opacity: 1;
+        }
+
+        .grid .poster img {
+            object-fit: contain;
+            padding: 6%;
         }
 
         @media (hover: hover) {
@@ -442,8 +452,9 @@
             }
 
             .grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 32px 12px;
+                --cols: 2;
+                --gap: 12px;
+                row-gap: 32px;
             }
 
 
@@ -478,8 +489,9 @@
             }
 
             .grid {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 28px 10px;
+                --cols: 2;
+                --gap: 10px;
+                row-gap: 28px;
             }
 
             .lightbox {
@@ -587,28 +599,40 @@
         <a href="/design" class="back-link">← Back to Design</a>
         <h1 class="page-title" data-arrive>TMWRK Management</h1>
         <script src="/arrive.js"></script>
-        <p class="page-intro">Design for Diplo, Dillstradamus and Sierra Hull.</p>
+        <p class="page-intro">Posters, merch and album art for TMWRK artists.</p>
 
         <div class="grid">
             <figure>
                 <img src="/img/artists/diplo%201.webp" alt="Diplo Grammy For Your Consideration design: a CD hand-lettered with the track list" loading="lazy" decoding="async" width="2048" height="2048">
                 <figcaption><strong>Diplo</strong>Grammy For Your Consideration</figcaption>
             </figure>
+            <figure class="poster">
+                <img src="/img/artists/tvotr-williamsburg.webp" alt="TV on the Radio poster for the final two nights of Music Hall of Williamsburg, Dec 5 and 6, with a black-and-white photo of the venue" loading="lazy" decoding="async" width="1656" height="2560">
+                <figcaption><strong>TV on the Radio</strong>Music Hall of Williamsburg poster</figcaption>
+            </figure>
             <figure>
                 <img src="/img/artists/dill%201.webp" alt="Dillstradamus Back 2 Back Champs 25/26 global tour design with a horned basketball" loading="lazy" decoding="async" width="2560" height="2560">
                 <figcaption><strong>Dillstradamus</strong>Back 2 Back Champs tour merch</figcaption>
             </figure>
             <figure>
-                <img src="/img/artists/dill%203.webp" alt="Dillstradamus B2B Jam design in the style of a retro basketball video game" loading="lazy" decoding="async" width="2560" height="2560">
-                <figcaption><strong>Dillstradamus</strong>B2B Jam merch</figcaption>
-            </figure>
-            <figure>
-                <img src="/img/artists/dill%204.webp" alt="Dillstradamus global tour championship design with a gold globe on navy" loading="lazy" decoding="async" width="2560" height="2560">
-                <figcaption><strong>Dillstradamus</strong>Global tour merch</figcaption>
+                <img src="/img/artists/qendresa-date-night.webp" alt="Qendresa Date Night Tour 2025 poster: Qendresa in red seen through a champagne glass, with the European tour dates" loading="lazy" decoding="async" width="1080" height="1080">
+                <figcaption><strong>Qendresa</strong>Date Night Tour poster</figcaption>
             </figure>
             <figure>
                 <img src="/img/artists/sierra%201.webp" alt="Laser-etched vinyl for Sierra Hull's The Movements" loading="lazy" decoding="async" width="2560" height="2560">
                 <figcaption><strong>Sierra Hull</strong>Vinyl laser etching</figcaption>
+            </figure>
+            <figure>
+                <img src="/img/artists/dill%203.webp" alt="Dillstradamus B2B Jam design in the style of a retro basketball video game" loading="lazy" decoding="async" width="2560" height="2560">
+                <figcaption><strong>Dillstradamus</strong>B2B Jam merch</figcaption>
+            </figure>
+            <figure class="poster">
+                <img src="/img/artists/animal-collective-feels-pass.webp" alt="Animal Collective Feels Live pass sheet for Knockdown Center, 10.21, showing the All Access laminate and the backstage satin" loading="lazy" decoding="async" width="1978" height="2560">
+                <figcaption><strong>Animal Collective</strong>Feels Live pass sheet</figcaption>
+            </figure>
+            <figure>
+                <img src="/img/artists/dill%204.webp" alt="Dillstradamus global tour championship design with a gold globe on navy" loading="lazy" decoding="async" width="2560" height="2560">
+                <figcaption><strong>Dillstradamus</strong>Global tour merch</figcaption>
             </figure>
             <figure>
                 <img src="/img/artists/sierra%202.webp" alt="Album cover for Sierra Hull's The Movements" loading="lazy" decoding="async" width="2560" height="2559">
