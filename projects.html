@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#0a0a0a">
     <title>Selected Projects - Gregor Egan</title>
     <link rel="canonical" href="https://gregoregan.com/projects">
-    <meta name="description" content="Selected photography projects by Gregor Egan, including portraits of Tunde Adebimpe and Croz Boyce.">
+    <meta name="description" content="Selected photography projects by Gregor Egan: portraits of Tunde Adebimpe, Croz Boyce performing, and Grammy Award-winning producer Charles Goodan in his studio.">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -29,13 +29,13 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="gregor egan">
     <meta property="og:title" content="Selected Projects — Gregor Egan">
-    <meta property="og:description" content="Selected photography projects by Gregor Egan, including portraits of Tunde Adebimpe and Croz Boyce.">
+    <meta property="og:description" content="Selected photography projects by Gregor Egan: portraits of Tunde Adebimpe, Croz Boyce performing, and Grammy Award-winning producer Charles Goodan in his studio.">
     <meta property="og:image" content="https://gregoregan.com/img/projects/tunde%205.webp">
     <meta property="og:url" content="https://gregoregan.com/projects">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Selected Projects — Gregor Egan">
-    <meta name="twitter:description" content="Selected photography projects by Gregor Egan, including portraits of Tunde Adebimpe and Croz Boyce.">
+    <meta name="twitter:description" content="Selected photography projects by Gregor Egan: portraits of Tunde Adebimpe, Croz Boyce performing, and Grammy Award-winning producer Charles Goodan in his studio.">
     <meta name="twitter:image" content="https://gregoregan.com/img/projects/tunde%205.webp">
 
     <style>
@@ -235,6 +235,92 @@
             text-transform: uppercase;
             opacity: 0.5;
             margin-top: 10px;
+        }
+
+        /* ==================== PROJECT COVERS ==================== */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 40px 16px;
+        }
+
+        .project {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .project figure {
+            aspect-ratio: 3 / 2;
+            overflow: hidden;
+            background: var(--placeholder);
+        }
+
+        .project img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project img.loaded {
+            opacity: 1;
+        }
+
+        .project h2 {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3em;
+            margin-top: 16px;
+            font-size: clamp(22px, 2.4vw, 34px);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1;
+            transition: opacity 0.2s ease, padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .project .out {
+            flex: none;
+            width: 0.27em;
+            height: 0.27em;
+            background: currentColor;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .project:focus-visible h2 {
+            padding-left: 8px;
+        }
+
+        @media (hover: hover) {
+            .project:hover img {
+                transform: scale(1.03);
+            }
+
+            .project:hover h2 {
+                opacity: 0.6;
+                padding-left: 8px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .projects {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 600px) {
+            .projects {
+                grid-template-columns: 1fr;
+                gap: 36px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .project img {
+                transition: opacity 0.3s ease;
+            }
         }
 
         /* ==================== GRID ==================== */
@@ -553,7 +639,7 @@
             text-transform: lowercase !important;
         }
     </style>
-    <noscript><style>.grid img { opacity: 1; }</style></noscript>
+    <noscript><style>.project img { opacity: 1; }</style></noscript>
 </head>
 <body>
 
@@ -605,39 +691,23 @@
         <script src="/arrive.js"></script>
         <p class="page-intro">Photography</p>
 
-        <!-- ==================== TUNDE ADEBIMPE ==================== -->
-        <section class="artist">
-            <div class="artist-head">
-                <div>
-                    <h2>Tunde Adebimpe</h2>
-                    <p class="artist-credit">TV on the Radio</p>
-                </div>
-            </div>
-            <div class="grid">
-                <figure><img src="/img/projects/tunde%205.webp" alt="Tunde Adebimpe in glasses and a black shirt, palms behind him" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%206.webp" alt="Tunde Adebimpe in profile against a green hedge" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2014.webp" alt="Tunde Adebimpe with his arms crossed in a narrow passage between walls" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2016.webp" alt="Black-and-white portrait of Tunde Adebimpe against a white wall" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2018.webp" alt="Black-and-white portrait of Tunde Adebimpe among palm fronds" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/tunde%2030.webp" alt="Black-and-white portrait of Tunde Adebimpe leaning on a wall with his arms crossed" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-            </div>
-        </section>
-
-        <!-- ==================== CROZ BOYCE ==================== -->
-        <section class="artist">
-            <div class="artist-head">
-                <div>
-                    <h2>Croz Boyce</h2>
-                    <p class="artist-credit">Avey Tare &amp; Geologist of Animal Collective</p>
-                </div>
-            </div>
-            <div class="grid">
-                <figure><img src="/img/projects/croz%201.webp" alt="Croz Boyce performing in a garden, seen through tree branches" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/croz%202.webp" alt="Croz Boyce performing for a seated crowd in a garden" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-                <figure><img src="/img/projects/croz%203.webp" alt="Croz Boyce at their equipment in a garden, framed by trees" loading="lazy" decoding="async" width="2560" height="1707"></figure>
-            </div>
-        </section>
-
+        <div class="projects">
+            <a href="/tunde-adebimpe" class="project">
+                <figure><img src="/img/projects/tunde%205.webp" alt="Tunde Adebimpe in glasses and a black shirt, palms behind him" decoding="async" width="2560" height="1707"></figure>
+                <h2><span>Tunde Adebimpe</span><i class="out" aria-hidden="true"></i></h2>
+                <p class="artist-credit">TV on the Radio</p>
+            </a>
+            <a href="/croz-boyce" class="project">
+                <figure><img src="/img/projects/croz%202.webp" alt="Croz Boyce performing for a seated crowd in a garden" decoding="async" width="2560" height="1707"></figure>
+                <h2><span>Croz Boyce</span><i class="out" aria-hidden="true"></i></h2>
+                <p class="artist-credit">Avey Tare &amp; Geologist of Animal Collective</p>
+            </a>
+            <a href="/charles-goodan" class="project">
+                <figure><img src="/img/projects/goodan-31.webp" alt="Charles Goodan turning toward the camera from a synth in his studio, racks of gear around him" decoding="async" width="2560" height="1707"></figure>
+                <h2><span>Charles Goodan</span><i class="out" aria-hidden="true"></i></h2>
+                <p class="artist-credit">Grammy Award-winning producer</p>
+            </a>
+        </div>
         <a href="/design" class="next-page"><span>Next</span><strong><span class="next-title">Design</span><i class="out" aria-hidden="true"></i></strong></a>
     </main>
 
@@ -645,76 +715,13 @@
         &copy; <span data-yr>2026</span> GREGOR EGAN
     </footer>
 
-    <!-- ==================== LIGHTBOX ==================== -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged photo">
-        <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
-        <button class="lightbox-prev" id="lightboxPrev" aria-label="Previous"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="16,2 2,20 16,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
-        <button class="lightbox-next" id="lightboxNext" aria-label="Next"><svg viewBox="0 0 18 40" aria-hidden="true"><polyline points="2,2 16,20 2,38" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/></svg></button>
-        <img id="lightboxImg" src="" alt="">
-    </div>
 
     <script>
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxClose = document.getElementById('lightboxClose');
-
-        const gridImgs = [...document.querySelectorAll('.grid img')];
-        const count = gridImgs.length;
-        let current = 0;
-
-        lightboxImg.addEventListener('load', () => lightboxImg.classList.add('loaded'));
-
-        function show(i) {
-            current = (i + count) % count;
-            const img = gridImgs[current];
-            lightboxImg.classList.remove('loaded');
-            lightboxImg.src = img.src;
-            lightboxImg.alt = img.alt;
-            lightboxImg.decode().catch(() => {}).then(() => {
-                if (lightboxImg.src === img.src) lightboxImg.classList.add('loaded');
-            });
-            lightbox.classList.add('open');
-            document.body.style.overflow = 'hidden';
-            new Image().src = gridImgs[(current + 1) % count].src;
-            new Image().src = gridImgs[(current - 1 + count) % count].src;
-        }
-
-        gridImgs.forEach((img, i) => {
+        document.querySelectorAll('.project img').forEach(function (img) {
             if (img.complete && img.naturalWidth) img.classList.add('loaded');
-            else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-            img.addEventListener('click', () => show(i));
-        });
-
-        function closeLightbox() {
-            lightbox.classList.remove('open');
-            lightboxImg.src = '';
-            document.body.style.overflow = '';
-        }
-
-        lightbox.addEventListener('click', closeLightbox);
-        lightboxClose.addEventListener('click', closeLightbox);
-        document.getElementById('lightboxPrev').addEventListener('click', e => { e.stopPropagation(); show(current - 1); });
-        document.getElementById('lightboxNext').addEventListener('click', e => { e.stopPropagation(); show(current + 1); });
-
-        let touchX = 0, touchY = 0;
-        lightbox.addEventListener('touchstart', e => {
-            touchX = e.changedTouches[0].clientX;
-            touchY = e.changedTouches[0].clientY;
-        }, { passive: true });
-        lightbox.addEventListener('touchend', e => {
-            const dx = e.changedTouches[0].clientX - touchX;
-            const dy = e.changedTouches[0].clientY - touchY;
-            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(current + (dx < 0 ? 1 : -1));
-        }, { passive: true });
-
-        document.addEventListener('keydown', e => {
-            if (!lightbox.classList.contains('open')) return;
-            if (e.key === 'Escape') closeLightbox();
-            else if (e.key === 'ArrowLeft') show(current - 1);
-            else if (e.key === 'ArrowRight') show(current + 1);
+            else img.addEventListener('load', function () { img.classList.add('loaded'); }, { once: true });
         });
     </script>
-
     <script>
         (function () {
             var root = document.documentElement;

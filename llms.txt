@@ -9,7 +9,10 @@ He specializes in portraits, cityscapes and landscapes, and experimental long-ex
 - [Photos](https://gregoregan.com/photos): digital, analog and selected projects
 - [Digital](https://gregoregan.com/digital): portraits, cityscapes and personal work made in Los Angeles
 - [Analog](https://gregoregan.com/analog): film photography, 35mm and medium format
-- [Selected Projects](https://gregoregan.com/projects): photography projects, including portraits of Tunde Adebimpe and Croz Boyce
+- [Selected Projects](https://gregoregan.com/projects): photography projects, each on its own page
+  - [Tunde Adebimpe](https://gregoregan.com/tunde-adebimpe): portraits of Tunde Adebimpe of TV on the Radio
+  - [Croz Boyce](https://gregoregan.com/croz-boyce): Croz Boyce performing in a garden
+  - [Charles Goodan](https://gregoregan.com/charles-goodan): Grammy Award-winning producer Charles Goodan in his studio
 
 ## Design
 
