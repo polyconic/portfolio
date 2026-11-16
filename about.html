@@ -38,6 +38,7 @@
     <meta name="twitter:description" content="Gregor Egan is a photographer, graphic designer and sound artist based in Los Angeles. Portraits, cityscapes and landscapes, long-exposure work, book and brand design, and dark psychedelic techno.">
     <meta name="twitter:image" content="https://gregoregan.com/photos%20webp/photo%20webp/digital/EGANGREGOR-1828.webp">
 
+    <script src="/loader.js"></script>
     <style>
         * {
             margin: 0;
@@ -62,6 +63,7 @@
         }
 
         body {
+            font-weight: 500;
             overflow-x: clip;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -113,7 +115,7 @@
 
         .logo {
             view-transition-name: site-logo;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 14px;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -187,7 +189,7 @@
 
         .page-title {
             font-size: clamp(48px, 10vw, 120px);
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -2px;
             text-transform: uppercase;
             line-height: 1;
@@ -218,7 +220,7 @@
         }
 
         .about .lead {
-            font-size: min(24px, calc(100cqw / 25));
+            font-size: min(24px, calc(100cqw / 26));
             line-height: 1.4;
             white-space: nowrap;
         }
@@ -279,7 +281,7 @@
             color: var(--text-color);
             text-decoration: none;
             font-size: clamp(24px, 4vw, 44px);
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -1px;
             text-transform: uppercase;
             line-height: 1;
@@ -318,7 +320,7 @@
             padding-top: 15px;
             padding-bottom: 15px;
             font-size: 15px;
-            font-weight: 400;
+            font-weight: 500;
             letter-spacing: -0.005em;
             text-transform: none;
         }
@@ -432,14 +434,14 @@
 
             /* One line at any phone width; divisor measured for the current intro text. */
             .page-intro {
-                font-size: min(12px, calc((100vw - 40px) / 33));
+                font-size: min(12px, calc((100vw - 40px) / 36));
                 letter-spacing: 0.05em;
                 white-space: nowrap;
             }
 
             /* Phones: one line would drop the lead below the body text, so it breaks after "designer". */
             .about .lead {
-                font-size: min(22px, calc(100cqw / 16));
+                font-size: min(22px, calc(100cqw / 17));
                 white-space: normal;
             }
 
@@ -478,9 +480,10 @@
             }
         }
 
-        /* All lowercase, Gregor 2026-10-23. */
+        /* All caps, heavier and tightened (Gregor 2026-11-16; all lowercase before that). Weights: body 500, bold 800. */
         *, *::before, *::after {
-            text-transform: lowercase !important;
+            text-transform: uppercase !important;
+            letter-spacing: -0.04em !important;
         }
     </style>
 </head>

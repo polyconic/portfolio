@@ -1,7 +1,9 @@
 (function () {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    // A prerendered page would finish the motion before it is shown, so hold it until activation.
-    const waiting = document.prerendering;
+    // A prerendered page would finish the motion before it is shown, and the loading screen (/loader.js)
+    // would hide it, so hold it until activation or until the loader lifts.
+    const loading = document.documentElement.classList.contains('loading');
+    const waiting = document.prerendering || loading;
     const held = [];
     document.querySelectorAll('[data-arrive]:not([data-arrived])').forEach(el => {
         el.setAttribute('data-arrived', '');
@@ -70,5 +72,5 @@
         ], { duration: 1400, delay: 300, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'backwards' });
         if (waiting) { a.pause(); held.push(a); }
     });
-    if (waiting) document.addEventListener('prerenderingchange', () => held.forEach(a => a.play()), { once: true });
+    if (waiting) document.addEventListener(loading ? 'loaderdone' : 'prerenderingchange', () => held.forEach(a => a.play()), { once: true });
 })();

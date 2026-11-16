@@ -58,6 +58,7 @@
     }
     </script>
 
+    <script src="/loader.js"></script>
     <style>
         :root {
             --text-color: #ffffff;
@@ -70,6 +71,7 @@
         }
 
         body {
+            font-weight: 500;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
                 Roboto, 'Helvetica Neue', Arial, sans-serif;
             background-color: #0a0a0a;
@@ -167,7 +169,7 @@
 
         .site-name {
             font-size: clamp(28px, 5vw, 72px);
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -3px;
             text-transform: uppercase;
             line-height: 0.88;
@@ -175,11 +177,12 @@
             white-space: nowrap;
         }
 
-        /* Squashed to the lowercase x-height: baseline to top of "n", measured in the bold system font. */
+        /* Squashed to the height of the name's letters, baseline to top, whatever case or font the name is in.
+           The numbers come from the script after the title, which measures the real glyphs. */
         .site-name .slashes {
             display: inline-block;
-            transform-origin: 50% 0.55em;
-            transform: scaleY(0.61);
+            transform-origin: 50% var(--slash-origin, 0.55em);
+            transform: scaleY(var(--slash-scale, 0.61));
         }
 
         .arrive {
@@ -339,9 +342,10 @@
             .bio-link { transition: none; }
         }
 
-        /* All lowercase, Gregor 2026-10-23. */
+        /* All caps, heavier and tightened (Gregor 2026-11-16; all lowercase before that). Weights: body 500, bold 800. */
         *, *::before, *::after {
-            text-transform: lowercase !important;
+            text-transform: uppercase !important;
+            letter-spacing: -0.04em !important;
         }
     </style>
 </head>
@@ -375,6 +379,40 @@
         <div class="bottom-row">
             <h1 class="site-name" data-arrive>Gregor Egan <span class="slashes"> / / /</span></h1>
             <script src="/arrive.js"></script>
+            <script>
+                // Fit the slashes to the name: measure the tallest letter of the name as it's actually shown
+                // (case and weight included) and the slash glyph, then scale the slash about the point that
+                // puts its bottom on the baseline and its top at that letter height.
+                (function () {
+                    var h1 = document.querySelector('.site-name');
+                    function fit() {
+                        var sl = h1.querySelector('.slashes');
+                        if (!sl) return;
+                        var cs = getComputedStyle(h1), ctx = document.createElement('canvas').getContext('2d');
+                        ctx.font = cs.fontStyle + ' ' + cs.fontWeight + ' 1000px ' + cs.fontFamily;
+                        var tt = cs.textTransform, name = h1.querySelector('.arrive-text') ? h1.querySelector('.arrive-text').textContent : h1.textContent;
+                        name = name.replace(/[\s/]+/g, '');
+                        name = tt === 'uppercase' ? name.toUpperCase() : tt === 'lowercase' ? name.toLowerCase() : name;
+                        var top = 0;
+                        for (var i = 0; i < name.length; i++) top = Math.max(top, ctx.measureText(name[i]).actualBoundingBoxAscent);
+                        var m = ctx.measureText('/'), up = m.actualBoundingBoxAscent, down = m.actualBoundingBoxDescent;
+                        if (!top || !(up + down)) return;
+                        var scale = top / (up + down), lift = scale < 0.999 ? scale * down / (1 - scale) : 0;
+                        var probe = document.createElement('i');
+                        probe.style.cssText = 'display:inline-block;width:0;height:0;vertical-align:baseline';
+                        sl.appendChild(probe);
+                        sl.style.transform = 'none';
+                        var fs = parseFloat(getComputedStyle(sl).fontSize);
+                        var base = (probe.getBoundingClientRect().top - sl.getBoundingClientRect().top) / fs;
+                        probe.remove();
+                        sl.style.transform = '';
+                        h1.style.setProperty('--slash-scale', scale.toFixed(4));
+                        h1.style.setProperty('--slash-origin', (base - lift / 1000).toFixed(4) + 'em');
+                    }
+                    fit();
+                    if (document.fonts) document.fonts.ready.then(fit);
+                })();
+            </script>
             <div class="bio">
                 <p><span class="scr">los angeles</span></p>
                 <ul class="bio-links">
@@ -474,6 +512,7 @@
             pairs.forEach(([real, fx]) => scrambleText(real, fx));
         }
         if (document.prerendering) document.addEventListener('prerenderingchange', startScramble, { once: true });
+        else if (document.documentElement.classList.contains('loading')) document.addEventListener('loaderdone', startScramble, { once: true });
         else startScramble();
     </script>
 
